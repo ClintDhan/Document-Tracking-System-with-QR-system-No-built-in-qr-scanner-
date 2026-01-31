@@ -25,7 +25,7 @@ if ($result->num_rows == 1 ) {
                 exit;
             }
             elseif ($user['is_admin'] == 0) {
-                  header("Location: ../user/userhome.php");
+                  header("Location: ../user/user-home.php");
                 exit;
             }
         }

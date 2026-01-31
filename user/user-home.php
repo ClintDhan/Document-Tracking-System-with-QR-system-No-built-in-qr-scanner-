@@ -37,7 +37,6 @@
                 <div class='user-dash-flx'>
                     <div class='user-dash-grid'>
                         <div class='user-received'><p>Received Documents</p></div>
-                        <div></div>
                         <div class='user-released'><p>Released Documents</p></div>
                         <div class='user-returned'><p>Returned Documents</p></div>
                     </div>

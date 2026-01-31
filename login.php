@@ -14,12 +14,12 @@
 <div class='login-container'>
     <div class='login-form'>
         <div class='login-centered'>
-            <p>Welcome Back!</p>
-            <p>Please input your details</p>
-                <form action="operation/checklogin.php" method='post'>
-                    <input class='login-centered-input' type="text" name='name' placeholder='Enter username'>
-                    <input class='login-centered-input mt-2' type="password" name='password' placeholder='Enter password'>
-                    <button class='login-centered-input mt-4'>Log in</button>
+            <p style='font-weight: 900; color: #188A0E; font-size: 30px; line-height: 0.8;'>Welcome Back!</p>
+            <p style='font-size: 15px; color: #47D63A; font-weight: bold;'>Please input your details</p>
+                <form action="operation/checklogin.php" method='post' class='form-flx'>
+                    <input class='login-centered-input' type="text" name='name' placeholder='Enter username' required>
+                    <input class='login-centered-input m-3' type="password" name='password' placeholder='Enter password' required>
+                    <button class='login-centered-input'>Log in</button>
                 </form>
         </div>
     </div>
