@@ -1,4 +1,6 @@
-<?php require_once '../db.php'; ?>
+<?php 
+session_start();
+require_once '../db.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,9 +15,11 @@
         <div class='user-form'>
 
             <div class='user-nav-bar'>
-                <div class='user-name'><p>Hi! Jhea!</p></div>
+                <div class='user-name'><p>Hi! <?= $_SESSION['name']; ?></p></div>
                 <div class='user-date'><p>01/24/2026</p></div>
-                <button class='log-out'>LOGOUT</button>
+                <form action="../operation/logout.php" method='POST'>
+                    <button class='log-out'>LOGOUT</button>
+                </form>
             </div>
             
             <div class='user-option'>
