@@ -19,13 +19,17 @@ if ($result->num_rows == 1 ) {
              $_SESSION['name'] = $user['name'];
              $_SESSION['password'] = $user['password'];
             
+            $redirect = '../user/user-home.php';
+            if (isset($_POST['redirect']) && !empty($_POST['redirect'])) {
+            $redirect = urldecode($_POST['redirect']); // decode QR control
+            }
             
             if($user['is_admin'] == 1) {
                 header("Location: ../admin/adminDash.php");
                 exit;
             }
             elseif ($user['is_admin'] == 0) {
-                  header("Location: ../user/user-home.php");
+                header("Location: $redirect");
                 exit;
             }
         }
