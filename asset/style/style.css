@@ -76,7 +76,7 @@ body {
 
 .form-flx input::placeholder {
     color: #DBA159;
-    font-size: 700;
+    font-weight: 700;
 }
 
 .form-flx input:focus {
@@ -247,3 +247,79 @@ body {
 .user-returned {
     background-color: #F25757;
 }
+
+
+/* user receive */
+
+.option-form {
+    width: 431px;
+    height: 409px;
+    background-color: #ECFFEB;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.receive-input {
+    height: 47px;
+    width: 309px;
+    background-color: transparent;
+    border: 1px solid #DBA159;
+    padding: 15px;
+    color: #DBA159;
+}
+
+
+
+.receive-input:focus {
+    outline: none;
+}
+
+.receive-input::placeholder {
+    color: #DBA159;
+    font-weight: 700;
+}
+
+.receive-textarea {
+    width: 309px; 
+    background-color: transparent;
+    border: 1px solid #DBA159;
+    padding: 15px;
+    color: #DBA159;
+}
+
+.receive-textarea::placeholder {
+    color: #DBA159;
+    font-weight: 700;
+    padding: 5px 0 0 2px;
+}
+
+.receive-textarea:focus {
+    outline: none;
+}
+.btn-submit {
+    height: 47px;
+    width: 309px;
+    background-color: #7BE0AD;
+    color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border: none;
+    cursor: pointer;
+    margin-top: 35px;
+}
+
+.option-receive {
+    font-weight: 500;
+    color: #2FB823;
+    font-size: 14px;
+}
+
+.option-text {
+    font-weight: 200;
+    font-size: 12px;
+}
+
+
+

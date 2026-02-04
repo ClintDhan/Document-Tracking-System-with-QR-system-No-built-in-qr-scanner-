@@ -20,7 +20,7 @@
                 <!-- hidden input to carry redirect -->
                 <input type="hidden" name="redirect" value="<?= isset($_GET['redirect']) ? htmlspecialchars($_GET['redirect']) : '' ?>">
                 <input type="text" name="name" placeholder="Username">
-                <input type="password" name="password" placeholder="Password" class='m-3'>
+                <input type="password" name="password" placeholder="Password" class='mt-3'>
                 <button type="submit">Login</button>
         </form>
 

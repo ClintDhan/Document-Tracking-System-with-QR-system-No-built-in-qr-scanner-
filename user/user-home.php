@@ -23,9 +23,11 @@ if ($qrControl) {
     $result = $conn->query($sql);
     $qr = $result->fetch_assoc();
 
-    if (!$qr) {
-        $qrError = "Invalid QR code.";
-    }
+    if ($qr) {
+    $qr_id = $qr['id']; // <-- primary key of qr_code
+    } else {
+    $qrError = "Invalid QR code.";
+}
 }
 ?>
 
@@ -35,6 +37,7 @@ if ($qrControl) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Home</title>
+    <link rel="stylesheet" href="../asset/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <body>
@@ -64,23 +67,19 @@ if ($qrControl) {
             </div>
 
             <!-- ACTION BUTTONS -->
-            <?php if (($qrControl && isset($qr)) || isset($qrError)): ?>
+            <?php if ($qr && !$qr['is_used']): ?>
                 <div class='user-option'>
-                    <?php if (isset($qrError)): ?>
-                        <!-- only show error -->
-
-                    <?php elseif ($qr['is_used'] == 0): ?>
-                        <!-- QR unused -->
-                        <a href="user-receive.php?qr=<?= $qr['id'] ?>" class='btn-receive'>RECEIVE DOCUMENT</a>
-                        <a href="user-update.php?qr=<?= $qr['id'] ?>" class='btn-update'>UPDATE DOCUMENT</a>
-                        <a href="user-view.php?qr=<?= $qr['id'] ?>" class='btn-view'>VIEW DOCUMENT</a>
-
-                    <?php else: ?>
-                        <!-- QR already used -->
-                        <a href="user-update.php?qr=<?= $qr['id'] ?>" class='btn-update'>UPDATE DOCUMENT</a>
-                        <a href="user-view.php?qr=<?= $qr['id'] ?>" class='btn-view'>VIEW DOCUMENT</a>
-                    <?php endif; ?>
+                    <a href="user-receive.php?qr=<?= $qr_id ?>" class='btn-receive'>RECEIVE DOCUMENT</a>
+                    <a href="user-update.php?qr=<?= $qr_id ?>" class='btn-update'>UPDATE DOCUMENT</a>
+                    <a href="user-view.php?qr=<?= $qr_id ?>" class='btn-view'>VIEW DOCUMENT</a>
                 </div>
+            <?php elseif ($qr && $qr['is_used']): ?>
+                <div class='user-option'>
+                    <a href="user-update.php?qr=<?= $qr_id ?>" class='btn-update'>UPDATE DOCUMENT</a>
+                    <a href="user-view.php?qr=<?= $qr_id ?>" class='btn-view'>VIEW DOCUMENT</a>
+                </div>
+            <?php elseif ($qrError): ?>
+                <p style="color:red;"><?= $qrError ?></p>
             <?php endif; ?>
 
             <!-- DASHBOARD -->
