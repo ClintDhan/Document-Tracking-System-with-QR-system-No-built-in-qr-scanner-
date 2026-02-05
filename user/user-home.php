@@ -41,6 +41,12 @@ if ($qrControl) {
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <body>
+    <?php if (isset($_SESSION['success'])): ?>
+    <div class="alert alert-success">
+        <?= $_SESSION['success']; ?>
+    </div>
+    <?php unset($_SESSION['success']); ?>
+<?php endif; ?>
     <div class='user-container'>
         <div class='user-form'>
 
@@ -69,9 +75,9 @@ if ($qrControl) {
             <!-- ACTION BUTTONS -->
             <?php if ($qr && !$qr['is_used']): ?>
                 <div class='user-option'>
-                    <a href="user-receive.php?qr=<?= $qr_id ?>" class='btn-receive'>RECEIVE DOCUMENT</a>
-                    <a href="user-update.php?qr=<?= $qr_id ?>" class='btn-update'>UPDATE DOCUMENT</a>
-                    <a href="user-view.php?qr=<?= $qr_id ?>" class='btn-view'>VIEW DOCUMENT</a>
+                    <a href="user-receive.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>" class='btn-receive'>RECEIVE DOCUMENT</a>
+                    <a href="user-update.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>" class='btn-update'>UPDATE DOCUMENT</a>
+                    <a href="user-view.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>" class='btn-view'>VIEW DOCUMENT</a>
                 </div>
             <?php elseif ($qr && $qr['is_used']): ?>
                 <div class='user-option'>

@@ -1,6 +1,26 @@
 <?php 
 session_start();
-require_once '../db.php'; ?>
+require_once '../db.php'; 
+
+// Get QR info from URL
+$qr_id = $_GET['qr'] ?? null;           // id of the QR
+$qrControl = $_GET['control'] ?? null;  // control number
+
+if (!$qr_id || !$qrControl) {
+    die("Invalid QR access."); // safety check
+}
+
+// Optional: fetch QR info from database
+$stmt = $conn->prepare("SELECT * FROM qr_code WHERE id = ?");
+$stmt->bind_param("i", $qr_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$qr = $result->fetch_assoc();
+
+if (!$qr) {
+    die("QR not found.");
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +50,9 @@ require_once '../db.php'; ?>
                 <p class='option-text'>Please indicate document information</p>
 
             <form action="../operation/receivedocument.php" method='POST' 
-            style='display: flex; justify-content: center; align-items: center; flex-direction: column;'>
+                 style='display: flex; justify-content: center; align-items: center; flex-direction: column;'>
                 <input type="hidden" name="qr_id" value="<?= htmlspecialchars($_GET['qr'] ?? '') ?>">
+                <input type="hidden" name="control_num" value="<?= htmlspecialchars($qrControl) ?>">
                 <input class='receive-input' type="text" placeholder='Title' name='title'>
                 <textarea name='description' id="" class='receive-textarea mt-2' rows='3' placeholder='Description' ></textarea>
                 <input type="text" placeholder='Department' class='receive-input mt-2' name='department'>

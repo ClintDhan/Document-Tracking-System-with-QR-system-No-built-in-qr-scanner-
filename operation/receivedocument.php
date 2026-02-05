@@ -3,6 +3,7 @@ session_start();
 require_once '../db.php';
 
 if(isset($_POST['submit'])) {
+    $control = $_POST['control_num']; 
     $qr_id = $_POST['qr_id'];
     $title = $_POST['title'];
     $description = $_POST['description'];
@@ -27,7 +28,9 @@ if(isset($_POST['submit'])) {
         $qrUpdate = $stmt2->execute();
 
         if($result1 && $qrUpdate) {
-            echo 'Document received successfully!';
+            $_SESSION['success'] = "Document successfully received.";
+            header("Location: ../user/user-home.php?control=" . urlencode($control));
+            exit();
         } else {
             echo 'Something went wrong.';
         }
