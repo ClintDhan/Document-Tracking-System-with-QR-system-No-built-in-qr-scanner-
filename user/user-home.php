@@ -82,7 +82,7 @@ if ($qrControl) {
             <?php elseif ($qr && $qr['is_used']): ?>
                 <div class='user-option'>
                     <a href="user-update.php?qr=<?= $qr_id ?>" class='btn-update'>UPDATE DOCUMENT</a>
-                    <a href="user-view.php?qr=<?= $qr_id ?>" class='btn-view'>VIEW DOCUMENT</a>
+                    <a href="user-view.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>" class='btn-view'>VIEW DOCUMENT</a>
                 </div>
             <?php elseif ($qrError): ?>
                 <p style="color:red;"><?= $qrError ?></p>

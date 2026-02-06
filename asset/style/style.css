@@ -262,7 +262,7 @@ body {
     flex-direction: column;
 }
 
-.receive-input {
+.receive-input , .update-input {
     height: 47px;
     width: 309px;
     background-color: transparent;
@@ -273,16 +273,15 @@ body {
 
 
 
-.receive-input:focus {
+.receive-input,.update-input:focus {
     outline: none;
 }
 
-.receive-input::placeholder {
+.receive-input,.update-input::placeholder {
     color: #DBA159;
-    font-weight: 700;
 }
 
-.receive-textarea {
+.receive-textarea , .update-textare{
     width: 309px; 
     background-color: transparent;
     border: 1px solid #DBA159;
@@ -290,13 +289,12 @@ body {
     color: #DBA159;
 }
 
-.receive-textarea::placeholder {
+.receive-textarea,.update-textare::placeholder {
     color: #DBA159;
-    font-weight: 700;
     padding: 5px 0 0 2px;
 }
 
-.receive-textarea:focus {
+.receive-textarea,.update-textare:focus {
     outline: none;
 }
 .btn-submit {
@@ -321,5 +319,7 @@ body {
     font-size: 12px;
 }
 
+
+/* user update */
 
 
