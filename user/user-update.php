@@ -4,6 +4,8 @@ session_start();
 require_once '../db.php'; 
 
 $qr_id = $_GET['qr'] ?? null;
+$document_id = $_GET['document'] ?? null;
+$control_num = $_GET['control'] ?? null;
 
 $sql = "SELECT * FROM document WHERE qr_id = '$qr_id'";
 $result = $conn->query($sql);
@@ -36,28 +38,61 @@ $document = mysqli_fetch_assoc($result);
                 <p class='option-receive'>Update Document</p>
                 <p class='option-text'>Please indicate the necessary changes</p>
             
-            <form action="../operation/update-document.php" 
-                    method='POST'
-                    style='display: flex; justify-content: center; align-items: center; flex-direction: column;'
-                    >
-                <input type="hidden" name="qr_id" value="<?= $qr_id ?>">
-                <input type="text" placeholder='Title' class='update-input mt-2' name='title' value="<?= $document['title'] ?>">
-                <textarea name="" id="" placeholder='Description' class='update-textare mt-2' name='title'><?= $document['description'] ?></textarea>
-                <input type="text" placeholder='Department' class='update-input mt-2' name='department' value="<?= $document['department']?>">
-            
+                <form action="../operation/updatedocument.php" 
+                        method='POST'
+                        style='display: flex; justify-content: center; align-items: center; flex-direction: column;'
+                        >
+                    <input type="hidden" name="qr_id" value="<?= $qr_id ?>">
+                    <input type="hidden" name="document_id" value="<?= $document_id ?>">
+                    <input type="hidden" name="control_num" value="<?= $control_num ?>">
+                    <input type="text" placeholder='Type' class='update-input mt-2' name='type' value="<?= $document['type'] ?>">
+                    <textarea id="" placeholder='Description' class='update-textare mt-2' name='description'><?= $document['description'] ?></textarea>
+                    <input type="text" placeholder='Department' class='update-input mt-2' name='department' value="<?= $document['department']?>">
+                
 
-                <select name="status" class="update-input mt-2">
-                    <option value="Received" <?= ($doc['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
-                    <option value="Released" <?= ($doc['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
-                    <option value="Returned" <?= ($doc['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
-                </select>
+                    <select name="status" class="update-input mt-2" id='statusSelect'>
+                        <option value="Received" <?= ($document['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
+                        <option value="Released" <?= ($document['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
+                        <option value="Returned" <?= ($document['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
+                    </select>
 
-                <button class='btn-submit' type='submit' name='submit'>UPDATE</button>
-            </form>
+                    <input type="text"
+       id="releasedTo"
+       class="update-input mt-2"
+       name="released_to"
+       placeholder="Released To"
+       value="<?= htmlspecialchars($document['released_to'] ?? '') ?>"
+       style="<?= ($document['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?>">
+
+
+                    <button class='btn-submit' type='submit' name='submit'>UPDATE</button>
+                </form>
             </div>
 
         </div>
 
     </div>
+
+<script>
+
+const statusSelect = document.getElementById('statusSelect');
+const releasedInput = document.getElementById('releasedTo');
+
+
+function showInput() {
+    if (statusSelect.value === 'Released') {
+        releasedInput.style.display = 'block';
+        releasedInput.required = true;
+    } else {
+        releasedInput.style.display = 'none';
+        releasedInput.required = false;
+    }
+
+}
+
+showInput();
+statusSelect.addEventListener('change' ,showInput );
+
+</script>
 </body>
 </html>

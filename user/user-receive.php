@@ -46,18 +46,18 @@ if (!$qr) {
             <button class='btn-home'>Home</button>
 
             <div class='option-form'>
-                <p class='option-receive'>Receive Document</p>
-                <p class='option-text'>Please indicate document information</p>
+                    <p class='option-receive'>Receive Document</p>
+                    <p class='option-text'>Please indicate document information</p>
 
-            <form action="../operation/receivedocument.php" method='POST' 
-                 style='display: flex; justify-content: center; align-items: center; flex-direction: column;'>
-                <input type="hidden" name="qr_id" value="<?= htmlspecialchars($_GET['qr'] ?? '') ?>">
-                <input type="hidden" name="control_num" value="<?= htmlspecialchars($qrControl) ?>">
-                <input class='receive-input' type="text" placeholder='Title' name='title'>
-                <textarea name='description' id="" class='receive-textarea mt-2' rows='3' placeholder='Description' ></textarea>
-                <input type="text" placeholder='Department' class='receive-input mt-2' name='department'>
-                <button class='btn-submit' type="submit" name="submit">CREATE</button>
-            </form>
+                <form action="../operation/receivedocument.php" method='POST' 
+                    style='display: flex; justify-content: center; align-items: center; flex-direction: column;'>
+                    <input type="hidden" name="qr_id" value="<?= htmlspecialchars($_GET['qr'] ?? '') ?>">
+                    <input type="hidden" name="control_num" value="<?= htmlspecialchars($qrControl) ?>">
+                    <input class='receive-input' type="text" placeholder='Title' name='type'>
+                    <textarea name='description' id="" class='receive-textarea mt-2' rows='3' placeholder='Description'></textarea>
+                    <input type="text" placeholder='Department' class='receive-input mt-2' name='department'>
+                    <button class='btn-submit' type="submit" name="submit">CREATE</button>
+                </form>
             </div>
 
         </div>

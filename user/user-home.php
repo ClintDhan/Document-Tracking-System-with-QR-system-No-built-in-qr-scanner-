@@ -27,8 +27,18 @@ if ($qrControl) {
     $qr_id = $qr['id']; // <-- primary key of qr_code
     } else {
     $qrError = "Invalid QR code.";
+    }
+
 }
+
+$document = null;
+
+if (isset($qr_id)) {
+    $sql2 = "SELECT * FROM document WHERE qr_id = '$qr_id'";
+    $result2 = $conn->query($sql2);
+    $document = $result2->fetch_assoc();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -76,12 +86,10 @@ if ($qrControl) {
             <?php if ($qr && !$qr['is_used']): ?>
                 <div class='user-option'>
                     <a href="user-receive.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>" class='btn-receive'>RECEIVE DOCUMENT</a>
-                    <a href="user-update.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>" class='btn-update'>UPDATE DOCUMENT</a>
-                    <a href="user-view.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>" class='btn-view'>VIEW DOCUMENT</a>
                 </div>
             <?php elseif ($qr && $qr['is_used']): ?>
                 <div class='user-option'>
-                    <a href="user-update.php?qr=<?= $qr_id ?>" class='btn-update'>UPDATE DOCUMENT</a>
+                    <a href="user-update.php?document=<?= $document['id'] ?>&qr=<?= $qr_id ?>&control=<?= urlencode($qrControl)?>" class='btn-update'>UPDATE DOCUMENT</a>
                     <a href="user-view.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>" class='btn-view'>VIEW DOCUMENT</a>
                 </div>
             <?php elseif ($qrError): ?>

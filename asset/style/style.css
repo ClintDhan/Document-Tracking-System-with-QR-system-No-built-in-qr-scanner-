@@ -253,7 +253,7 @@ body {
 
 .option-form {
     width: 431px;
-    height: 409px;
+    height: auto;
     background-color: #ECFFEB;
     border-radius: 20px;
     display: flex;
