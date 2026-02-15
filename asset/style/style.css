@@ -10,12 +10,14 @@ p {
 * {
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
     font-family: "Roboto";
 }
 
 body {
     background-color: #D0FFCC;
+    height: 100%;
+    padding-bottom: 40px !important;
+    box-sizing: border-box;
 }
 
 .login-container {
@@ -258,16 +260,21 @@ body {
     border-radius: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
+    padding: 2em 3em;
+}
+
+.option-form label {
+    color: rgb(102, 102, 102);
+    font-weight: 600;
 }
 
 .receive-input , .update-input {
     height: 47px;
-    width: 309px;
+    width: 100%;
     background-color: transparent;
     border: 1px solid #DBA159;
-    padding: 15px;
+    padding: 5px;
     color: #DBA159;
 }
 

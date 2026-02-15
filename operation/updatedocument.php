@@ -4,6 +4,8 @@ require_once '../db.php';
 
 if(isset($_POST['submit'])) {
     $updatedby = $_SESSION['user_id'];
+
+    
     $type = $_POST['type'];
     $description = $_POST['description'];
     $status = $_POST['status'];

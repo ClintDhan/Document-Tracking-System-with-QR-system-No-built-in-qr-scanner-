@@ -12,5 +12,6 @@
         <input type="password" name='role' placeholder ='Enter role'>
         <input type="submit" name='create'>
     </form>
+
 </body>
 </html>
