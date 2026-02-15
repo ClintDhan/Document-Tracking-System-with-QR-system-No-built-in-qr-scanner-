@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 require_once '../db.php'; 
 
 $qr_id = $_GET['qr'] ?? null;
@@ -27,12 +27,14 @@ $document = mysqli_fetch_assoc($result);
         <div class="user-form">
 
             <div class='user-nav-bar'>
-                <div class='user-name'><p>Hi! Jhea!</p></div>
-                <div class='user-date'><p>01/24/2026</p></div>
-                <button class='log-out'>LOGOUT</button>
+                <div class='user-name'><p>Hi! <span class="span-name"><?= $_SESSION['name']; ?></p></div>
+                <div class='user-date'><p><?= date('m/d/Y') ?></p></div>
+                <form action="../operation/logout.php" method='POST'>
+                    <button class='log-out'>↪ LOGOUT</button>
+                </form>
             </div>
 
-            <button class='btn-home d-flex justify-content-center'><i class="bi bi-chevron-left"></i><a href="">Home</a></button>
+            <button class='btn-home d-flex justify-content-center' onclick="history.back()">&larr; <span class="span-home">Home</span></button>
 
             <div class='option-form'>
                 <p class='option-receive' style="text-align: center;">View Document</p>

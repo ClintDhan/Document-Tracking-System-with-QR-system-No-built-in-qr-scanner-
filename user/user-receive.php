@@ -36,26 +36,36 @@ if (!$qr) {
         <div class="user-form">
 
             <div class='user-nav-bar'>
-                <div class='user-name'><p>Hi! <?= $_SESSION['name']; ?></p></div>
+                <div class='user-name'><p>Hi! <span class="span-name"><?= $_SESSION['name']; ?></span></p></div>
                 <div class='user-date'><p><?= date('m/d/y') ?> </p></div>
                 <form action="../operation/logout.php" method='POST'>
-                    <button class='log-out'>LOGOUT</button>
+                    <button class='log-out'>↪ LOGOUT</button>
                 </form>
             </div>
 
-            <button class='btn-home'>Home</button>
+            <button class='btn-home d-flex justify-content-center' onclick="history.back()">&larr; <span class="span-home">Home</span></button>
 
             <div class='option-form'>
                     <p class='option-receive'>Receive Document</p>
                     <p class='option-text'>Please indicate document information</p>
 
                 <form action="../operation/receivedocument.php" method='POST' 
-                    style='display: flex; justify-content: center; align-items: center; flex-direction: column;'>
+                    style='display: flex; justify-content: center; flex-direction: column;'>
                     <input type="hidden" name="qr_id" value="<?= htmlspecialchars($_GET['qr'] ?? '') ?>">
                     <input type="hidden" name="control_num" value="<?= htmlspecialchars($qrControl) ?>">
-                    <input class='receive-input' type="text" placeholder='Title' name='type'>
-                    <textarea name='description' id="" class='receive-textarea mt-2' rows='3' placeholder='Description'></textarea>
-                    <input type="text" placeholder='Department' class='receive-input mt-2' name='department'>
+                    
+                    <div>
+                        <label for="">Type</label><br>
+                        <input class='receive-input' type="text" placeholder='Title' name='type'>
+                    </div>
+                    <div class="mt-2">
+                        <label for="">Description</label> <br>
+                        <textarea name='description' id="" class='receive-textarea' rows='3' placeholder='Description'></textarea>
+                    </div>
+                    <div class="mt-2">
+                        <label for="">Department</label> <br>
+                        <input type="text" placeholder='Department' class='receive-input' name='department'>
+                    </div>
                     <button class='btn-submit' type="submit" name="submit">CREATE</button>
                 </form>
             </div>

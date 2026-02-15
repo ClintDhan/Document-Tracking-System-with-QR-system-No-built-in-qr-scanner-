@@ -62,15 +62,15 @@ if (isset($qr_id)) {
 
             <!-- NAV BAR -->
             <div class='user-nav-bar'>
-                <div class='user-name'><p>Hi! <?= $_SESSION['name']; ?></p></div>
+                <div class='user-name'><p>Hi! <span class="span-name"><?= $_SESSION['name']; ?></p></div>
                 <div class='user-date'><p><?= date('m/d/Y') ?></p></div>
                 <form action="../operation/logout.php" method='POST'>
-                    <button class='log-out'>LOGOUT</button>
+                    <button class='log-out'>↪ LOGOUT</button>
                 </form>
             </div>
 
             <!-- QR STATUS -->
-            <div>
+            <div class="qr-status-container d-flex justify-content-center align-items-center p-2">
                 <?php if ($qrControl && isset($qr) && $qr['is_used'] == 0): ?>
                     <p>QR Scanned: <?= htmlspecialchars($qr['control_num']) ?></p>
                 <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 1): ?>
