@@ -66,6 +66,7 @@ $document = mysqli_fetch_assoc($result);
                         <label for="">Status</label> <br>
                         <select name="status" class="update-input" id='statusSelect'>
                             <option value="Received" <?= ($document['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
+                            <option value="Under Review" <?= ($document['status'] ?? '') == 'Under Review' ? 'selected' : '' ?>>Under Review</option>
                             <option value="Released" <?= ($document['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
                             <option value="Returned" <?= ($document['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
                         </select>
@@ -81,6 +82,18 @@ $document = mysqli_fetch_assoc($result);
                         style="<?= ($document['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;">
                     </div>
 
+                    <div class="mt-2">
+                        <label for="" id="returnedInputLabel">Return Reason</label>
+                        <input type="text"
+                        id="returnReason"
+                        class="update-input"
+                        name="returned_reason"
+                        placeholder="Return Reason"
+                        value="<?= htmlspecialchars($document['returned_reason'] ?? '') ?>"
+                        style="<?= ($document['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;">
+                    </div>
+                    
+
                     <button class='btn-submit' type='submit' name='submit'>UPDATE</button>
                 </form>
             </div>
@@ -94,6 +107,8 @@ $document = mysqli_fetch_assoc($result);
 const statusSelect = document.getElementById('statusSelect');
 const releasedInput = document.getElementById('releasedTo');
 const releasedInputLabel = document.getElementById('releasedInputLabel');
+const returnedInputLabel = document.getElementById('returnedInputLabel');
+const returnReason = document.getElementById('returnReason');
 
 
 function showInput() {
@@ -101,10 +116,29 @@ function showInput() {
         releasedInputLabel.style.display = 'block';
         releasedInput.style.display = 'block';
         releasedInput.required = true;
-    } else {
+        returnedInputLabel.style.display = 'none';
+        returnReason.style.display = 'none';
+        returnReason.required = false;
+    }
+    
+    else if(statusSelect.value === 'Returned') {
+        returnedInputLabel.style.display = 'block';
+        returnReason.style.display = 'block';
+        returnReason.required = true;
+         releasedInputLabel.style.display = 'none';
+        releasedInput.style.display = 'none';
+        releasedInput.required = false;
+    }
+    else {
         releasedInputLabel.style.display = 'none';
         releasedInput.style.display = 'none';
         releasedInput.required = false;
+        releasedInput.value = ''; // ADD THIS
+
+        returnedInputLabel.style.display = 'none';
+        returnReason.style.display = 'none';
+        returnReason.required = false;
+        returnReason.value = ''; // ADD THIS
     }
 
 }

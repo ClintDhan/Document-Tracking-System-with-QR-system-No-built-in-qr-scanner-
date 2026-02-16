@@ -14,48 +14,80 @@ if(isset($_POST['submit'])) {
     $qr_id = $_POST['qr_id'];
     $document_id = $_POST['document_id'];
     $control =  $_POST['control_num'];
+    $returned_reason = $_POST['returned_reason'];
 
 
-    $sql = "SELECT * FROM document WHERE type = '$type'";
-    $result = $conn->query($sql);
+    if($status == 'Received') {
+        $sql1 = "UPDATE document 
+                        SET type = '$type',
+                            description = '$description',
+                            status = '$status'
+                        WHERE qr_id = '$qr_id'";
+        $result1 = $conn->query($sql1);
 
-    if(empty($released_to)) {
-    
-    $sql1 = "UPDATE document 
-                    SET type = '$type',
-                        description = '$description',
-                        status = '$status'
-                    WHERE qr_id = '$qr_id'";
-    $result1 = $conn->query($sql1);
-
-    $sql2 ="INSERT into document_log(document_id, action,performed_by) 
-                        VALUES('$document_id', '$status', '$updatedby')";
-    $conn->query($sql2);
-    $_SESSION['success'] = "Document successfully updated.";
-    header("Location: ../user/user-home.php?control=" . urlencode($control));
-    exit();
+        $sql2 ="INSERT into document_log(document_id, action,performed_by) 
+                            VALUES('$document_id', '$status', '$updatedby')";
+        $conn->query($sql2);
+        $_SESSION['success'] = "Document successfully updated.";
+        header("Location: ../user/user-home.php?control=" . urlencode($control));
+        exit();
     }
-    elseif(!empty($released_to)) {
-     $sql3 = "UPDATE document 
-                SET type = '$type',
-                    description = '$description',
-                    status = '$status',
-                    released_to = '$released_to'
-                    WHERE qr_id = '$qr_id'";
-    $result3 = $conn->query($sql3);
+    elseif($status == 'Under Review') {
+        $sql2 = "UPDATE document 
+                        SET type = '$type',
+                            description = '$description',
+                            status = '$status'
+                        WHERE qr_id = '$qr_id'";
+        $result2 = $conn->query($sql2);
 
-    $sql4 ="INSERT into document_log(document_id, action,performed_by) 
-                        VALUES('$document_id', '$status', '$updatedby')";
-    $conn->query($sql4);
-    $_SESSION['success'] = "Document successfully updated.";
-    header("Location: ../user/user-home.php?control=" . urlencode($control));
-    exit();
+        $sql3 ="INSERT into document_log(document_id, action,performed_by) 
+                            VALUES('$document_id', '$status', '$updatedby')";
+        $conn->query($sql3);
+        $_SESSION['success'] = "Document successfully updated.";
+        header("Location: ../user/user-home.php?control=" . urlencode($control));
+        exit();
     }
+    elseif($status == 'Released') {
+        $returned_reason = null;
 
+        $sql4 = "UPDATE document 
+                        SET type = '$type',
+                            description = '$description',
+                            status = '$status',
+                            released_to = '$released_to',
+                            returned_reason = '$returned_reason'
+                        WHERE qr_id = '$qr_id'";
+        $result3 = $conn->query($sql4);
+
+        $sql5 ="INSERT into document_log(document_id, action,performed_by) 
+                            VALUES('$document_id', '$status', '$updatedby')";
+        $conn->query($sql5);
+        $_SESSION['success'] = "Document successfully updated.";
+        header("Location: ../user/user-home.php?control=" . urlencode($control));
+        exit();
+    }
+    elseif($status == 'Returned') {
+        $released_to = null;
+
+        $sql6 = "UPDATE document 
+                        SET type = '$type',
+                            description = '$description',
+                            status = '$status',
+                            released_to = '$released_to',
+                            returned_reason = '$returned_reason'
+                        WHERE qr_id = '$qr_id'";
+        $result4 = $conn->query($sql6);
+
+        $sql7 ="INSERT into document_log(document_id, action,performed_by) 
+                            VALUES('$document_id', '$status', '$updatedby')";
+        $conn->query($sql7);
+        $_SESSION['success'] = "Document successfully updated.";
+        header("Location: ../user/user-home.php?control=" . urlencode($control));
+        exit();
+    }
     else {
-        echo "NAAY ERROR DO!";
+        echo "hahahahahaha e chatgpt napud XD";
     }
-
 
 }
 

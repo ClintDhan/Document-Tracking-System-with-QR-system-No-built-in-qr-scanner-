@@ -45,21 +45,16 @@ $document = mysqli_fetch_assoc($result);
                 </div>
                 <div class="mt-2">
                     <label for="">Description</label> <br>
-                    <input type="text" class="update-input" name="description" value="<?= $document['description'] ?>" disabled>
-                </div>
-                <div class="mt-2">
-                     <label for="">Status</label> <br>
-                    <input type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
+                    <textarea 
+                                class="update-textare" 
+                                name="description" 
+                                rows="3" 
+                                disabled><?= htmlspecialchars($document['description'] ?? '') ?></textarea>                
                 </div>
                 <div class="mt-2">
                     <label for="">Department</label> <br>
                     <input type="text" class="update-input" name="department" value="<?= $document['department'] ?>" disabled>
                 </div>
-                <div class="mt-2">
-                    <label for="">Control Number</label> <br>
-                    <input type="text" class="update-input" name="control" value="<?= $control ?>" disabled>
-                </div>
-
                 <?php if($document['status'] == 'Released'): ?>
                     <div class="mt-2">
                         <label for="">Status</label> <br>
@@ -69,12 +64,25 @@ $document = mysqli_fetch_assoc($result);
                         <label for="">Released To</label> <br>
                         <input type="text" class="update-input" name="released" value="<?= $document['released_to'] ?>" disabled>
                     </div>
-                <?php else: ?>
+                <?php elseif($document['status'] == 'Returned'): ?>
                      <div class="mt-2">
                         <label for="">Status</label> <br>
                         <input type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
                     </div>
+                    <div class="mt-2">
+                        <label for="">Returned Reason</label> <br>
+                        <input type="text" class="update-input" name="returned_reason" value="<?= $document['returned_reason'] ?>" disabled>
+                    </div>
+                <?php else: ?> 
+                    <div class="mt-2">
+                        <label for="">Status</label> <br>
+                        <input type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
+                    </div>
                 <?php endif; ?>
+                <div class="mt-2">
+                    <label for="">Control Number</label> <br>
+                    <input type="text" class="update-input" name="control" value="<?= $control ?>" disabled>
+                </div>
                 <div class="mt-2">
                      <label for="">Created</label> <br>
                     <input type="text" class="update-input" name="status" value="<?= $document['created_at'] ?>" disabled>
@@ -84,7 +92,6 @@ $document = mysqli_fetch_assoc($result);
                     <input type="text" class="update-input" name="status" value="<?= $document['updated_at'] ?>" disabled>
                 </div>
 
-                
             </div>
 
         </div>

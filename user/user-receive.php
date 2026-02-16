@@ -46,8 +46,8 @@ if (!$qr) {
             <button class='btn-home d-flex justify-content-center' onclick="history.back()">&larr; <span class="span-home">Home</span></button>
 
             <div class='option-form'>
-                    <p class='option-receive'>Receive Document</p>
-                    <p class='option-text'>Please indicate document information</p>
+                    <p class='option-receive' style="text-align: center;">Receive Document</p>
+                    <p class='option-text' style="text-align: center;">Please indicate document information</p>
 
                 <form action="../operation/receivedocument.php" method='POST' 
                     style='display: flex; justify-content: center; flex-direction: column;'>
