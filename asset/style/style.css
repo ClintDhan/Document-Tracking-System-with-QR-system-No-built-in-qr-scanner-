@@ -366,7 +366,58 @@ body {
     font-size: 12px;
 }
 
+/* ADMIN SIDE - DASHBOARD */
 
-/* user update */
+.admin-body {
+    background-color: #EFEFEF;
+}
+
+.admin-dash-container {
+    padding: 10px 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.admin-navbar {
+    height: 70px;
+    width: 1030px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+.admin-card-container {
+    display: flex;
+    width: 1030px;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 10px;
+}
+
+.admin-card-container > div {
+    width: 201px;
+    height: 117px;
+    background-color: #fff;
+}
+
+.admin-middle-container {
+    display: grid;
+    grid-template-columns: 764px 261px;
+    grid-template-rows: 145px 145px;
+    gap: 8px;
+}
+
+.admin-middle-container > div {
+    background-color: #fff;
+}
+
+.first {
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
 
 
