@@ -39,6 +39,26 @@ if (isset($qr_id)) {
     $document = $result2->fetch_assoc();
 }
 
+// logic for the received documents
+
+$receivedSql = "SELECT COUNT(*) AS received_docs 
+                FROM document
+                WHERE status = 'Received' 
+                  AND created_by = {$_SESSION['user_id']} 
+                  AND DATE(created_at) = CURDATE()";
+$result5 = $conn->query($receivedSql);
+$row = $result5->fetch_assoc();
+$receivedDocs = $row['received_docs'];
+
+$releasedSql = "SELECT COUNT(*) AS released_docs FROM document WHERE status = 'Released' AND created_by = {$_SESSION['user_id']} AND DATE(created_at) = CURDATE()";
+$result6 = $conn->query($releasedSql);
+$row2 = $result6->fetch_assoc();
+$releasedDocs = $row2['released_docs']; 
+
+$returnedSql = "SELECT COUNT(*) AS returned_docs FROM document WHERE status = 'Returned' AND created_by = {$_SESSION['user_id']} AND DATE(created_at) = CURDATE()";
+$result7 = $conn->query($returnedSql);
+$row3 = $result7->fetch_assoc();
+$returnedDocs = $row3['returned_docs'];
 ?>
 
 <!DOCTYPE html>
@@ -100,9 +120,18 @@ if (isset($qr_id)) {
             <div class='user-dash'>
                 <div class='user-dash-flx'>
                     <div class='user-dash-grid'>
-                        <div class='user-received'><p>Received Documents</p></div>
-                        <div class='user-released'><p>Released Documents</p></div>
-                        <div class='user-returned'><p>Returned Documents</p></div>
+                        <div class='user-received'>
+                            <p class="user-dash-count"><?= $receivedDocs ?></p>
+                            <p>Received Documents</p>
+                        </div>
+                        <div class='user-released'>
+                            <p class="user-dash-count"><?= $releasedDocs ?></p>
+                            <p>Released Documents</p>
+                        </div>
+                        <div class='user-returned'>
+                            <p class="user-dash-count"><?= $returnedDocs ?></p>
+                            <p>Returned Documents</p>
+                        </div>
                     </div>
                 </div>
             </div>
