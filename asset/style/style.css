@@ -212,6 +212,8 @@ body {
     font-weight: 900;
     font-size: 20px;
     text-decoration: none;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
 }
 
 .btn-receive {
@@ -250,7 +252,7 @@ body {
 }
 
 .user-dash {
-    height: 242px;
+    height: auto;
     background-color: #ECFFEB;
     border-radius: 20px;
     margin-top: 16px;
@@ -260,6 +262,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px 0;
+    flex-direction: column;
 }
 
 .user-dash-grid {
@@ -271,8 +275,9 @@ body {
 }
 
 .user-dash-grid > div {
+    padding-top: 30px;
     color: white;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
 
 }
 .user-received {
@@ -289,6 +294,16 @@ body {
     background-color: #F25757;
 }
 
+.user-dash-count {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+
+.todays-docs {
+    font-weight: 700;
+
+}
 
 /* user receive */
 
@@ -366,6 +381,10 @@ body {
     font-size: 12px;
 }
 
+.user-homecount-container > p {
+    text-align: center;
+}
+
 /* ADMIN SIDE - DASHBOARD */
 
 .admin-body {
@@ -387,6 +406,11 @@ body {
     width: 1030px;
     background-color: #fff;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 12px;
 }
 
 .admin-card-container {
@@ -402,6 +426,7 @@ body {
     width: 201px;
     height: 117px;
     background-color: #fff;
+    border-radius: 12px;
 }
 
 .admin-middle-container {
@@ -413,6 +438,8 @@ body {
 
 .admin-middle-container > div {
     background-color: #fff;
+    border-radius: 12px;
+    padding: 10px 20px;
 }
 
 .first {
@@ -420,4 +447,51 @@ body {
     grid-row-end: 3;
 }
 
+.admin-logo a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 900;
+    color: #333333;
+}
+
+.nav-anchor {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-anchor a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    color: #333333;
+}
+
+.admin-logout {
+    height: 35px;
+}
+
+.card-flx {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.admin-card-circle {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    background-color: yellowgreen;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-count {
+    color: white;
+}
+
+.card-text {
+    margin-top: 5px;
+}
 

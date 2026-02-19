@@ -120,15 +120,15 @@ $returnedDocs = $row3['returned_docs'];
             <div class='user-dash'>
                 <div class='user-dash-flx'>
                     <div class='user-dash-grid'>
-                        <div class='user-received'>
+                        <div class='user-received user-homecount-container'>
                             <p class="user-dash-count"><?= $receivedDocs ?></p>
                             <p>Received Documents</p>
                         </div>
-                        <div class='user-released'>
+                        <div class='user-released user-homecount-container'>
                             <p class="user-dash-count"><?= $releasedDocs ?></p>
                             <p>Released Documents</p>
                         </div>
-                        <div class='user-returned'>
+                        <div class='user-returned user-homecount-container'>
                             <p class="user-dash-count"><?= $returnedDocs ?></p>
                             <p>Returned Documents</p>
                         </div>

@@ -16,20 +16,60 @@ require_once '../db.php';
 <body class="admin-body">
     <div class="admin-dash-container">
         <div class="admin-navbar">
+            <div class="admin-logo">
+                <a href="">MAYOR'S OFFICE DTS</a>
+            </div>
 
+            <div class="nav-anchor">
+                <a href="">DASHBOARD</a>
+                <a href="">DOCUMENTS</a>
+                <a href="">LOGS</a>
+                <a href="">QR MANAGEMENT</a>
+                <a href="">USERS</a>
+            </div>
+
+            <div class="admin-logout">
+                <button class='log-out admin-logout'>↪ LOGOUT</button>
+            </div>
         </div>
 
         <div class="admin-card-container">
-            <div class=""></div>
-            <div class=""></div>
-            <div class=""></div>
-            <div class=""></div>
-            <div class=""></div>
+            <div class="card-flx">
+                <div class="admin-card-circle">
+                <p class="card-count">55</p>
+            </div>
+                <p class="card-text">TOTAL DOCUMENTS</p>
+            </div>
+            <div class="card-flx">
+                <div class="admin-card-circle">
+                <p class="card-count">55</p></div>
+                <p class="card-text">RECEIVED</p>
+            </div>
+            <div class="card-flx">
+                <div class="admin-card-circle">
+                    
+                <p class="card-count">55</p>
+                </div>
+                <p class="card-text">UNDER REVIEW</p>
+            </div>
+            <div class="card-flx">
+                <div class="admin-card-circle">
+                    
+                <p class="card-count">55</p>
+                </div>
+                <p class="card-text">RELEASED</p>
+            </div>
+            <div class="card-flx">
+                <div class="admin-card-circle"><p class="card-count">55</p></div>
+                <p class="card-text">RETURNED</p>
+            </div>
         </div>
         <div class="admin-middle-container">
-            <div class="first">first</div>
-            <div></div>
-            <div></div>
+            <div class="first">
+                <div></div>
+            </div>
+            <div>2nd</div>
+            <div>3rd</div>
         </div>
     </div>
 
