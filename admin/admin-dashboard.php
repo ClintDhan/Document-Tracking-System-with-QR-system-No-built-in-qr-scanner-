@@ -65,11 +65,90 @@ require_once '../db.php';
             </div>
         </div>
         <div class="admin-middle-container">
-            <div class="first">
-                <div></div>
+            <div class="first middle-form">
+                <div class="d-flex justify-content-between">
+                    <p class="recent-title">RECENT ACTIVITY</p>
+                    <button class="recent-view">VIEW</button>
+                </div>
+
+                <table class="first-table">
+                    <thead>
+                        <tr>
+                            <th class="recent-log">Log ID</th>
+                            <th class="recent-type">Type</th>
+                            <th class="recent-action">Action performed</th>
+                            <th class="recent-performed">Performed by</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Kingmingoy</td>
+                            <td>Received</td>
+                            <td>Clint Rono</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Kingmingoy</td>
+                            <td>Received</td>
+                            <td>Clint Rono</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Kingmingoy</td>
+                            <td>Received</td>
+                            <td>Clint Rono</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Kingmingoy</td>
+                            <td>Received</td>
+                            <td>Clint Rono</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Kingmingoy</td>
+                            <td>Received</td>
+                            <td>Clint Rono</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Kingmingoy</td>
+                            <td>Received</td>
+                            <td>Clint Rono</td>
+                        </tr>
+                         <tr>
+                            <td>1</td>
+                            <td>Kingmingoy</td>
+                            <td>Received</td>
+                            <td>Clint Rono</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div>2nd</div>
-            <div>3rd</div>
+
+
+            <div class="middle-form">
+                <p class="todays-title">TODAY'S DOCUMENTS</p>
+
+                <div class="mt-2 d-flex justify-content-between">
+                    <p class="todays-text">Received</p>
+                    <p class="todays-num">26</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="todays-text">Under review</p>
+                    <p class="todays-num">21</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="todays-text">Released</p>
+                    <p class="todays-num">5</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="todays-text">Returned</p>
+                    <p class="todays-num">2</p>
+                </div>
+            </div>
+            <div class="middle-form"></div>
         </div>
     </div>
 
