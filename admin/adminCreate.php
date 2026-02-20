@@ -9,7 +9,6 @@
     <form action="../operation/createuser.php" method='post'>
         <input type="text" name='name' placeholder='Enter user name'>
         <input type="password" name='password' placeholder ='Enter password'>
-        <input type="password" name='role' placeholder ='Enter role'>
         <input type="submit" name='create'>
     </form>
 

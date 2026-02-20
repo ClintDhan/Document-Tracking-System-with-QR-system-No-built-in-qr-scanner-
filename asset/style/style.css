@@ -456,7 +456,7 @@ body {
 
 .nav-anchor {
     display: flex;
-    gap: 35px;
+    gap: 5px;
 }
 
 .nav-anchor a {
@@ -464,6 +464,15 @@ body {
     font-size: 12px;
     font-weight: 700;
     color: #333333;
+    
+    padding: 10px 10px;
+    transition: all 0.5s ease;
+}
+
+.nav-anchor a:hover {
+    background-color: #626161;
+    color: white;
+    border-radius: 8px;
 }
 
 .admin-logout {
@@ -552,4 +561,22 @@ tbody tr td {
 .todays-num {
     font-size: 14px;
     color: #5f5f5f;
+    font-weight: 800;
 }
+
+.active {
+    background-color: #626161;
+    color: white !important;
+    border-radius: 8px;
+}
+
+/* admin docs */
+
+
+.admin-docs-container {
+    width: 1030px;
+    border-radius: 8px;
+    height: 500px;
+    background-color: #fff;
+}
+

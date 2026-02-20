@@ -21,8 +21,8 @@ require_once '../db.php';
             </div>
 
             <div class="nav-anchor">
-                <a href="">DASHBOARD</a>
-                <a href="">DOCUMENTS</a>
+                <a href="" class="active">DASHBOARD</a>
+                <a href="admin-document.php">DOCUMENTS</a>
                 <a href="">LOGS</a>
                 <a href="">QR MANAGEMENT</a>
                 <a href="">USERS</a>
@@ -35,32 +35,32 @@ require_once '../db.php';
 
         <div class="admin-card-container">
             <div class="card-flx">
-                <div class="admin-card-circle">
+                <div class="admin-card-circle" style="background-color: #3B82F6;">
                 <p class="card-count">55</p>
             </div>
                 <p class="card-text">TOTAL DOCUMENTS</p>
             </div>
             <div class="card-flx">
-                <div class="admin-card-circle">
+                <div class="admin-card-circle" style="background-color: #22C55E;">
                 <p class="card-count">55</p></div>
                 <p class="card-text">RECEIVED</p>
             </div>
             <div class="card-flx">
-                <div class="admin-card-circle">
+                <div class="admin-card-circle" style="background-color: #FBBF24;">
                     
                 <p class="card-count">55</p>
                 </div>
                 <p class="card-text">UNDER REVIEW</p>
             </div>
             <div class="card-flx">
-                <div class="admin-card-circle">
+                <div class="admin-card-circle" style="background-color: #7C3AED;">
                     
                 <p class="card-count">55</p>
                 </div>
                 <p class="card-text">RELEASED</p>
             </div>
             <div class="card-flx">
-                <div class="admin-card-circle"><p class="card-count">55</p></div>
+                <div class="admin-card-circle" style="background-color: #EF4444;"><p class="card-count">55</p></div>
                 <p class="card-text">RETURNED</p>
             </div>
         </div>
@@ -133,20 +133,24 @@ require_once '../db.php';
 
                 <div class="mt-2 d-flex justify-content-between">
                     <p class="todays-text">Received</p>
-                    <p class="todays-num">26</p>
+                    <p class="todays-num" style="color: #166534;">26</p>
                 </div>
+
                 <div class="d-flex justify-content-between">
                     <p class="todays-text">Under review</p>
-                    <p class="todays-num">21</p>
+                    <p class="todays-num" style="color: #92400E;">21</p>
                 </div>
+
                 <div class="d-flex justify-content-between">
                     <p class="todays-text">Released</p>
-                    <p class="todays-num">5</p>
+                    <p class="todays-num" style="color: #075985;">5</p>
                 </div>
+
                 <div class="d-flex justify-content-between">
                     <p class="todays-text">Returned</p>
-                    <p class="todays-num">2</p>
+                    <p class="todays-num" style="color: #991B1B">2</p>
                 </div>
+                
             </div>
             <div class="middle-form"></div>
         </div>

@@ -4,7 +4,6 @@ require_once '../db.php';
 if(isset($_POST['create'])) {
     $name = $_POST['name'];
     $password = $_POST['password'];
-    $role = $_POST['role'];
 
 
     $sql = "SELECT * FROM user WHERE name = '$name'";
@@ -14,7 +13,7 @@ if(isset($_POST['create'])) {
         echo 'user already existed!';
     }
     else {
-        $sql1 = "INSERT INTO user (name , password, role) VALUES ('$name' , '$password' , '$role')";
+        $sql1 = "INSERT INTO user (name , password) VALUES ('$name' , '$password')";
         $result1 = $conn->query($sql1);
 
          if ($result1) {
