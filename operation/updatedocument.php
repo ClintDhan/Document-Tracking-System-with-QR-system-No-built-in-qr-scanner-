@@ -16,7 +16,7 @@ if(isset($_POST['submit'])) {
     $control = $_POST['control_num'];
     $returned_reason = $_POST['returned_reason'] ?? null;
 
-    // Default values
+    
     if($status != 'Released') {
         $released_to = null;
     }
@@ -35,7 +35,7 @@ if(isset($_POST['submit'])) {
 
     $conn->query($sql);
 
-    // Insert log (same for all statuses)
+   
     $logSql = "INSERT INTO document_log(document_id, action, performed_by) 
                VALUES('$document_id', '$status', '$updatedby')";
     $conn->query($logSql);

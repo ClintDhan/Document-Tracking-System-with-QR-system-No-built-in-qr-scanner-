@@ -411,6 +411,7 @@ body {
     align-items: center;
     padding: 0 20px;
     border-radius: 12px;
+    flex-shrink: 0;
 }
 
 .admin-card-container {
@@ -573,10 +574,13 @@ tbody tr td {
 /* admin docs */
 
 
-.admin-docs-container {
+.admin-docs-container , .admin-logs-container {
     width: 1030px;
     border-radius: 8px;
-    height: 500px;
+    height: auto;
+    padding: 10px 10px;
     background-color: #fff;
 }
+
+
 
