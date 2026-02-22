@@ -574,7 +574,7 @@ tbody tr td {
 /* admin docs */
 
 
-.admin-docs-container , .admin-logs-container {
+.admin-docs-container , .admin-logs-container , .admin-qr-container , .admin-user-container {
     width: 1030px;
     border-radius: 8px;
     height: auto;
