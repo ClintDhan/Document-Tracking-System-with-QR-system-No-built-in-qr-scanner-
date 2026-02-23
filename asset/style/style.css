@@ -471,7 +471,7 @@ body {
 }
 
 .nav-anchor a:hover {
-    background-color: #626161;
+    background-color: #aaaaaa;
     color: white;
     border-radius: 8px;
 }
@@ -566,7 +566,7 @@ tbody tr td {
 }
 
 .active {
-    background-color: #626161;
+    background-color: #aaaaaa;
     color: white !important;
     border-radius: 8px;
 }
@@ -574,7 +574,8 @@ tbody tr td {
 /* admin docs */
 
 
-.admin-docs-container , .admin-logs-container , .admin-qr-container , .admin-user-container {
+.admin-docs-container , .admin-logs-container , 
+.admin-qr-container , .admin-user-container {
     width: 1030px;
     border-radius: 8px;
     height: auto;

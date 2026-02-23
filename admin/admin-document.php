@@ -2,26 +2,26 @@
 session_start();
 require_once '../db.php';
 
-$sql ="
-    SELECT 
-        document.id,
-        document.type,
-        document.description,
-        document.status,
-        document.department,
-        document.created_at,
-        document.updated_at,
-        document.released_to,
-        document.returned_reason,
-        user.name AS creator_name
-    FROM document
-    INNER JOIN user 
-        ON document.created_by = user.id
-    ORDER BY document.id DESC , document.created_at DESC
-";
+// $sql ="
+//     SELECT 
+//         document.id,
+//         document.type,
+//         document.description,
+//         document.status,
+//         document.department,
+//         document.created_at,
+//         document.updated_at,
+//         document.released_to,
+//         document.returned_reason,
+//         user.name AS creator_name
+//     FROM document
+//     INNER JOIN user 
+//         ON document.created_by = user.id
+//     ORDER BY document.id DESC , document.created_at DESC
+// ";
 
-$result = $conn->query($sql);
-$documents = $result->fetch_all(MYSQLI_ASSOC);
+// $result = $conn->query($sql);
+// $documents = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -54,40 +54,28 @@ $documents = $result->fetch_all(MYSQLI_ASSOC);
         </div>
 
         <div class="admin-docs-container">
-            <table class='admin-docs-table'>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Department</th>
-                        <th>Created by</th>
-                        <th>Created at</th>
-                        <th>Last Updated</th>
-                        <th>Released To</th>
-                        <th>Returned Reason</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($documents as $doc): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($doc['id']) ?></td>
-                        <td><?= htmlspecialchars($doc['type']) ?></td>
-                        <td><?= htmlspecialchars($doc['description']) ?></td>
-                        <td><?= htmlspecialchars($doc['status']) ?></td>
-                        <td><?= htmlspecialchars($doc['department']) ?></td>
-                        <td><?= htmlspecialchars($doc['creator_name']) ?></td>
-                        <td><?= htmlspecialchars($doc['created_at']) ?></td>
-                        <td><?= htmlspecialchars($doc['updated_at']) ?></td>
-                        <td><?= htmlspecialchars($doc['released_to']) ?></td>
-                        <td><?= htmlspecialchars($doc['returned_reason']) ?></td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+            <input type="text" onkeyup="loadData(this.value)" placeholder="Search users...">
+            <div id="result">
+                <?php require_once "../operation/admin-document-search.php" ?>
+            </div>
         </div>
-    </div>
+
+        
+
+    <script>
+        function loadData(query) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "../operation/admin-document-search.php" , true);
+
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            }
+            xhr.send("query=" + query);
+        }
+    </script>
     
 </body>
 </html>
