@@ -64,10 +64,8 @@ while ($row = $result->fetch_assoc()) {
             <td>".$row['updated_at']."</td>
             <td>".$row['released_to']."</td>
             <td>".$row['returned_reason']."</td>
-            <td><form method='POST' action='admin-edit-doc.php'>
-                <input type='hidden' name='id' value='".$row['id']."''>
-                <input type='submit' value='EDIT'>
-                </></td>
+            <td><a href='../admin/admin-doc-edit.php?doc=".$row['id']."'>EDIT
+                </a></td>
 
 
         </tr>";

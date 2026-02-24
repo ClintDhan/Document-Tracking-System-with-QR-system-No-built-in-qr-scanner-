@@ -2,6 +2,10 @@
 session_start();
 require_once '../db.php';
 
+$doc = $_GET['doc'] ?? null;
+$sql = "SELECT * FROM document where id = '$doc'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
 ?>
 
 
@@ -34,12 +38,16 @@ require_once '../db.php';
                     </div>
                 </div>
             <div class="doc-edit-container mt-2">
-
+                <p>Edit document</p>
+                <form action="../operation/admin-edit-document.php" method="POST">
+                    <input type="text" name='type' value=<?= $row['type'] ?>>
+                    <input type="text" name='description' value=<?= $row['description'] ?>>
+                    <input type="text" name='department' value=<?= $row['department'] ?>>
+                    <input type="text" name='released_to' value=<?= $row['released_to'] ?>>
+                    <input type="text" name='returned_reason' value=<?= $row['returned_reason'] ?>>
+                </form>
             </div>
         </div>
-
-        
-
 
 </body>
 </html>
