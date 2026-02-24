@@ -2,23 +2,6 @@
 session_start();
 require_once '../db.php';
 
-$sql = "SELECT 
-    document_log.id,
-    document_log.action,
-    document_log.performed_at,
-    document.type AS document_type,
-    user.name AS performer
-FROM document_log
-INNER JOIN user 
-    ON document_log.performed_by = user.id
-INNER JOIN document 
-    ON document_log.document_id = document.id
-ORDER BY document_log.performed_at DESC;
-";
-
-$result = $conn->query($sql);
-$document_log = $result->fetch_all(MYSQLI_ASSOC);
-
 ?>
 
 <!DOCTYPE html>
@@ -50,34 +33,28 @@ $document_log = $result->fetch_all(MYSQLI_ASSOC);
             </div>
         </div>
 
-        <div class="admin-logs-container">
-            <div class="admin-logs-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Type</th>
-                            <th>Action</th>
-                            <th>Performed At</th>
-                            <th>Performed By</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($document_log as $doc): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($doc['id'])?></td>
-                            <td><?= htmlspecialchars($doc['document_type'])?></td>
-                            <td><?= htmlspecialchars($doc['action'])?></td>
-                            <td><?= htmlspecialchars($doc['performed_at'])?></td>
-                            <td><?= htmlspecialchars($doc['performer'])?></td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+         <div class="admin-logs-container">
+            <input type="text" onkeyup="loadData(this.value)" placeholder="Search users...">
+            <div id="result">
+                <?php require_once "../operation/admin-log-search.php" ?>
             </div>
         </div>
 
     </div>
-    
+
+     <script>
+        function loadData(query) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "../operation/admin-log-search.php" , true);
+
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            }
+            xhr.send("query=" + query);
+        }
+    </script>
 </body>
 </html>

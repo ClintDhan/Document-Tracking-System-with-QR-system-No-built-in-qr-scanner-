@@ -26,6 +26,7 @@ if ($search != "") {
 }
 
 $sql .= " ORDER BY document.id DESC , document.created_at DESC";
+
 $result = $conn->query($sql);
 echo "<table class='admin-docs-table'>
         <thead>

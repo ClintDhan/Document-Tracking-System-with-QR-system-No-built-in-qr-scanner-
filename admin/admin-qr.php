@@ -2,15 +2,15 @@
 session_start();
 require_once "../db.php";
 
-$sql = "SELECT qr_code.id,
-                qr_code.control_num,
-                qr_code.is_used,
-                user.name AS creator
+// $sql = "SELECT qr_code.id,
+//                 qr_code.control_num,
+//                 qr_code.is_used,
+//                 user.name AS creator
                 
-        FROM qr_code INNER JOIN user on qr_code.created_by = user.id";
+//         FROM qr_code INNER JOIN user on qr_code.created_by = user.id";
 
-$result = $conn->query($sql);
-$qr = $result->fetch_all(MYSQLI_ASSOC);
+// $result = $conn->query($sql);
+// $qr = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -43,34 +43,26 @@ $qr = $result->fetch_all(MYSQLI_ASSOC);
         </div>
 
         <div class="admin-qr-container">
-           <table class="qr-table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Control Number</th>
-                        <th>Used/Not Used</th>
-                        <th>Created By</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($qr as $qrcode): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($qrcode['id']) ?></td>
-                            <td><?= htmlspecialchars($qrcode['control_num']) ?></td>
-                            <td> <?php if($qrcode['is_used'] == 0) {
-                                        echo "Not used";
-                                    } 
-                                    else {
-                                        echo "Used";
-                                    }?></td>
-                            <td><?= htmlspecialchars($qrcode['creator']) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-           </table>
+            <input type="text" onkeyup="loadData(this.value)" placeholder="Search users...">
+            <div id="result">
+                <?php require_once "../operation/admin-qr-search.php" ?>
+            </div>
         </div>
 
     </div>
-    
+    <script>
+        function loadData(query) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "../operation/admin-qr-search.php" , true);
+
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            }
+            xhr.send("query=" + query);
+        }
+    </script>
 </body>
 </html>
