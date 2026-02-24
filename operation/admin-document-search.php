@@ -31,33 +31,44 @@ $result = $conn->query($sql);
 echo "<table class='admin-docs-table'>
         <thead>
             <tr>
-                <th>No</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Department</th>
-                <th>Created by</th>
-                <th>Created at</th>
-                <th>Last Updated</th>
-                <th>Released To</th>
-                <th>Returned Reason</th>
+                <th class='admin-docs-no'>No</th>
+                <th class='admin-docs-type'>Type</th>
+                <th class='admin-docs-desc'>Description</th>
+                <th class='admin-docs-sts'>Status</th>
+                <th class='admin-docs-dep'>Department</th>
+                <th class='admin-docs-created'>Created by</th>
+                <th class='admin-docs-created-at'>Created at</th>
+                <th class='admin-docs-updt'>Last Updated</th>
+                <th class='admin-docs-released'>Released To</th>
+                <th class='admin-docs-returned'>Returned Reason</th>
+                <th class='admin-docs-action'>Action</th>
             </tr>
          </thead>
          <tbody>";
 
 while ($row = $result->fetch_assoc()) {
     echo "
-        <tr>
+        <tr class='tr-hover'>
             <td>".$row['id']."</td>
             <td>".$row['type']."</td>
             <td>".$row['description']."</td>
-            <td>".$row['status']."</td>
+            <td><div style='border-radius: 4px;' class='".
+                ($row['status'] == 'Returned' ? 'status-returned' :
+                ($row['status'] == 'Under Review' ? 'status-review' :
+                ($row['status'] == 'Released' ? 'status-released' :
+                'status-default')))
+            ."'>".$row['status']."</div></td>
             <td>".$row['department']."</td>
             <td>".$row['creator_name']."</td>
             <td>".$row['created_at']."</td>
             <td>".$row['updated_at']."</td>
             <td>".$row['released_to']."</td>
             <td>".$row['returned_reason']."</td>
+            <td><form method='POST' action='admin-edit-doc.php'>
+                <input type='hidden' name='id' value='".$row['id']."''>
+                <input type='submit' value='EDIT'>
+                </></td>
+
 
         </tr>";
 }

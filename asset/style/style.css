@@ -398,7 +398,6 @@ body {
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    margin-bottom: 30px;
 }
 
 .admin-navbar {
@@ -583,5 +582,123 @@ tbody tr td {
     background-color: #fff;
 }
 
+.admin-docs-no {
+    min-width: 60px;
+    max-width: 50px;
+}
+
+.admin-docs-type {
+    min-width: 90px;
+    max-width: 150px;
+}
+
+.admin-docs-desc {
+    min-width: 140px;
+    max-width: 150px;
+}
+
+.admin-docs-sts {
+    min-width: 90px;
+    max-width: 150px;
+}
+
+.admin-docs-dep {
+    min-width: 100px;
+    max-width: 150px;
+}
+
+.admin-docs-created {
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.admin-docs-created-at {
+    min-width: 80px;
+}
+
+.admin-docs-updt {
+    min-width: 80px;
+}
+
+.admin-docs-released {
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.admin-docs-returned {
+    min-width: 120px;
+    max-width: 150px;
+}
+
+.admin-docs-action {
+    min-width: 80px;
+    max-width: 80px;
+}
 
 
+
+.admin-docs-table {
+    width: max-content;
+    
+}
+
+#result {
+    max-width: 1010px;
+    overflow-x: auto;
+}
+
+.tr-hover:hover {
+    background-color: rgb(227, 227, 227);
+}
+
+
+#result::-webkit-scrollbar {
+    height: 8px;
+    width: 8px; 
+}
+
+/* Scroll track */
+#result::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* Scroll thumb */
+#result::-webkit-scrollbar-thumb {
+    background: #7eff06;
+    border-radius: 8px;
+}
+
+
+.status-default {
+    padding: 2px 3px;
+    background-color: #22C55E;
+    color: white;
+}
+
+.status-returned {
+    background-color: #EF4444;
+    color: white;
+    padding: 2px 3px;
+}
+
+.status-review {
+    background-color: #FBBF24;
+    color: white;
+    padding: 2px 3px;
+}
+
+.status-released {
+    background-color: #7C3AED;
+    color: white;
+    padding: 2px 3px;
+}
+
+
+.doc-edit-container {
+    background-color: #fff;
+    height: 300px;
+    border: 1px solid red;
+    width: 1027px;
+    display: flex;
+}
