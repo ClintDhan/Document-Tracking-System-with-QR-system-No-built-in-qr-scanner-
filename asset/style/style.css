@@ -697,8 +697,15 @@ tbody tr td {
 
 .doc-edit-container {
     background-color: #fff;
-    height: 300px;
-    border: 1px solid red;
+    height: auto;
+    padding: 10px;
+    border-radius: 8px;
     width: 1027px;
+}
+
+.doc-edit-flx {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

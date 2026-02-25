@@ -38,16 +38,107 @@ $row = $result->fetch_assoc();
                     </div>
                 </div>
             <div class="doc-edit-container mt-2">
-                <p>Edit document</p>
-                <form action="../operation/admin-edit-document.php" method="POST">
-                    <input type="text" name='type' value=<?= $row['type'] ?>>
-                    <input type="text" name='description' value=<?= $row['description'] ?>>
-                    <input type="text" name='department' value=<?= $row['department'] ?>>
-                    <input type="text" name='released_to' value=<?= $row['released_to'] ?>>
-                    <input type="text" name='returned_reason' value=<?= $row['returned_reason'] ?>>
+                <p class="text-center">Edit document</p>
+                <form action="../operation/admin-update-document.php" method="POST">
+                    <div class="doc-edit-flx">
+                    <input type="hidden" name="doc_id" value="<?= $doc ?>">
+                    <div>
+                    <label for="">Type</label> <br>
+                    <input type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>">
+                    </div>
+
+                    <div>
+                    <label for="">Description</label> <br>
+                    <textarea name='description' id="" ><?= $row['description'] ?></textarea>            
+                    </div>
+
+                    <div>
+                    <label for="">Department</label> <br>
+                    <input type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>">
+                    </div>
+
+                    <div>
+                    <label for="">Status</label> <br>
+                    <select name="status" class="" id='statusSelect'>
+                        <option value="Received" <?= ($row['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
+                        <option value="Under Review" <?= ($row['status'] ?? '') == 'Under Review' ? 'selected' : '' ?>>Under Review</option>
+                        <option value="Released" <?= ($row['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
+                        <option value="Returned" <?= ($row['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
+                    </select>
+                    </div>
+
+                    <div>
+                     <label for="" id="releasedInputLabel">Released To</label>
+                        <input type="text"
+                        id="releasedTo"
+                        class="update-input"
+                        name="released_to"
+                        placeholder="Released To"
+                        value="<?= htmlspecialchars($row['released_to'] ?? '') ?>"
+                        style="<?= ($row['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;">
+                    </div>
+
+                    <div>
+                    <label for="" id="returnedInputLabel">Return Reason</label>
+                        <input type="text"
+                        id="returnReason"
+                        class="update-input"
+                        name="returned_reason"
+                        placeholder="Return Reason"
+                        value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
+                        style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;">                    
+                    </div>
+
+                    
+                    <button class='btn-submit' type='submit' name='submit'>UPDATE</button>
+                    </div>
                 </form>
             </div>
         </div>
+<script>
+const statusSelect = document.getElementById('statusSelect');
+const releasedInput = document.getElementById('releasedTo');
+const releasedInputLabel = document.getElementById('releasedInputLabel');
+const returnedInputLabel = document.getElementById('returnedInputLabel');
+const returnReason = document.getElementById('returnReason');
 
+
+function showInput() {
+    if (statusSelect.value === 'Released') {
+        releasedInputLabel.style.display = 'block';
+        releasedInput.style.display = 'block';
+        releasedInput.required = true;
+        returnedInputLabel.style.display = 'none';
+        returnReason.style.display = 'none';
+        returnReason.required = false;
+    }
+    
+    else if(statusSelect.value === 'Returned') {
+        returnedInputLabel.style.display = 'block';
+        returnReason.style.display = 'block';
+        returnReason.required = true;
+         releasedInputLabel.style.display = 'none';
+        releasedInput.style.display = 'none';
+        releasedInput.required = false;
+    }
+    else {
+        releasedInputLabel.style.display = 'none';
+        releasedInput.style.display = 'none';
+        releasedInput.required = false;
+        releasedInput.value = ''; // ADD THIS
+
+        returnedInputLabel.style.display = 'none';
+        returnReason.style.display = 'none';
+        returnReason.required = false;
+        returnReason.value = ''; // ADD THIS
+    }
+
+}
+
+showInput();
+statusSelect.addEventListener('change' ,showInput );
+</script>
 </body>
+
+
 </html>
