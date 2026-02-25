@@ -36,10 +36,15 @@ echo "<table class='admin-logs-table'>
 
 while ($row = $result->fetch_assoc()) {
     echo "
-        <tr>
+        <tr class='tr-hover'>
             <td>".$row['id']."</td>
             <td>".$row['document_type']."</td>
-            <td>".$row['action']."</td>
+            <td><div style='border-radius: 4px;' class='".
+                ($row['action'] == 'Returned' ? 'status-returned' :
+                ($row['action'] == 'Under Review' ? 'status-review' :
+                ($row['action'] == 'Released' ? 'status-released' :
+                'status-default')))
+            ."'>".$row['action']."</div></td>
             <td>".$row['performed_at']."</td>
             <td>".$row['performer']."</td>
         </tr>";

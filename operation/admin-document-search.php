@@ -64,7 +64,7 @@ while ($row = $result->fetch_assoc()) {
             <td>".$row['updated_at']."</td>
             <td>".$row['released_to']."</td>
             <td>".$row['returned_reason']."</td>
-            <td><a href='../admin/admin-doc-edit.php?doc=".$row['id']."'>EDIT
+            <td><a class='admin-doc-btn' href='../admin/admin-doc-edit.php?doc=".$row['id']."'>EDIT
                 </a></td>
 
 

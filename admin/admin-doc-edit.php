@@ -38,28 +38,28 @@ $row = $result->fetch_assoc();
                     </div>
                 </div>
             <div class="doc-edit-container mt-2">
-                <p class="text-center">Edit document</p>
+                <p class="text-center" style="font-weight: 700;">Edit document</p>
                 <form action="../operation/admin-update-document.php" method="POST">
                     <div class="doc-edit-flx">
                     <input type="hidden" name="doc_id" value="<?= $doc ?>">
                     <div>
                     <label for="">Type</label> <br>
-                    <input type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>">
+                    <input type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>" class="admin-doc-input">
                     </div>
 
-                    <div>
+                    <div class="mt-2">
                     <label for="">Description</label> <br>
-                    <textarea name='description' id="" ><?= $row['description'] ?></textarea>            
+                    <textarea name='description' rows="4" id="" class="admin-doc-area"><?= $row['description'] ?></textarea>            
                     </div>
 
-                    <div>
+                    <div class="mt-2">
                     <label for="">Department</label> <br>
-                    <input type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>">
+                    <input type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>" class="admin-doc-input">
                     </div>
 
-                    <div>
+                    <div class="mt-2">
                     <label for="">Status</label> <br>
-                    <select name="status" class="" id='statusSelect'>
+                    <select name="status" id='statusSelect' class="admin-doc-input">
                         <option value="Received" <?= ($row['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
                         <option value="Under Review" <?= ($row['status'] ?? '') == 'Under Review' ? 'selected' : '' ?>>Under Review</option>
                         <option value="Released" <?= ($row['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
@@ -67,22 +67,22 @@ $row = $result->fetch_assoc();
                     </select>
                     </div>
 
-                    <div>
+                    <div class="mt-2">
                      <label for="" id="releasedInputLabel">Released To</label>
                         <input type="text"
                         id="releasedTo"
-                        class="update-input"
+                        class="admin-doc-input"
                         name="released_to"
                         placeholder="Released To"
                         value="<?= htmlspecialchars($row['released_to'] ?? '') ?>"
                         style="<?= ($row['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;">
                     </div>
 
-                    <div>
+                    <div class="mt-2">
                     <label for="" id="returnedInputLabel">Return Reason</label>
                         <input type="text"
                         id="returnReason"
-                        class="update-input"
+                        class="admin-doc-input"
                         name="returned_reason"
                         placeholder="Return Reason"
                         value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
@@ -90,7 +90,7 @@ $row = $result->fetch_assoc();
                     </div>
 
                     
-                    <button class='btn-submit' type='submit' name='submit'>UPDATE</button>
+                    <button class='btn-submit admin-doc-submit' type='submit' name='submit'>UPDATE</button>
                     </div>
                 </form>
             </div>

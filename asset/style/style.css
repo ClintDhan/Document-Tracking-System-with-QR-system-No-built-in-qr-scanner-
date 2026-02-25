@@ -698,9 +698,9 @@ tbody tr td {
 .doc-edit-container {
     background-color: #fff;
     height: auto;
-    padding: 10px;
+    padding: 20px 30px;
     border-radius: 8px;
-    width: 1027px;
+    width: auto;
 }
 
 .doc-edit-flx {
@@ -708,4 +708,59 @@ tbody tr td {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+
+.admin-doc-input{
+    width: 300px;
+    height: 30px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.admin-doc-area {
+    width: 300px;
+}
+
+.admin-doc-submit {
+    width: 300px !important;
+}
+
+.admin-doc-btn {
+    padding: 5px 8px;
+    border-radius: 8px;
+    background-color: rgb(80, 80, 255);
+    color: white;
+    text-decoration: none;
+}
+
+/* LOG SEARCH */
+
+.admin-logs-table thead tr th {
+    width: 20%;
+}
+
+.admin-logs-table {
+    width: 100%;
+}
+
+/* qr search */
+
+.admin-qr-table thead tr th {
+    width: 25%;
+}
+.admin-qr-table {
+    width: 100%;
+}
+
+
+/* user table */
+
+.user-table {
+    width: 100%;
+}
+
+.user-table thead tr th {
+    width: 20%;
 }

@@ -45,7 +45,7 @@ echo "<table class='admin-qr-table'>
 
 while ($row = $result->fetch_assoc()) {
     echo "
-        <tr>
+        <tr class='tr-hover'>
             <td>".$row['id']."</td>
             <td>".$row['control_num']."</td>
             <td>".(($row['is_used'] == 0) ? "Not used" : "Used")."</td>

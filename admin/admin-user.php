@@ -50,7 +50,7 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                 </thead>
                 <tbody>
                     <?php foreach($user as $users): ?>
-                        <tr>
+                        <tr class="tr-hover">
                             <td><?= htmlspecialchars($users['id'])?></td>
                             <td><?= htmlspecialchars($users['name'])?></td>
                             <td><?php 
