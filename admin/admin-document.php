@@ -54,13 +54,13 @@ require_once '../db.php';
         </div>
 
         <div class="admin-docs-container">
-            <input type="text" onkeyup="loadData(this.value)" placeholder="Search users...">
+            <div class="search-container">
+            <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
+            </div>
             <div id="result">
                 <?php require_once "../operation/admin-document-search.php" ?>
             </div>
         </div>
-
-        
 
     <script>
         function loadData(query) {

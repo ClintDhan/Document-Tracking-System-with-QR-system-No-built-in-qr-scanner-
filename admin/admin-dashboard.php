@@ -29,22 +29,25 @@ $totalReturnedCount = $row4['total_returned'];
 
 // today count 
 
-$todayRecs = "SELECT COUNT(*) AS today_received FROM document WHERE status = 'Received' AND DATE(created_at) = CURDATE()";
+$todayRecs = " SELECT COUNT(*) AS today_received
+    FROM document
+    WHERE status = 'Received'
+    AND (DATE(created_at) = CURDATE() OR DATE(updated_at) = CURDATE())";
 $result6 = $conn->query($todayRecs);
 $row5 = $result6->fetch_assoc();
 $todayReceivedCount = $row5['today_received'];
 
-$todayReview = "SELECT COUNT(*) AS today_review FROM document WHERE status = 'Under Review' AND DATE(created_at) = CURDATE()";
+$todayReview = "SELECT COUNT(*) AS today_review FROM document WHERE status = 'Under Review' AND (DATE(created_at) = CURDATE() OR DATE(updated_at) = CURDATE())";
 $result7 = $conn->query($todayReview);
 $row6 = $result7->fetch_assoc();
 $todayReviewCount = $row6['today_review'];
 
-$todayReleased = "SELECT COUNT(*) AS today_released FROM document WHERE status = 'Released' AND DATE(created_at) = CURDATE()";
+$todayReleased = "SELECT COUNT(*) AS today_released FROM document WHERE status = 'Released' AND (DATE(created_at) = CURDATE() OR DATE(updated_at) = CURDATE())";
 $result8 = $conn->query($todayReleased);
 $row7 = $result8->fetch_assoc();
 $todayReleasedCount = $row7['today_released'];
 
-$todayReturned = "SELECT COUNT(*) AS today_returned FROM document WHERE status = 'Returned' AND DATE(created_at) = CURDATE()";
+$todayReturned = "SELECT COUNT(*) AS today_returned FROM document WHERE status = 'Returned' AND (DATE(created_at) = CURDATE() OR DATE(updated_at) = CURDATE())";
 $result9 = $conn->query($todayReturned);
 $row8 = $result9->fetch_assoc();
 $todayReturnedCount = $row8['today_returned'];

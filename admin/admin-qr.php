@@ -43,8 +43,9 @@ require_once "../db.php";
         </div>
 
         <div class="admin-qr-container">
-            <input type="text" onkeyup="loadData(this.value)" placeholder="Search users...">
-            <div id="result">
+            <div class="search-container">
+            <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
+            </div>            <div id="result">
                 <?php require_once "../operation/admin-qr-search.php" ?>
             </div>
         </div>
