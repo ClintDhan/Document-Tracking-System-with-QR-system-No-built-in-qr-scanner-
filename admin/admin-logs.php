@@ -34,9 +34,11 @@ require_once '../db.php';
         </div>
 
          <div class="admin-logs-container">
-<div class="search-container">
+            <div class="search-container">
+            <p>Audit Logs</p>
             <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
-            </div>            <div id="result">
+            </div>
+                        <div id="result">
                 <?php require_once "../operation/admin-log-search.php" ?>
             </div>
         </div>

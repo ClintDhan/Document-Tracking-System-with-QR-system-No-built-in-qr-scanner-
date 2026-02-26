@@ -44,7 +44,27 @@ require_once "../db.php";
 
         <div class="admin-qr-container">
             <div class="search-container">
-            <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
+            <p>QR Management</p>
+
+            <div class="d-flex gap-2">
+                <form action="../operation/generate_qr_download.php" method="POST" target="_blank">
+                    <select name="qty" required style="height: 35px; border-radius: 8px; background-color: #D6ECFF;" onchange="generateQR(this.value)">
+                        <option value="" disabled selected hidden>GENERATE QR</option>
+                        <option value="5">5 QR</option>
+                        <option value="10">10 QR</option>
+                        <option value="20">20 QR</option>
+                    </select>
+                </form>
+                <form action="">
+                    <select name="qty" required style="height: 35px; border-radius: 8px; background-color: #DFF7E4;">
+                        <option value="" disabled selected hidden>GENERATE UNUSED QR</option>
+                        <option value="5">5 QR</option>
+                        <option value="10">10 QR</option>
+                        <option value="20">20 QR</option>
+                    </select>
+                </form>
+                <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
+            </div>
             </div>            <div id="result">
                 <?php require_once "../operation/admin-qr-search.php" ?>
             </div>
@@ -64,6 +84,18 @@ require_once "../db.php";
             }
             xhr.send("query=" + query);
         }
+
+        function generateQR(qty) {
+        if(!qty) return;
+
+        const form = event.target.form;
+        form.submit(); // open QR in new tab
+
+        // refresh table after small delay
+        setTimeout(() => {
+            loadData('');
+        }, 800);
+    }
     </script>
 </body>
 </html>

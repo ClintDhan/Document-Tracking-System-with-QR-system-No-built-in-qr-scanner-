@@ -16,6 +16,31 @@ if(isset($_POST['submit'])) {
     $control = $_POST['control_num'];
     $returned_reason = $_POST['returned_reason'] ?? null;
 
+    $changes = [];
+
+    $getDoc = "SELECT * FROM document where id ='$document_id'";
+    $getDocResult = $conn->query($getDoc);
+    $row = $getDocResult->fetch_assoc();
+
+    if ($row['type'] != $type) {
+        $changes[] = "Type: {$row['type']} -> {$type}<br>";
+    }
+
+    if($row['description'] != $description) {
+        $changes[] = "Description: {$row['description']} -> {$description}<br>";
+    }
+
+    if($row['status'] != $status) {
+        $changes[] = "Status: {$row['status']} -> {$status}<br>";
+    }
+    if($row['department'] != $department) {
+        $changes[] = "Department: {$row['department']} -> {$department}<br>";
+    }
+
+    $changesString = !empty($changes) ? implode("", $changes) : null;
+
+
+
     
     if($status != 'Released') {
         $released_to = null;
@@ -36,8 +61,8 @@ if(isset($_POST['submit'])) {
     $conn->query($sql);
 
    
-    $logSql = "INSERT INTO document_log(document_id, action, performed_by) 
-               VALUES('$document_id', '$status', '$updatedby')";
+    $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by) 
+               VALUES('$document_id', '$status', '$changesString' '$updatedby')";
     $conn->query($logSql);
 
     $_SESSION['success'] = "Document successfully updated.";

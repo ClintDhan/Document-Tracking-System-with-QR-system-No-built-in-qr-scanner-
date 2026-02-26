@@ -38,6 +38,7 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
         </div>
 
         <div class="admin-user-container">
+            <p>Users</p>
            <table class="user-table">
                 <thead>
                     <tr>

@@ -1,7 +1,8 @@
 <?php
+session_start();
 require_once '../db.php';
 require_once '../phpqrcode/qrlib.php'; // offline QR code library
-session_start();
+
 
 // 1️⃣ Validate POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['qty'])) {

@@ -55,6 +55,7 @@ require_once '../db.php';
 
         <div class="admin-docs-container">
             <div class="search-container">
+            <p>Documents</p>
             <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
             </div>
             <div id="result">
