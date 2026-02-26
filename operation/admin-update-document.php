@@ -14,6 +14,31 @@ if(isset($_POST['submit'])) {
     $document_id = $_POST['doc_id'];
     $returned_reason = $_POST['returned_reason'] ?? null;
 
+    $changes = [];
+
+    $getDoc = "SELECT * FROM document where id ='$document_id'";
+    $getDocResult = $conn->query($getDoc);
+    $row = $getDocResult->fetch_assoc();
+
+    if($row['type'] != $type) {
+        $changes[] = "Type: {$row['type']} -> {$type}<br>";
+    }
+
+    if($row['description'] != $description) {
+        $changes[] = "Description: {$row['description']} -> {$description}<br>";
+    }
+
+    if($row['status'] != $status) {
+        $changes[] = "Status: {$row['status']} -> {$status}<br>";
+    }
+    if($row['department'] != $department) {
+        $changes[] = "Department: {$row['department']} -> {$department}<br>";
+    }
+
+    $changesString = !empty($changes) ? implode("", $changes) : null;
+
+
+
     
     if($status != 'Released') {
         $released_to = null;
@@ -30,13 +55,13 @@ if(isset($_POST['submit'])) {
                 released_to = " . ($released_to ? "'$released_to'" : "NULL") . ",
                 returned_reason = " . ($returned_reason ? "'$returned_reason'" : "NULL") . "
             WHERE id = '$document_id'";
-
     $conn->query($sql);
 
-   
-    $logSql = "INSERT INTO document_log(document_id, action, performed_by) 
-               VALUES('$document_id', '$status', '$updatedby')";
+    
+    $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by) 
+               VALUES('$document_id', '$status', '$changesString', '$updatedby')";
     $conn->query($logSql);
+
 
     header("Location: ../admin/admin-document.php");
     exit();

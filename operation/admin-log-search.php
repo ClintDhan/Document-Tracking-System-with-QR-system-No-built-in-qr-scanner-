@@ -10,7 +10,7 @@ $search = $conn->real_escape_string($_POST['query']);
 
 }
 
-$sql = "SELECT document_log.id , document_log.action , document_log.performed_at, document.type AS document_type, user.name AS performer
+$sql = "SELECT document_log.id , document_log.action , document_log.performed_at, document_log.changes, document.type AS document_type, user.name AS performer
         FROM document_log INNER JOIN user ON document_log.performed_by = user.id INNER JOIN document ON document_log.document_id = document.id";
 
 // if search is not empty, filter results
@@ -28,6 +28,7 @@ echo "<table class='admin-logs-table'>
                 <th>No</th>
                 <th>Type</th>
                 <th>Acion</th>
+                <th>Changes</th>
                 <th>Performed At</th>
                 <th>Performed By</th>
             </tr>
@@ -45,6 +46,7 @@ while ($row = $result->fetch_assoc()) {
                 ($row['action'] == 'Released' ? 'status-released' :
                 'status-default')))
             ."'>".$row['action']."</div></td>
+            <td style='text-align: justify;'>".$row['changes']."</td>
             <td>".$row['performed_at']."</td>
             <td>".$row['performer']."</td>
         </tr>";
