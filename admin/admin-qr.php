@@ -48,21 +48,22 @@ require_once "../db.php";
 
             <div class="d-flex gap-2">
                 <form action="../operation/generate_qr_download.php" method="POST" target="_blank">
-                    <select name="qty" required style="height: 35px; border-radius: 8px; background-color: #D6ECFF;" onchange="generateQR(this.value)">
+                    <select name="qty" required style="height: 35px; border-radius: 8px; background-color: #D6ECFF;" onchange="generateQR(this)">
                         <option value="" disabled selected hidden>GENERATE QR</option>
                         <option value="5">5 QR</option>
                         <option value="10">10 QR</option>
                         <option value="20">20 QR</option>
                     </select>
                 </form>
-                <form action="">
-                    <select name="qty" required style="height: 35px; border-radius: 8px; background-color: #DFF7E4;">
+                <form action="../operation/regenerate_unused_qr.php" method="POST" target="_blank">
+                    <select name="qty" required style="height: 35px; border-radius: 8px; background-color: #DFF7E4;"
+                        onchange="this.form.submit()">
                         <option value="" disabled selected hidden>GENERATE UNUSED QR</option>
                         <option value="5">5 QR</option>
                         <option value="10">10 QR</option>
                         <option value="20">20 QR</option>
                     </select>
-                </form>
+                 </form>
                 <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
             </div>
             </div>            <div id="result">
@@ -85,16 +86,14 @@ require_once "../db.php";
             xhr.send("query=" + query);
         }
 
-        function generateQR(qty) {
-        if(!qty) return;
+        function generateQR(select) {
+        const form = select.form;
+        form.submit();
 
-        const form = event.target.form;
-        form.submit(); // open QR in new tab
-
-        // refresh table after small delay
         setTimeout(() => {
-            loadData('');
-        }, 800);
+            select.selectedIndex = -1;
+            location.reload();
+        }, 100);
     }
     </script>
 </body>
