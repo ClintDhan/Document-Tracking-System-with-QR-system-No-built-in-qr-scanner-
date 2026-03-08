@@ -49,7 +49,9 @@ require_once '../db.php';
             </div>
 
             <div class="admin-logout">
+                <form action="../operation/logout.php" method="POST">
                 <button class='log-out admin-logout'>↪ LOGOUT</button>
+                </form>
             </div>
         </div>
 
@@ -63,6 +65,7 @@ require_once '../db.php';
             </div>
         </div>
 
+    </div>
     <script>
         function loadData(query) {
             var xhr = new XMLHttpRequest();

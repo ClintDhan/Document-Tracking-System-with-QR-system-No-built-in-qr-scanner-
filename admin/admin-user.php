@@ -33,12 +33,16 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
             </div>
 
             <div class="admin-logout">
+<form action="../operation/logout.php" method="POST">
                 <button class='log-out admin-logout'>↪ LOGOUT</button>
-            </div>
+                </form>            </div>
         </div>
 
         <div class="admin-user-container">
-            <p>Users</p>
+            <p style="    font-size: 2em;
+    color: #5f5f5f;
+    font-weight: 700;
+    margin-bottom: 10px;">Users</p>
            <table class="user-table">
                 <thead>
                     <tr>

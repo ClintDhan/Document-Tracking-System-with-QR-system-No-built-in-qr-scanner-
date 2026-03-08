@@ -92,7 +92,9 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
             </div>
 
             <div class="admin-logout">
+                <form action="../operation/logout.php" method="POST">
                 <button class='log-out admin-logout'>↪ LOGOUT</button>
+                </form>
             </div>
         </div>
 
