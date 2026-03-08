@@ -10,13 +10,16 @@ $search = $conn->real_escape_string($_POST['query']);
 
 }
 
-$sql = "SELECT document.id, document.type,
-                document.description, document.status,
-                document.department, document.created_at,
-                document.updated_at, document.released_to,
-                document.returned_reason, user.name AS creator_name
-                FROM document INNER JOIN user ON document.created_by = user.id
-    ";
+$sql = $sql = "SELECT document.id, document.type,
+        document.description, document.status,
+        document.department, document.created_at,
+        document.updated_at, document.released_to,
+        document.returned_reason,
+        user.name AS creator_name,
+        qr_code.control_num
+        FROM document
+        INNER JOIN user ON document.created_by = user.id
+        LEFT JOIN qr_code ON document.qr_id = qr_code.id";
 
 // if search is not empty, filter results
 if ($search != "") {
@@ -64,8 +67,15 @@ while ($row = $result->fetch_assoc()) {
             <td>".$row['updated_at']."</td>
             <td>".$row['released_to']."</td>
             <td>".$row['returned_reason']."</td>
-            <td><a class='admin-doc-btn' href='../admin/admin-doc-edit.php?doc=".$row['id']."'>EDIT
-                </a></td>
+            <td>
+            <a class='admin-doc-btn' href='../admin/admin-doc-edit.php?doc=".$row['id']."'>EDIT</a>
+
+            <a class='admin-doc-btn'
+            href='../operation/document-download-qr.php?control=".$row['control_num']."'
+            target='_blank' style='background: green;'>
+            DOWNLOAD QR
+            </a>
+            </td>
 
 
         </tr>";
