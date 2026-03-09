@@ -16,7 +16,6 @@ p {
 body {
     background-color: #D0FFCC;
     height: 100%;
-    padding-bottom: 40px !important;
     box-sizing: border-box;
 }
 
@@ -461,7 +460,7 @@ body {
 
 .nav-anchor a {
     text-decoration: none;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
     color: #333333;
     
@@ -784,4 +783,23 @@ tbody tr td {
     border: 1px solid lightgray;
     border-radius: 8px;
     padding: 2px;
+}
+
+
+/* admin user */
+
+.add-user-btn {
+    padding: 8px 10px;
+    background-color: #22C55E;
+    text-decoration: none;
+    color: white;
+    border-radius: 8px;
+}
+
+/* add user */
+
+.admin-add-user-container {
+    width: 300px;
+    height: 300px;
+    background-color: yellow;
 }

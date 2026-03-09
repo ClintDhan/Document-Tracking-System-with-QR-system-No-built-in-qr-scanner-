@@ -86,7 +86,8 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
             <div class="nav-anchor">
                 <a href="admin-dashboard.php" class="active">DASHBOARD</a>
                 <a href="admin-document.php">DOCUMENTS</a>
-                <a href="admin-logs.php">LOGS</a>
+                <a href="admin-logs.php">DOCUMENT LOGS</a>
+                <a href="admin-logs.php">USER LOGS</a>
                 <a href="admin-qr.php">QR MANAGEMENT</a>
                 <a href="admin-user.php">USERS</a>
             </div>

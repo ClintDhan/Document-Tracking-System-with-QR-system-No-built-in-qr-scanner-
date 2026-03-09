@@ -32,7 +32,8 @@ require_once "../db.php";
             <div class="nav-anchor">
                 <a href="admin-dashboard.php" class="">DASHBOARD</a>
                 <a href="admin-document.php">DOCUMENTS</a>
-                <a href="admin-logs.php">LOGS</a>
+                <a href="admin-logs.php">DOCUMENT LOGS</a>
+                <a href="admin-logs.php">USER LOGS</a>
                 <a href="admin-qr.php" class="active">QR MANAGEMENT</a>
                 <a href="admin-user.php">USERS</a>
             </div>

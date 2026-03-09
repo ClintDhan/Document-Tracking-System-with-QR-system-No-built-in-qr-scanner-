@@ -25,24 +25,33 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
             </div>
 
             <div class="nav-anchor">
-                <a href="admin-dashboard.php" class="">DASHBOARD</a>
+                <a href="admin-dashboard.php">DASHBOARD</a>
                 <a href="admin-document.php">DOCUMENTS</a>
-                <a href="admin-logs.php">LOGS</a>
+                <a href="admin-logs.php">DOCUMENT LOGS</a>
+                <a href="admin-logs.php">USER LOGS</a>
                 <a href="admin-qr.php">QR MANAGEMENT</a>
                 <a href="admin-user.php" class="active">USERS</a>
             </div>
 
             <div class="admin-logout">
-<form action="../operation/logout.php" method="POST">
+                <form action="../operation/logout.php" method="POST">
                 <button class='log-out admin-logout'>↪ LOGOUT</button>
-                </form>            </div>
+                </form>            
+        </div>
         </div>
 
         <div class="admin-user-container">
+            <div class="d-flex justify-content-between align-items-center">
             <p style="    font-size: 2em;
     color: #5f5f5f;
     font-weight: 700;
     margin-bottom: 10px;">Users</p>
+
+        <div>
+            <a href="admin-add-user.php" class="add-user-btn">ADD USER<span>+</span></a>
+        </div>
+
+        </div>
            <table class="user-table">
                 <thead>
                     <tr>

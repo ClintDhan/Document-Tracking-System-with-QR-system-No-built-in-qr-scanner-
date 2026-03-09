@@ -23,11 +23,11 @@ require_once '../db.php';
             </div>
 
             <div class="nav-anchor">
-                <a href="admin-dashboard.php" class="active">DASHBOARD</a>
+                <a href="admin-dashboard.php">DASHBOARD</a>
                 <a href="admin-document.php">DOCUMENTS</a>
                 <a href="admin-logs.php">LOGS</a>
                 <a href="admin-qr.php">QR MANAGEMENT</a>
-                <a href="admin-user.php">USERS</a>
+                <a href="admin-user.php" class="active">USERS</a>
             </div>
 
             <div class="admin-logout">
@@ -37,8 +37,27 @@ require_once '../db.php';
             </div>
         </div>
 
+        <div class="admin-add-user-container">
+    <p>Add User</p>
+    <p>Enter user detail</p>
+
+    <div>
+        <div>
+            <p>Username</p>
+            <input type="text">
+        </div>
+
+        <div>
+            <p>Password</p>
+            <input type="password">
+        </div>
+    </div>
 
     </div>
+    </div>
+
+    
+
 
 </body>
 
