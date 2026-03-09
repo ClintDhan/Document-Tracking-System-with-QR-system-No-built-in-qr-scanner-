@@ -25,7 +25,8 @@ require_once '../db.php';
             <div class="nav-anchor">
                 <a href="admin-dashboard.php">DASHBOARD</a>
                 <a href="admin-document.php">DOCUMENTS</a>
-                <a href="admin-logs.php">LOGS</a>
+                <a href="admin-logs.php">DOCUMENT LOGS</a>
+                <a href="admin-logs.php">USER LOGS</a>
                 <a href="admin-qr.php">QR MANAGEMENT</a>
                 <a href="admin-user.php" class="active">USERS</a>
             </div>
@@ -37,20 +38,27 @@ require_once '../db.php';
             </div>
         </div>
 
-        <div class="admin-add-user-container">
-    <p>Add User</p>
-    <p>Enter user detail</p>
+    <div class="admin-add-user-container">
+    <p style="text-align: center;" class="admin-add-title">Add User</p>
+    <p style="text-align: center;" class="admin-add-sub">Enter user detail</p>
 
     <div>
-        <div>
-            <p>Username</p>
-            <input type="text">
+        <div class="admin-add-user-flx mt-3">
+            <p>User's name</p>
+            <input type="text" class="admin-add-user-input">
         </div>
 
-        <div>
-            <p>Password</p>
+        <div class="admin-add-user-flx">
+            <p>User's Password</p>
+            <input type="password" value="" class="admin-add-user-input" readonly>
+        </div>
+
+        <div class="admin-add-user-flx mt-4">
+            <p class="enter-pass">Enter your Password</p>
+            <p class="enter-pass-sub">Please enter your password to confirm new user details</p>
             <input type="password">
         </div>
+        <input class="btn-submit" type="submit" value="Create User" placeholder="Create User">
     </div>
 
     </div>
