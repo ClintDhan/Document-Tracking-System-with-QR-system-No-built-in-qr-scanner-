@@ -2,6 +2,10 @@
 session_start();
 require_once "../db.php";
 
+if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] != 1) {
+    header("Location: ../login.php");
+    exit();
+}
 $sql = "SELECT * FROM user";
 $result = $conn->query($sql);
 $user = $result->fetch_all(MYSQLI_ASSOC);

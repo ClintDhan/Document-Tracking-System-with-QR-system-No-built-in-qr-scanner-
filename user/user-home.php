@@ -6,8 +6,7 @@ require_once '../db.php';
 // 1️⃣ Check login
 // ----------------------------
 if (!isset($_SESSION['user_id'])) {
-    $redirectUrl = $_SERVER['REQUEST_URI']; // preserves ?control=...
-    header("Location: ../login.php?redirect=" . urlencode($redirectUrl));
+    header("Location: ../login.php");
     exit();
 }
 

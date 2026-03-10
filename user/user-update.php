@@ -3,6 +3,11 @@
 session_start();
 require_once '../db.php'; 
 
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 $qr_id = $_GET['qr'] ?? null;
 $document_id = $_GET['document'] ?? null;
 $control_num = $_GET['control'] ?? null;

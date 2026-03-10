@@ -17,7 +17,7 @@ if ($result->num_rows == 1 ) {
 
              $_SESSION['user_id'] = $user['id'];
              $_SESSION['name'] = $user['name'];
-             $_SESSION['password'] = $user['password'];
+             $_SESSION['is_admin'] = $user['is_admin'];
             
             $redirect = '../user/user-home.php';
             if (isset($_POST['redirect']) && !empty($_POST['redirect'])) {

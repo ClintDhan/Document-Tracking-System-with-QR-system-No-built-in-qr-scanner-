@@ -2,6 +2,10 @@
 session_start();
 require_once '../db.php'; 
 
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 // Get QR info from URL
 $qr_id = $_GET['qr'] ?? null;           // id of the QR
 $qrControl = $_GET['control'] ?? null;  // control number
