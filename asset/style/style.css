@@ -75,6 +75,25 @@ body {
     
 }
 
+.input-position {
+    position: relative;
+}
+
+.input-position > input {
+    height: 47px;
+    width: 309px;
+    background-color: transparent;
+    border: 1px solid #DBA159;
+    padding: 15px;
+}
+
+.input-position span {
+    position: absolute;
+    right: 12px;
+    top: 60%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
 .form-flx input::placeholder {
     color: #DBA159;
     font-weight: 700;

@@ -21,15 +21,19 @@ if ($result->num_rows == 1 ) {
             
             $redirect = '../user/user-home.php';
             if (isset($_POST['redirect']) && !empty($_POST['redirect'])) {
-            $redirect = urldecode($_POST['redirect']); // decode QR control
+            $redirect = urldecode($_POST['redirect']);
             }
             
-            if($user['is_admin'] == 1) {
+            if($user['is_admin'] == 1 && $user['first_login'] == 1) {
                 header("Location: ../admin/admin-dashboard.php");
                 exit;
             }
-            elseif ($user['is_admin'] == 0) {
+            elseif ($user['is_admin'] == 0 && $user['first_login'] == 1) {
                 header("Location: $redirect");
+                exit;
+            }
+            else {
+                header("Location: ../first-login.php");
                 exit;
             }
         }
