@@ -6,6 +6,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] != 1) {
     header("Location: ../login.php");
     exit();
 }
+
+$password = random_int(100000, 999999);
 ?>
 
 <!DOCTYPE html>
@@ -46,22 +48,18 @@ if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] != 1) {
     <p style="text-align: center;" class="admin-add-sub">Enter user detail</p>
 
     <div>
-        <div class="admin-add-user-flx mt-3">
-            <p>User's name</p>
-            <input type="text" class="admin-add-user-input">
-        </div>
+        <form action="../operation/createuser.php" method="POST">
+            <div class="admin-add-user-flx mt-3">
+                <p>User's name</p>
+                <input type="text" class="admin-add-user-input" name="name">
+            </div>
 
-        <div class="admin-add-user-flx">
-            <p>User's Password</p>
-            <input type="password" value="" class="admin-add-user-input" readonly>
-        </div>
-
-        <div class="admin-add-user-flx mt-4">
-            <p class="enter-pass">Enter your Password</p>
-            <p class="enter-pass-sub">Please enter your password to confirm new user details</p>
-            <input type="password">
-        </div>
-        <input class="btn-submit" type="submit" value="Create User" placeholder="Create User">
+            <div class="admin-add-user-flx">
+                <p>User's Password</p>
+                <input type="text" value="<?= $password ?>" name="password" class="admin-add-user-input" readonly>
+            </div>
+            <button class="btn-submit" name="submit">Create User</button>
+        </form>
     </div>
 
     </div>

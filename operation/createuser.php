@@ -1,7 +1,10 @@
 <?php
+session_start();
 require_once '../db.php';
 
-if(isset($_POST['create'])) {
+$admin_id = $_SESSION['user_id'];
+
+if(isset($_POST['submit'])) {
     $name = $_POST['name'];
     $password = $_POST['password'];
 
@@ -13,18 +16,18 @@ if(isset($_POST['create'])) {
         echo 'user already existed!';
     }
     else {
-        $sql1 = "INSERT INTO user (name , password) VALUES ('$name' , '$password')";
+        $sql1 = "INSERT INTO user (name , password) VALUES ('$name' , $password)";
         $result1 = $conn->query($sql1);
 
-         if ($result1) {
-            echo 'You created a user';
-        } else {
-            echo 'Error creating user: ' . $conn->error;
+        if($result1) {
+            $new_user_id = $conn->insert_id;
+
+            $action = 'create user';
+            $sql2 = "INSERT INTO user_log(admin_id, user_id, action) VALUES ($admin_id , $new_user_id, '$action')";
+            $conn->query($sql2);
+            header("Location: ../admin/admin-user.php");
+            exit;
         }
     }
-
 }
- 
-
-
 ?>

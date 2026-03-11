@@ -22,8 +22,7 @@ require_once 'db.php';
         <div class='login-centered'>
             <p style='font-weight: 900; color: #188A0E; font-size: 30px; line-height: 0.8;'>Change password</p>
             <p style='font-size: 15px; color: #47D63A; font-weight: bold;'>Please change the password provided by your admin</p>
-        <form action="operation/change-pass.php" method="post" class='form-flx'>
-                <!-- hidden input to carry redirect -->                
+        <form action="operation/change-pass.php" method="post" class='form-flx'>             
 
                 <div class="input-position">
                     <input type="password" name="newPass" placeholder="Enter new password" class='mt-3'>
