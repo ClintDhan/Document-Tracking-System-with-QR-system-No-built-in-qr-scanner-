@@ -64,6 +64,7 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                         <th>Status</th>
                         <th>Created At</th>
                         <th>Role</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,6 +89,7 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                                         echo "Admin";
                                     }
                             ?></td>
+                            <td><a class="admin-user-edit-btn" href="admin-edit-user.php?user=<?= $users['id'] ?>">Edit</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

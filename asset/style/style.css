@@ -817,7 +817,7 @@ tbody tr td {
 
 /* add user */
 
-.admin-add-user-container {
+.admin-add-user-container ,  .admin-edit-user-container{
     width: 300px;
     height: auto;
     background-color: white;
@@ -860,4 +860,15 @@ tbody tr td {
 .enter-pass-sub {
     font-size: 12px;
     color: gray;
+}
+
+
+.admin-user-edit-btn {
+    width: 40px;
+    height: 20px;
+    background-color: #83BCFF;
+    color: white;
+    border-radius: 8px;
+    display: inline-block;
+    text-decoration: none;
 }

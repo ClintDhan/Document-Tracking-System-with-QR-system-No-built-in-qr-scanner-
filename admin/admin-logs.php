@@ -42,7 +42,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] != 1) {
 
          <div class="admin-logs-container">
             <div class="search-container">
-            <p>Audit Logs</p>
+            <p>Document Logs</p>
             <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
             </div>
                         <div id="result">
