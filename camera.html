@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Scanner</title>
+  <script src="https://unpkg.com/html5-qrcode@2.3.7/html5-qrcode.min.js"></script>
+</head>
+<body>
+<h2>Scan QR Code (Rear Camera)</h2>
+<div id="reader" style="width:300px; height:300px;"></div>
+
+<script>
+function onScanSuccess(decodedText, decodedResult) {
+    console.log(`QR Code detected: ${decodedText}`);
+    alert(`QR Code: ${decodedText}`);
+}
+
+// Get all cameras on the device
+Html5Qrcode.getCameras().then(cameras => {
+    if (cameras && cameras.length) {
+        // Choose rear camera
+        let rearCamera = cameras.find(camera => camera.label.toLowerCase().includes("back") || camera.label.toLowerCase().includes("rear"));
+        let cameraId = rearCamera ? rearCamera.id : cameras[0].id;
+
+        const html5Qr = new Html5Qrcode("reader");
+        html5Qr.start(
+            cameraId,
+            { fps: 10, qrbox: 250 },
+            onScanSuccess,
+            errorMessage => {
+                console.log("No QR code detected yet", errorMessage);
+            }
+        );
+    } else {
+        alert("No cameras found on this device.");
+    }
+}).catch(err => {
+    console.error("Error getting cameras: ", err);
+});
+</script>
+</body>
+</html>

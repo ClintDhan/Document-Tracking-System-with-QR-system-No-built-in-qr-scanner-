@@ -62,7 +62,7 @@ if(isset($_POST['submit'])) {
 
    
     $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by) 
-               VALUES('$document_id', '$status', '$changesString' '$updatedby')";
+               VALUES('$document_id', '$status', '$changesString' , '$updatedby')";
     $conn->query($logSql);
 
     $_SESSION['success'] = "Document successfully updated.";
