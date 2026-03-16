@@ -1,12 +1,63 @@
-<?php
-
+<?php 
 session_start();
-require_once '../db.php'; 
+require_once '../db.php';
 
+// ----------------------------
+// 1️⃣ Check login
+// ----------------------------
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ../login.php");
     exit();
 }
+
+// ----------------------------
+// 2️⃣ QR scan handling
+// ----------------------------
+$qrControl = $_GET['control'] ?? null;
+$qr = null;
+$qrError = null;
+
+if ($qrControl) {
+    $sql = "SELECT * FROM qr_code WHERE control_num = '$qrControl'";
+    $result = $conn->query($sql);
+    $qr = $result->fetch_assoc();
+
+    if ($qr) {
+    $qr_id = $qr['id']; // <-- primary key of qr_code
+    } else {
+    $qrError = "Invalid QR code.";
+    }
+
+}
+
+$document = null;
+
+if (isset($qr_id)) {
+    $sql2 = "SELECT * FROM document WHERE qr_id = '$qr_id'";
+    $result2 = $conn->query($sql2);
+    $document = $result2->fetch_assoc();
+}
+
+// logic for the received documents
+
+$receivedSql = "SELECT COUNT(*) AS received_docs 
+                FROM document
+                WHERE status = 'Received' 
+                  AND created_by = {$_SESSION['user_id']} 
+                  AND DATE(created_at) = CURDATE()";
+$result5 = $conn->query($receivedSql);
+$row = $result5->fetch_assoc();
+$receivedDocs = $row['received_docs'];
+
+$releasedSql = "SELECT COUNT(*) AS released_docs FROM document WHERE status = 'Released' AND created_by = {$_SESSION['user_id']} AND DATE(created_at) = CURDATE()";
+$result6 = $conn->query($releasedSql);
+$row2 = $result6->fetch_assoc();
+$releasedDocs = $row2['released_docs']; 
+
+$returnedSql = "SELECT COUNT(*) AS returned_docs FROM document WHERE status = 'Returned' AND created_by = {$_SESSION['user_id']} AND DATE(created_at) = CURDATE()";
+$result7 = $conn->query($returnedSql);
+$row3 = $result7->fetch_assoc();
+$returnedDocs = $row3['returned_docs'];
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +95,22 @@ if (!isset($_SESSION['user_id'])) {
                     <p>No QR scanned</p>
                 <?php endif; ?>
             </div>
+
+            <div class="user-option sub-admin-option">
+                <div>
+                    <label for="">Type</label> <br>
+                    <input type="text" disabled>
+                </div>
+                <div>
+                    <label for="">Status</label> <br>
+                    <input type="text" disabled>
+                </div>
+                <div class="mt-5">
+                    <button class="sub-admin-submit" type="submit" value="reviewed">REVIEWED</button>
+                </div>
+
+            </div> 
+            
 
             <!-- DASHBOARD -->
             <div class='user-dash'>

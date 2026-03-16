@@ -872,3 +872,31 @@ tbody tr td {
     display: inline-block;
     text-decoration: none;
 }
+
+
+/* edit user */
+
+
+
+/* sub admin */
+.sub-admin-option {
+    align-items: start !important;
+    padding: 1em 1em;
+}
+
+.sub-admin-option div input,button {
+     width: 395px;
+     background-color: transparent;
+    border: 1px solid #DBA159;
+    color: #DBA159;
+}
+
+.sub-admin-submit {
+    height: 40px;
+}
+
+.sub-admin-option label {
+    color: rgb(102, 102, 102);
+    font-weight: 600;
+}
+

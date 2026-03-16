@@ -2,7 +2,7 @@
 session_start();
 require_once "../db.php";
 
-if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] != 1) {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] != "superadmin") {
     header("Location: ../login.php");
     exit();
 }
@@ -81,14 +81,7 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                                     }
                             ?></td>
                             <td><?= htmlspecialchars($users['created_at'])?></td>
-                            <td><?php 
-                                    if($users['is_admin'] == 0) {
-                                        echo "User";
-                                    } 
-                                    else {
-                                        echo "Admin";
-                                    }
-                            ?></td>
+                            <td><?= htmlspecialchars($users['role'])?></td>
                             <td><a class="admin-user-edit-btn" href="admin-edit-user.php?user=<?= $users['id'] ?>">Edit</a></td>
                         </tr>
                     <?php endforeach; ?>
