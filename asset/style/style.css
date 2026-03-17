@@ -881,22 +881,32 @@ tbody tr td {
 /* sub admin */
 .sub-admin-option {
     align-items: start !important;
-    padding: 1em 1em;
+    padding: 1em 1.2em;
 }
 
 .sub-admin-option div input,button {
-     width: 395px;
-     background-color: transparent;
+    width: 395px;
+    background-color: transparent;
     border: 1px solid #DBA159;
     color: #DBA159;
+    height: 47px;
+    padding: 5px;
 }
 
 .sub-admin-submit {
-    height: 40px;
+    height: 47px;
+    background-color: #7BE0AD;
+    color: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
 }
 
 .sub-admin-option label {
     color: rgb(102, 102, 102);
     font-weight: 600;
 }
+
+
 

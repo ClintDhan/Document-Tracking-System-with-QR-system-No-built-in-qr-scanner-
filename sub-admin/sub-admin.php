@@ -58,6 +58,11 @@ $returnedSql = "SELECT COUNT(*) AS returned_docs FROM document WHERE status = 'R
 $result7 = $conn->query($returnedSql);
 $row3 = $result7->fetch_assoc();
 $returnedDocs = $row3['returned_docs'];
+
+
+$sqlSub = "SELECT * FROM document where qr_id ='$qr_id'";
+$resultAni = $conn->query($sqlSub);
+$documentType = mysqli_fetch_assoc($resultAni);
 ?>
 
 <!DOCTYPE html>
@@ -97,17 +102,20 @@ $returnedDocs = $row3['returned_docs'];
             </div>
 
             <div class="user-option sub-admin-option">
-                <div>
-                    <label for="">Type</label> <br>
-                    <input type="text" disabled>
-                </div>
-                <div>
-                    <label for="">Status</label> <br>
-                    <input type="text" disabled>
-                </div>
-                <div class="mt-5">
-                    <button class="sub-admin-submit" type="submit" value="reviewed">REVIEWED</button>
-                </div>
+                <form action="../operation/sub-admin-update.php" method="POST">
+                    <input type="hidden" name="id" value="<?= $documentType['id'] ?>">
+                    <div>
+                        <label for="">Type</label> <br>
+                        <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+                    </div>
+                    <div>
+                        <label for="">Status</label> <br>
+                        <input type="text"  value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+                    </div>
+                    <div class="mt-3">
+                        <button class="sub-admin-submit" type="submit" name="submit" value="reviewed">REVIEWED</button>
+                    </div>
+                </form>
 
             </div> 
             
