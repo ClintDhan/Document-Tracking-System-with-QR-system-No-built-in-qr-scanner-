@@ -16,7 +16,7 @@ $result2 = $conn->query($totalRecs);
 $row1 = $result2->fetch_assoc();
 $totalReceivedCount = $row1['total_received'];
 
-$totalUnderReview = "SELECT COUNT(*) AS total_review FROM document WHERE status = 'Under Review'";
+$totalUnderReview = "SELECT COUNT(*) AS total_review FROM document WHERE status = 'Reviewed'";
 $result3 = $conn->query($totalUnderReview);
 $row2 = $result3->fetch_assoc();
 $totalReviewCount = $row2['total_review'];
@@ -41,7 +41,7 @@ $result6 = $conn->query($todayRecs);
 $row5 = $result6->fetch_assoc();
 $todayReceivedCount = $row5['today_received'];
 
-$todayReview = "SELECT COUNT(*) AS today_review FROM document WHERE status = 'Under Review' AND (DATE(created_at) = CURDATE() OR DATE(updated_at) = CURDATE())";
+$todayReview = "SELECT COUNT(*) AS today_review FROM document WHERE status = 'Reviewed' AND (DATE(created_at) = CURDATE() OR DATE(updated_at) = CURDATE())";
 $result7 = $conn->query($todayReview);
 $row6 = $result7->fetch_assoc();
 $todayReviewCount = $row6['today_review'];

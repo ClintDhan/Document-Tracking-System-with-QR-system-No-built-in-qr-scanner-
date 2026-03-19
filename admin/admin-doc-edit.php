@@ -65,7 +65,7 @@ $row = $result->fetch_assoc();
                     <label for="">Status</label> <br>
                     <select name="status" id='statusSelect' class="admin-doc-input">
                         <option value="Received" <?= ($row['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
-                        <option value="Under Review" <?= ($row['status'] ?? '') == 'Under Review' ? 'selected' : '' ?>>Under Review</option>
+                        <option value="Reviewed" <?= ($row['status'] ?? '') == 'Reviewed' ? 'selected' : '' ?>>Reviewed</option>
                         <option value="Released" <?= ($row['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
                         <option value="Returned" <?= ($row['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
                     </select>

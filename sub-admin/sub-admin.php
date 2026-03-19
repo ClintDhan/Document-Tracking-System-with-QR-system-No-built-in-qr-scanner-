@@ -59,10 +59,10 @@ $result7 = $conn->query($returnedSql);
 $row3 = $result7->fetch_assoc();
 $returnedDocs = $row3['returned_docs'];
 
-
 $sqlSub = "SELECT * FROM document where qr_id ='$qr_id'";
 $resultAni = $conn->query($sqlSub);
 $documentType = mysqli_fetch_assoc($resultAni);
+
 ?>
 
 <!DOCTYPE html>
@@ -103,52 +103,63 @@ $documentType = mysqli_fetch_assoc($resultAni);
             
             
             <div class="user-option sub-admin-option">
-                <?php if ($qrControl && isset($qr) && $qr['is_used'] == 1): ?>
-                    <form action="../operation/sub-admin-update.php" method="POST">
-                        <input type="hidden" name="id" value="<?= $documentType['id'] ?>">
-                        <div>
-                            <label for="">Type</label> <br>
-                            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
-                        </div>
-                        <div>
-                            <label for="">Status</label> <br>
-                            <input type="text"  value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
-                        </div>
-                        <div class="mt-3">
-                            <button class="sub-admin-submit" type="submit" name="submit" value="reviewed">REVIEWED</button>
-                        </div>
-                    </form>
-                <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 0): ?>
-                    <p>This qr is not in use. Please have the user to receive a document with this qr.</p>
-                <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 1 && $documentType['status'] == 'Reviewed'): ?>
-                        <div>
-                            <label for="">Type</label> <br>
-                            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
-                        </div>
-                        <div>
-                            <label for="">Status</label> <br>
-                            <input type="text"  value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
-                        </div>
-                 <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 1 && $documentType['status'] == 'Released'): ?>
-                        <div>
-                            <label for="">Type</label> <br>
-                            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
-                        </div>
-                        <div>
-                            <label for="">Status</label> <br>
-                            <input type="text"  value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
-                        </div>
-                 <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 1 && $documentType['status'] == 'Returned'): ?>
-                        <div>
-                            <label for="">Type</label> <br>
-                            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
-                        </div>
-                        <div>
-                            <label for="">Status</label> <br>
-                            <input type="text"  value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
-                        </div>
-                <?php endif; ?>
-            </div> 
+
+    <?php if ($qrControl && isset($qr) && $documentType['status'] == 'Reviewed'): ?>
+        <div>
+            <label for="">Type</label> <br>
+            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+        </div>
+        <div>
+            <label for="">Status</label> <br>
+            <input type="text" value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+        </div>
+
+    <?php elseif ($qrControl && isset($qr) && $documentType['status'] == 'Released'): ?>
+        <div>
+            <label for="">Type</label> <br>
+            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+        </div>
+        <div>
+            <label for="">Status</label> <br>
+            <input type="text" value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+        </div>
+
+    <?php elseif ($qrControl && isset($qr) && $documentType['status'] == 'Returned'): ?>
+        <div>
+            <label for="">Type</label> <br>
+            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+        </div>
+        <div>
+            <label for="">Status</label> <br>
+            <input type="text" value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+        </div>
+
+    <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 1): ?>
+        <!-- BUTTON ONLY HERE -->
+        <form action="../operation/sub-admin-update.php" method="POST">
+            <input type="hidden" name="qr" value="<?= $qrControl ?>">
+            <input type="hidden" name="id" value="<?= $documentType['id']?>">
+
+            <div>
+                <label for="">Type</label> <br>
+                <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+            </div>
+            <div>
+                <label for="">Status</label> <br>
+                <input type="text" value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+            </div>
+
+            <div class="mt-3">
+                <button class="sub-admin-submit" type="submit" name="submit" value="reviewed">REVIEWED</button>
+            </div>
+        </form>
+
+    <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 0): ?>
+        <p>This qr is not in use. Please have the user to receive a document with this qr.</p>
+
+    <?php endif; ?>
+
+</div>
             
 
             <!-- DASHBOARD -->
@@ -173,5 +184,6 @@ $documentType = mysqli_fetch_assoc($resultAni);
 
         </div>
     </div>
+
 </body>
 </html>

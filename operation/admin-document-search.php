@@ -14,7 +14,7 @@ $sql = $sql = "SELECT document.id, document.type,
         document.description, document.status,
         document.department, document.created_at,
         document.updated_at, document.released_to,
-        document.returned_reason,
+        document.returned_reason, document.pages,
         user.name AS creator_name,
         qr_code.control_num
         FROM document
@@ -39,6 +39,7 @@ echo "<table class='admin-docs-table'>
                 <th class='admin-docs-desc'>Description</th>
                 <th class='admin-docs-sts'>Status</th>
                 <th class='admin-docs-dep'>Department</th>
+                <th class='admin-docs-no'>Pages</th>
                 <th class='admin-docs-created'>Created by</th>
                 <th class='admin-docs-created-at'>Created at</th>
                 <th class='admin-docs-updt'>Last Updated</th>
@@ -57,11 +58,12 @@ while ($row = $result->fetch_assoc()) {
             <td>".$row['description']."</td>
             <td><div style='border-radius: 4px;' class='".
                 ($row['status'] == 'Returned' ? 'status-returned' :
-                ($row['status'] == 'Under Review' ? 'status-review' :
+                ($row['status'] == 'Reviewed' ? 'status-review' :
                 ($row['status'] == 'Released' ? 'status-released' :
                 'status-default')))
             ."'>".$row['status']."</div></td>
             <td>".$row['department']."</td>
+            <td>".$row['pages']."</td>
             <td>".$row['creator_name']."</td>
             <td>".$row['created_at']."</td>
             <td>".$row['updated_at']."</td>

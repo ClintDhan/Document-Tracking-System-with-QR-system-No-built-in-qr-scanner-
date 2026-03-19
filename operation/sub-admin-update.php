@@ -6,9 +6,9 @@ require_once "../db.php";
 if(isset($_POST['submit'])) {
 
 $document_id = $_POST['id'];
-$updatedBy = $_SESSION['user_id'];
-$status = $_POST['status'];
-
+$updatedby = $_SESSION['user_id'];
+$qrControl = $_POST['qr'];
+$status = "Reviewed";
 $changes = [];
 
 $sql = "SELECT * FROM document WHERE id = '$document_id'";
@@ -28,7 +28,7 @@ if($result2) {
     $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by) 
                VALUES('$document_id', '$status', '$changesString', '$updatedby')";
     $conn->query($logSql);
-    header("Location: ../sub-admin/sub-admin.php");
+    header("Location: ../sub-admin/sub-admin.php?control=$qrControl");
     exit();
 }
 
