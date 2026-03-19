@@ -67,6 +67,10 @@ if (!$qr) {
                         <textarea name='description' id="" class='receive-textarea' rows='3' placeholder='Description'></textarea>
                     </div>
                     <div class="mt-2">
+                        <label for="">Number of pages</label> <br>
+                        <input class='receive-input' type="number" placeholder='Pages' name='pages'>
+                    </div>
+                    <div class="mt-2">
                         <label for="">Department</label> <br>
                         <input type="text" placeholder='Department' class='receive-input' name='department'>
                     </div>

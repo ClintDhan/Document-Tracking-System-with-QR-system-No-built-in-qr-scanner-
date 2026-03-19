@@ -15,6 +15,7 @@ if(isset($_POST['submit'])) {
     $document_id = $_POST['document_id'];
     $control = $_POST['control_num'];
     $returned_reason = $_POST['returned_reason'] ?? null;
+    $pages = $_POST['pages'];
 
     $changes = [];
 
@@ -36,6 +37,9 @@ if(isset($_POST['submit'])) {
     if($row['department'] != $department) {
         $changes[] = "Department: {$row['department']} -> {$department}<br>";
     }
+    if($row['pages'] != $pages) {
+        $changes[] = "Pages: {$row['pages']} -> {$pages}<br>";
+    }
 
     $changesString = !empty($changes) ? implode("", $changes) : null;
 
@@ -54,6 +58,7 @@ if(isset($_POST['submit'])) {
             SET type = '$type',
                 description = '$description',
                 status = '$status',
+                pages = '$pages',
                 released_to = " . ($released_to ? "'$released_to'" : "NULL") . ",
                 returned_reason = " . ($returned_reason ? "'$returned_reason'" : "NULL") . "
             WHERE qr_id = '$qr_id'";

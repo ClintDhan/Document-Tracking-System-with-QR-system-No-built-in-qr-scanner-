@@ -100,23 +100,54 @@ $documentType = mysqli_fetch_assoc($resultAni);
                     <p>No QR scanned</p>
                 <?php endif; ?>
             </div>
-
+            
+            
             <div class="user-option sub-admin-option">
-                <form action="../operation/sub-admin-update.php" method="POST">
-                    <input type="hidden" name="id" value="<?= $documentType['id'] ?>">
-                    <div>
-                        <label for="">Type</label> <br>
-                        <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
-                    </div>
-                    <div>
-                        <label for="">Status</label> <br>
-                        <input type="text"  value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
-                    </div>
-                    <div class="mt-3">
-                        <button class="sub-admin-submit" type="submit" name="submit" value="reviewed">REVIEWED</button>
-                    </div>
-                </form>
-
+                <?php if ($qrControl && isset($qr) && $qr['is_used'] == 1): ?>
+                    <form action="../operation/sub-admin-update.php" method="POST">
+                        <input type="hidden" name="id" value="<?= $documentType['id'] ?>">
+                        <div>
+                            <label for="">Type</label> <br>
+                            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+                        </div>
+                        <div>
+                            <label for="">Status</label> <br>
+                            <input type="text"  value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+                        </div>
+                        <div class="mt-3">
+                            <button class="sub-admin-submit" type="submit" name="submit" value="reviewed">REVIEWED</button>
+                        </div>
+                    </form>
+                <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 0): ?>
+                    <p>This qr is not in use. Please have the user to receive a document with this qr.</p>
+                <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 1 && $documentType['status'] == 'Reviewed'): ?>
+                        <div>
+                            <label for="">Type</label> <br>
+                            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+                        </div>
+                        <div>
+                            <label for="">Status</label> <br>
+                            <input type="text"  value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+                        </div>
+                 <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 1 && $documentType['status'] == 'Released'): ?>
+                        <div>
+                            <label for="">Type</label> <br>
+                            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+                        </div>
+                        <div>
+                            <label for="">Status</label> <br>
+                            <input type="text"  value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+                        </div>
+                 <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 1 && $documentType['status'] == 'Returned'): ?>
+                        <div>
+                            <label for="">Type</label> <br>
+                            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+                        </div>
+                        <div>
+                            <label for="">Status</label> <br>
+                            <input type="text"  value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+                        </div>
+                <?php endif; ?>
             </div> 
             
 

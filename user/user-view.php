@@ -60,6 +60,10 @@ $document = mysqli_fetch_assoc($result);
                     <label for="">Department</label> <br>
                     <input type="text" class="update-input" name="department" value="<?= $document['department'] ?>" disabled>
                 </div>
+                <div class="mt-2">
+                        <label for="">Number of pages</label> <br>
+                        <input type="number" placeholder='Pages' class='update-input' name='pages' value="<?= $document['pages'] ?>">
+                </div>
                 <?php if($document['status'] == 'Released'): ?>
                     <div class="mt-2">
                         <label for="">Status</label> <br>

@@ -9,6 +9,7 @@ if(isset($_POST['submit'])) {
     $description = $_POST['description'];
     $department = $_POST['department'];
     $createdBy = $_SESSION['user_id'];
+    $pages = $_POST['pages'];
 
     // Check if a document with the same title exists
     $sql = "SELECT * FROM document WHERE type = '$type'";
@@ -18,8 +19,8 @@ if(isset($_POST['submit'])) {
         echo 'Document already exists';
     } else {
         // Insert document
-        $sql1 = "INSERT INTO document (qr_id, type, description, department, created_by) 
-                 VALUES ('$qr_id', '$type', '$description', '$department', '$createdBy')";
+        $sql1 = "INSERT INTO document (qr_id, type, description, department, created_by, pages) 
+                 VALUES ('$qr_id', '$type', '$description', '$department', '$createdBy', '$pages')";
         $result1 = $conn->query($sql1);
         $document_id = $conn->insert_id;
 

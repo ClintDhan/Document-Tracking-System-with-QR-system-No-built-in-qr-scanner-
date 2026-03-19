@@ -68,10 +68,13 @@ $document = mysqli_fetch_assoc($result);
                         <input type="text" placeholder='Department' class='update-input' name='department' value="<?= $document['department']?>">
                     </div>
                     <div class="mt-2">
+                        <label for="">Number of pages</label> <br>
+                        <input type="number" placeholder='Pages' class='update-input' name='pages' value="<?= $document['pages'] ?>">
+                    </div>
+                    <div class="mt-2">
                         <label for="">Status</label> <br>
                         <select name="status" class="update-input" id='statusSelect'>
                             <option value="Received" <?= ($document['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
-                            <option value="Under Review" <?= ($document['status'] ?? '') == 'Under Review' ? 'selected' : '' ?>>Under Review</option>
                             <option value="Released" <?= ($document['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
                             <option value="Returned" <?= ($document['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
                         </select>
