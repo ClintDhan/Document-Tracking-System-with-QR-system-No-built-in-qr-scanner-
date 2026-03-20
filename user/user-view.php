@@ -32,10 +32,12 @@ $document = mysqli_fetch_assoc($result);
         <div class="user-form">
 
             <div class='user-nav-bar'>
-                <div class='user-name'><p>Hi! <span class="span-name"><?= $_SESSION['name']; ?></p></div>
-                <div class='user-date'><p><?= date('m/d/Y') ?></p></div>
+                <div class='user-name'>
+                    <p>Hi <span class="span-name"><?= $_SESSION['name']; ?>!</p>
+                    <p><?= date('m/d/Y') ?></p>
+                </div>
                 <form action="../operation/logout.php" method='POST'>
-                    <button class='log-out'>↪ LOGOUT</button>
+                    <button class='log-out'>LOGOUT</button>
                 </form>
             </div>
 
@@ -62,7 +64,7 @@ $document = mysqli_fetch_assoc($result);
                 </div>
                 <div class="mt-2">
                         <label for="">Number of pages</label> <br>
-                        <input type="number" placeholder='Pages' class='update-input' name='pages' value="<?= $document['pages'] ?>">
+                        <input type="number" placeholder='Pages' class='update-input' name='pages' value="<?= $document['pages'] ?>" readonly>
                 </div>
                 <?php if($document['status'] == 'Released'): ?>
                     <div class="mt-2">

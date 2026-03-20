@@ -59,9 +59,6 @@ $result7 = $conn->query($returnedSql);
 $row3 = $result7->fetch_assoc();
 $returnedDocs = $row3['returned_docs'];
 
-$sqlSub = "SELECT * FROM document where qr_id ='$qr_id'";
-$resultAni = $conn->query($sqlSub);
-$documentType = mysqli_fetch_assoc($resultAni);
 
 ?>
 
@@ -81,10 +78,12 @@ $documentType = mysqli_fetch_assoc($resultAni);
 
             <!-- NAV BAR -->
             <div class='user-nav-bar'>
-                <div class='user-name'><p>Hi! <span class="span-name"><?= $_SESSION['name']; ?></p></div>
-                <div class='user-date'><p><?= date('m/d/Y') ?></p></div>
+                <div class='user-name'>
+                    <p>Hi! <span class="span-name"><?= $_SESSION['name']; ?></p>
+                    <p><?= date('m/d/Y') ?></p>
+                </div>
                 <form action="../operation/logout.php" method='POST'>
-                    <button class='log-out'>↪ LOGOUT</button>
+                    <button class='log-out'>LOGOUT</button>
                 </form>
             </div>
 
@@ -104,49 +103,49 @@ $documentType = mysqli_fetch_assoc($resultAni);
             
             <div class="user-option sub-admin-option">
 
-    <?php if ($qrControl && isset($qr) && $documentType['status'] == 'Reviewed'): ?>
+    <?php if ($qrControl && isset($qr) && $document['status'] == 'Reviewed'): ?>
         <div>
             <label for="">Type</label> <br>
-            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+            <input type="text" value="<?= htmlspecialchars($document['type']) ?>" disabled>
         </div>
         <div>
             <label for="">Status</label> <br>
-            <input type="text" value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+            <input type="text" value="<?= htmlspecialchars($document['status']) ?>" disabled>
         </div>
 
-    <?php elseif ($qrControl && isset($qr) && $documentType['status'] == 'Released'): ?>
+    <?php elseif ($qrControl && isset($qr) && $document['status'] == 'Released'): ?>
         <div>
             <label for="">Type</label> <br>
-            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+            <input type="text" value="<?= htmlspecialchars($document['type']) ?>" disabled>
         </div>
         <div>
             <label for="">Status</label> <br>
-            <input type="text" value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+            <input type="text" value="<?= htmlspecialchars($document['status']) ?>" disabled>
         </div>
 
-    <?php elseif ($qrControl && isset($qr) && $documentType['status'] == 'Returned'): ?>
+    <?php elseif ($qrControl && isset($qr) && $document['status'] == 'Returned'): ?>
         <div>
             <label for="">Type</label> <br>
-            <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+            <input type="text" value="<?= htmlspecialchars($document['type']) ?>" disabled>
         </div>
         <div>
             <label for="">Status</label> <br>
-            <input type="text" value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+            <input type="text" value="<?= htmlspecialchars($document['status']) ?>" disabled>
         </div>
 
     <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 1): ?>
         <!-- BUTTON ONLY HERE -->
         <form action="../operation/sub-admin-update.php" method="POST">
             <input type="hidden" name="qr" value="<?= $qrControl ?>">
-            <input type="hidden" name="id" value="<?= $documentType['id']?>">
+            <input type="hidden" name="id" value="<?= $document['id']?>">
 
             <div>
                 <label for="">Type</label> <br>
-                <input type="text" value="<?= htmlspecialchars($documentType['type']) ?>" disabled>
+                <input type="text" value="<?= htmlspecialchars($document['type']) ?>" disabled>
             </div>
             <div>
                 <label for="">Status</label> <br>
-                <input type="text" value="<?= htmlspecialchars($documentType['status']) ?>" disabled>
+                <input type="text" value="<?= htmlspecialchars($document['status']) ?>" disabled>
             </div>
 
             <div class="mt-3">

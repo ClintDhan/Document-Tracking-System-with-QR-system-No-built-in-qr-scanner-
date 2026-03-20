@@ -9,7 +9,7 @@ if (!isset($_GET['control'])) {
 $control = $_GET['control'];
 
 // Your server IP
-$serverIP = '192.168.68.103';
+$serverIP = ' 192.168.1.15';
 
 // QR URL
 $url = "http://$serverIP/DocumentTrackingSys/user/user-home.php?control=$control";
