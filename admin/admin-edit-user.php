@@ -54,6 +54,7 @@ $user = $result->fetch_assoc();
 
             <div>
                 <form action="../operation/admin-edit-user-info.php" method="POST">
+                    <input type="hidden" name="id" value="<?= $user['id'] ?>">
                     <div class="admin-add-user-flx mt-3">
                         <p>Name</p>
                         <input type="text" value="<?= $user['name'] ?>" class="admin-add-user-input" name="name">
@@ -69,9 +70,10 @@ $user = $result->fetch_assoc();
 
                      <div class="admin-add-user-flx">
                         <p>Role</p>
-                        <select name="is_admin">
-                            <option value="1" <?= ($user['is_active'] == 0) ? 'selected' : '' ?>>User</option>
-                            <option value="0"  <?= ($user['is_active'] == 1) ? 'selected' : '' ?>>Admin</option>
+                        <select name="role">
+                            <option value="superadmin" <?= ($user['role'] == 'superadmin') ? 'selected' : '' ?>>Superadmin</option>
+                            <option value="admin"  <?= ($user['role'] == 'admin') ? 'selected' : '' ?>>Admin</option>
+                            <option value="user"  <?= ($user['role'] == 'user') ? 'selected' : '' ?>>User</option>
                         </select>                   
                     </div>
                     <button class="btn-submit" name="submit">Save</button>

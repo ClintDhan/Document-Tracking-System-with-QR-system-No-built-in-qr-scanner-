@@ -15,7 +15,7 @@ $result = $conn->query($upSql);
     if($result) {
         $note = "Changed password to {$password}";
         $action = "Change password";
-        $logSql = "INSERT INTO user_log(admin_id, user_id, action, note)
+        $logSql = "INSERT INTO user_log(performed_by, user_id, action, note)
                     VALUES('$performedBy', '$id', '$action', '$note')";
         $resultLog = $conn->query($logSql);
 
