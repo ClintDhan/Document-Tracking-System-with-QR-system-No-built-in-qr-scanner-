@@ -42,21 +42,22 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                 <button class='log-out admin-logout'>↪ LOGOUT</button>
                 </form>            
         </div>
-        </div>
-
-        <div class="admin-user-container">
-            <div class="d-flex justify-content-between align-items-center">
-            <p style="    font-size: 2em;
-    color: #5f5f5f;
-    font-weight: 700;
-    margin-bottom: 10px;">Users</p>
-
-        <div>
-            <a href="admin-add-user.php" class="add-user-btn">ADD USER<span>+</span></a>
-        </div>
 
         </div>
-           <table class="user-table">
+
+            <div class="admin-user-container">
+                <div class="d-flex justify-content-between align-items-center">
+                <p style="    font-size: 2em;
+                        color: #5f5f5f;
+                        font-weight: 700;
+                        margin-bottom: 10px;">Users</p>
+
+                <div>
+                    <a href="admin-add-user.php" class="add-user-btn">ADD USER<span>+</span></a>
+                </div>
+
+        </div>
+           <table class="user-table result">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -64,7 +65,7 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                         <th>Status</th>
                         <th>Created At</th>
                         <th>Role</th>
-                        <th>Action</th>
+                        <th class="action-container">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,7 +83,12 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                             ?></td>
                             <td><?= htmlspecialchars($users['created_at'])?></td>
                             <td><?= htmlspecialchars($users['role'])?></td>
-                            <td><a class="admin-user-edit-btn" href="admin-edit-user.php?user=<?= $users['id'] ?>">Edit</a></td>
+                            <td>
+                                <div class="d-flex">
+                                    <a class="admin-user-edit-btn" href="admin-edit-user.php?user=<?= $users['id'] ?>">Edit</a>
+                                    <a class="admin-user-reset-btn" href="admin-reset-password.php?user=<?= $users['id'] ?>">Reset Password</a>
+                                </div>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

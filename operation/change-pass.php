@@ -20,11 +20,15 @@ if(isset($_POST['submit'])) {
         $updatePass = "UPDATE user SET first_login = 1, password = '$newPass' WHERE id =".$_SESSION['user_id'];
         $conn->query($updatePass);
 
-        if($row['is_admin'] == 1) {
+        if($row['role'] == 'superadmin') {
             header("Location: ../admin/admin-dashboard.php");
             exit;
         }
-            elseif ($row['is_admin'] == 0) {
+            elseif ($row['role'] == 'admin') {
+            header("Location: ../sub-admin/sub-admin.php");
+            exit;
+        }
+        else {
             header("Location: ../user/user-home.php");
             exit;
         }

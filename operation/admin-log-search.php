@@ -27,7 +27,7 @@ echo "<table class='admin-logs-table'>
             <tr>
                 <th>No</th>
                 <th>Type</th>
-                <th>Acion</th>
+                <th>Action</th>
                 <th>Changes</th>
                 <th>Performed At</th>
                 <th>Performed By</th>
@@ -42,7 +42,7 @@ while ($row = $result->fetch_assoc()) {
             <td>".$row['document_type']."</td>
             <td><div style='border-radius: 4px;' class='".
                 ($row['action'] == 'Returned' ? 'status-returned' :
-                ($row['action'] == 'Under Review' ? 'status-review' :
+                ($row['action'] == 'Reviewed' ? 'status-review' :
                 ($row['action'] == 'Released' ? 'status-released' :
                 'status-default')))
             ."'>".$row['action']."</div></td>

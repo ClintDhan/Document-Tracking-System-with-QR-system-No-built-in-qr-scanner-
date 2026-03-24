@@ -83,7 +83,7 @@ body {
     height: 47px;
     width: 309px;
     background-color: transparent;
-    border: 1px solid #DBA159;
+    border: 1px solid #E6E6E6;
     padding: 15px;
 }
 
@@ -670,6 +670,12 @@ tbody tr td {
     overflow-x: auto;
 }
 
+.result {
+    max-width: 1010px;
+    overflow-x: scroll;
+    height: auto;
+}
+
 .tr-hover:hover {
     background-color: rgb(227, 227, 227);
 }
@@ -691,6 +697,25 @@ tbody tr td {
     background: #7eff06;
     border-radius: 8px;
 }
+
+.result::-webkit-scrollbar {
+    height: 8px;
+    width: 8px; 
+}
+
+/* Scroll track */
+.result::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* Scroll thumb */
+.result::-webkit-scrollbar-thumb {
+    background: #7eff06;
+    border-radius: 8px;
+}
+
+
 
 
 .status-default {
@@ -788,6 +813,10 @@ tbody tr td {
     width: 20%;
 }
 
+.action-container {
+    min-width: 150px;
+    max-width: 150px;
+}
 
 .search-container {
     display: flex;
@@ -869,15 +898,20 @@ tbody tr td {
 
 
 .admin-user-edit-btn {
-    width: 40px;
-    height: 20px;
-    background-color: #83BCFF;
-    color: white;
+    padding: 5px 8px;
     border-radius: 8px;
-    display: inline-block;
+    background-color: rgb(80, 80, 255);
+    color: white;
+    text-decoration: none;
+
+}
+.admin-user-reset-btn {
+    padding: 5px 8px;
+    border-radius: 8px;
+    background-color: rgba(151, 185, 2, 0.993);
+    color: white;
     text-decoration: none;
 }
-
 
 /* edit user */
 
@@ -913,5 +947,13 @@ tbody tr td {
     font-weight: 600;
 }
 
+
+/* reset */
+
+
+.reset-username {
+    color: #424242;
+    font-weight: 700;
+}
 
 

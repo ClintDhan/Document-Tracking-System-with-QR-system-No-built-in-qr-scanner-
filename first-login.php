@@ -20,8 +20,8 @@ require_once 'db.php';
 <div class='login-container'>
     <div class='login-form'>
         <div class='login-centered'>
-            <p style='font-weight: 900; color: #188A0E; font-size: 30px; line-height: 0.8;'>Change password</p>
-            <p style='font-size: 15px; color: #47D63A; font-weight: bold;'>Please change the password provided by your admin</p>
+            <p style='font-weight: 900; color: #003B99; font-size: 30px; line-height: 0.8;'>Change password</p>
+            <p style='font-size: 15px; color: #80BBDB; font-weight: bold;'>Please change the password provided by your admin</p>
         <form action="operation/change-pass.php" method="post" class='form-flx'>             
 
                 <div class="input-position">
