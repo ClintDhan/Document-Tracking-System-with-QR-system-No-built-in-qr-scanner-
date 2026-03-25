@@ -21,8 +21,11 @@ if(isset($_POST['submit'])) {
         $changes[] = "Name: {$row['name']} -> {$name}<br>";
     }
 
-    if($row['is_active'] != $status) {
-        $changes[] = "Status: {$row['is_active']} -> {$status}<br>";
+    $oldStatus = ($row['is_active'] == 1) ? 'Active' : 'Inactive';
+    $newStatus = ($status == 1) ? 'Active' : 'Inactive';
+
+    if ($row['is_active'] != $status) {
+        $changes[] = "Status: {$oldStatus} -> {$newStatus}<br>";
     }
 
     if($row['role'] != $role) {

@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != "superadmin") {
                 <a href="admin-dashboard.php" class="">DASHBOARD</a>
                 <a href="admin-document.php">DOCUMENTS</a>
                 <a href="admin-logs.php" class="active">DOCUMENT LOGS</a>
-                <a href="admin-logs.php">USER LOGS</a>
+                <a href="admin-user-log.php">USER LOGS</a>
                 <a href="admin-qr.php">QR MANAGEMENT</a>
                 <a href="admin-user.php">USERS</a>
             </div>

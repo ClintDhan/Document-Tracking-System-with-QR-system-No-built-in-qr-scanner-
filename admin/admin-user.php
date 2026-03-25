@@ -32,7 +32,7 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                 <a href="admin-dashboard.php">DASHBOARD</a>
                 <a href="admin-document.php">DOCUMENTS</a>
                 <a href="admin-logs.php">DOCUMENT LOGS</a>
-                <a href="admin-logs.php">USER LOGS</a>
+                <a href="admin-user-log.php">USER LOGS</a>
                 <a href="admin-qr.php">QR MANAGEMENT</a>
                 <a href="admin-user.php" class="active">USERS</a>
             </div>

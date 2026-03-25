@@ -913,6 +913,26 @@ tbody tr td {
     text-decoration: none;
 }
 
+/* user log */
+.user-log-no {
+    width: 100px !important;
+}
+.user-log-by {
+    width: 150px !important;
+}
+.user-log-date {
+    width: 150px !important;
+}
+.user-log-action {
+    width: 200px !important;
+}
+.user-log-note {
+    width: 250px !important;
+}
+.user-log-name {
+    width: 150px !important;
+}
+
 /* edit user */
 
 

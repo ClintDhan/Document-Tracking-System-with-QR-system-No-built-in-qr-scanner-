@@ -13,8 +13,8 @@ $upSql = "UPDATE user SET password ='$password', first_login = 0 WHERE id ='$id'
 $result = $conn->query($upSql);
 
     if($result) {
-        $note = "Changed password to {$password}";
-        $action = "Change password";
+        $note = "Reset password to {$password}";
+        $action = "Reset password";
         $logSql = "INSERT INTO user_log(performed_by, user_id, action, note)
                     VALUES('$performedBy', '$id', '$action', '$note')";
         $resultLog = $conn->query($logSql);

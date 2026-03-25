@@ -32,7 +32,8 @@ $row = $result->fetch_assoc();
                     <div class="nav-anchor">
                         <a href="admin-dashboard.php" class="">DASHBOARD</a>
                         <a href="admin-document.php" class="active">DOCUMENTS</a>
-                        <a href="admin-logs.php">LOGS</a>
+                        <a href="admin-logs.php">DOCUMENT LOGS</a>
+                        <a href="admin-user-log.php">USER LOGS</a>
                         <a href="admin-qr.php">QR MANAGEMENT</a>
                         <a href="admin-user.php">USERS</a>
                     </div>
