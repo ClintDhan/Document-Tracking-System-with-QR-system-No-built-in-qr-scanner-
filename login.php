@@ -2,6 +2,11 @@
 session_start();
 require_once 'db.php'; 
 
+if (isset($_SESSION['user_id']) && isset($_GET['redirect'])) {
+    header("Location: " . $_GET['redirect']);
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -18,13 +23,13 @@ require_once 'db.php';
 <div class='login-container'>
     <div class='login-form'>
         <div class='login-centered'>
-            <p style='font-weight: 900; color: #003B99; font-size: 30px; line-height: 0.8;'>Welcome Back!</p>
+            <p style='font-weight: 900; color: #003B99; font-size: 30px; line-height: 0.8;'>Welcome!</p>
             <p style='font-size: 15px; color: #80BBDB; font-weight: 400;'>Please input your details</p>
         <form action="operation/checklogin.php" method="post" class='form-flx'>
                 <!-- hidden input to carry redirect -->
                 <input type="hidden" name="redirect" value="<?= isset($_GET['redirect']) ? htmlspecialchars($_GET['redirect']) : '' ?>">
-                <input type="text" name="name" placeholder="Username">
-                <input type="password" name="password" placeholder="Password" class='mt-3'>
+                <input type="text" name="name" placeholder="Username" maxlength="15">
+                <input type="password" name="password" placeholder="Password" class='mt-3' minlength="3">
                 <button type="submit">LOGIN</button>
         </form>
 

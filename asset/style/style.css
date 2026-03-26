@@ -34,7 +34,7 @@ body {
     background-color: white;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border: 1px solid #d1d5db;
 
 }
 
@@ -109,10 +109,10 @@ body {
     width: 309px;
     background-color: #80BBDB;
     color: white;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.25);
     border: none;
     cursor: pointer;
     margin-top: 41px;
+    border-radius: 8px;
 }
 
 .btn-home {
@@ -235,7 +235,6 @@ body {
     font-weight: 900;
     font-size: 20px;
     text-decoration: none;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     border-radius: 8px;
 }
 
@@ -279,6 +278,7 @@ body {
     background-color: white;
     border-radius: 20px;
     margin-top: 16px;
+    border: 1px solid #d1d5db;
 }
 
 .user-dash-flx {
@@ -299,18 +299,19 @@ body {
 
 .user-dash-grid > div {
     padding-top: 30px;
-    color: white;
+    color: #111111;
     border-radius: 8px;
+    border: 1px solid #d1d5db;
 
 }
 .user-received {
     grid-column-start: 1;
     grid-column-end: 3;
-    background-color: #7BE0AD;
+    background-color: #86E8B8;
 }
 
 .user-released {
-    background-color: #83BCFF;
+    background-color: #9CCBFF;
 }
 
 .user-returned {
@@ -387,7 +388,6 @@ body {
     width: 100% !important;
     background-color: #7BE0AD;
     color: white;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     border: none;
     cursor: pointer;
     margin-top: 35px;
@@ -434,8 +434,12 @@ body {
     padding: 0 20px;
     border-radius: 12px;
     flex-shrink: 0;
+    border: 1px solid #d1d5db;
 }
 
+.middle-form {
+    border: 1px solid #d1d5db;
+}
 .admin-card-container {
     display: flex;
     width: 1030px;
@@ -450,6 +454,7 @@ body {
     height: 117px;
     background-color: #fff;
     border-radius: 12px;
+    border: 1px solid #d1d5db;
 }
 
 .admin-middle-container {
@@ -535,12 +540,20 @@ body {
 }
 
 .recent-view {
-    padding: 2px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 0;
     border: none;
+    text-decoration: none;
     cursor: pointer;
-    font: 12px;
-    font-weight: 600;
-    color: #808080;
+    font-size: 12px !important;
+    font-weight: 500;
+    color: white;
+    background-color: rgb(40, 194, 233);
+    width: 40px;
+    height: 30px;
+    border-radius: 8px;
 }
 
 .first-table {
@@ -603,6 +616,7 @@ tbody tr td {
     height: auto;
     padding: 10px 10px;
     background-color: #fff;
+    border: 1px solid #d1d5db;
 }
 
 .admin-docs-no {
@@ -672,8 +686,7 @@ tbody tr td {
 
 .result {
     max-width: 1010px;
-    overflow-x: scroll;
-    height: auto;
+    overflow-x: auto;
 }
 
 .tr-hover:hover {
@@ -749,6 +762,8 @@ tbody tr td {
     padding: 20px 30px;
     border-radius: 8px;
     width: auto;
+    border: 1px solid #d1d5db;
+    position: relative;
 }
 
 .doc-edit-flx {
@@ -807,6 +822,7 @@ tbody tr td {
 
 .user-table {
     width: 100%;
+    max-width: max-content;
 }
 
 .user-table thead tr th {
@@ -814,8 +830,25 @@ tbody tr td {
 }
 
 .action-container {
-    min-width: 150px;
-    max-width: 150px;
+    min-width: 300px;
+}
+.no-container {
+    min-width: 100px;
+}
+.status-container {
+    min-width: 200px;
+}
+.name-container {
+    min-width: 100px;
+}
+.created-container {
+    min-width: 200px;
+}
+.role-container {
+    min-width: 200px;
+}
+.action-container {
+    min-width: 200px;
 }
 
 .search-container {
@@ -857,6 +890,8 @@ tbody tr td {
     background-color: white;
     padding: 20px 30px;
     border-radius: 8px;
+    border: 1px solid #d1d5db;
+    position: relative;
 }
 
 .admin-add-user-flx {
@@ -956,7 +991,6 @@ tbody tr td {
     height: 47px;
     background-color: #7BE0AD;
     color: white;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     border: none;
     cursor: pointer;
     font-weight: 700;
@@ -977,3 +1011,24 @@ tbody tr td {
 }
 
 
+.result {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.user-table {
+  width: max-content;
+}
+
+
+.adm-bck-btn {
+    position: absolute;
+    left: -80px;
+    top: 0;
+    width: auto;
+    height: 35px;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: gray;
+}

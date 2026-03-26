@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['qty'])) {
 $qty = (int) $_POST['qty'];
 
 // 2️⃣ Your server IP
-$serverIP = '192.168.1.15'; // <-- change this to your PC's IP
+$serverIP = '192.168.68.101'; // <-- change this to your PC's IP
 
 // 3️⃣ Fetch unused QR codes from DB
 $codes = [];
@@ -31,7 +31,7 @@ while ($row = $result->fetch_assoc()) {
     $control = $row['control_num'];
 
     // URL to your system including control number
-    $url = "http://$serverIP/DocumentTrackingSys/user/user-home.php?control=$control";
+    $url = "http://$serverIP/DocumentTrackingSys/qr-handler.php?control=$control";
 
     $codes[] = ['control' => $control, 'url' => $url];
 }

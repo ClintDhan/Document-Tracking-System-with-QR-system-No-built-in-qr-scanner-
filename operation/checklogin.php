@@ -5,52 +5,58 @@ require_once '../db.php';
 $name = $_POST['name'];
 $password = $_POST['password'];
 
-$sql = "SELECT * FROM user where name = '$name' AND password = '$password'";
+// get redirect (from QR)
+$redirect = '../user/user-home.php';
+if (!empty($_POST['redirect'])) {
+    $redirect = urldecode($_POST['redirect']);
+}
+
+$sql = "SELECT * FROM user WHERE name = '$name' AND password = '$password'";
 $result = $conn->query($sql);
 
-if ($result->num_rows == 1 ) {
+if ($result->num_rows == 1) {
     $user = $result->fetch_assoc();
-    
-    if($password === $user['password']) {
-        if($user['is_active'] == 1) {
-             session_regenerate_id(true);
 
-             $_SESSION['user_id'] = $user['id'];
-             $_SESSION['name'] = $user['name'];
-             $_SESSION['role'] = $user['role'];
-            
-            $redirect = '../user/user-home.php';
-            if (isset($_POST['redirect']) && !empty($_POST['redirect'])) {
-            $redirect = urldecode($_POST['redirect']);
-            }
-            
-            if($user['role'] == "superadmin" && $user['first_login'] == 1) {
-                header("Location: ../admin/admin-dashboard.php");
+    if ($password === $user['password']) {
+        if ($user['is_active'] == 1) {
+
+            session_regenerate_id(true);
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['role'] = $user['role'];
+
+            // FIRST LOGIN CHECK
+            if ($user['first_login'] == 0) {
+                // pass redirect to first-login page
+                $redirectParam = !empty($_POST['redirect']) ? '?redirect=' . urlencode($_POST['redirect']) : '';
+                header("Location: ../first-login.php$redirectParam");
                 exit;
             }
-            elseif ($user['role'] == "user" && $user['first_login'] == 1) {
+
+            // ALREADY LOGGED IN → use QR redirect if available
+            if (!empty($_POST['redirect'])) {
                 header("Location: $redirect");
                 exit;
             }
-            elseif ($user['role'] == "admin" && $user['first_login'] == 1) {
-                header("Location: ../sub-admin/sub-admin.php");
+
+            // DEFAULT DASHBOARD
+            if ($user['role'] == "superadmin" || $user['role'] == "admin") {
+                header("Location: ../admin/admin-dashboard.php");
+                exit;
+            } else {
+                header("Location: ../user/user-home.php");
                 exit;
             }
-            else {
-                header("Location: ../first-login.php");
-                exit;
-            }
-        }
-        else {
+
+        } else {
             echo 'Your account is invalid';
         }
-    }
-    else {
+    } else {
         echo 'Invalid Password';
     }
-}
-else {
+} else {
     echo "Invalid username or password";
 }
+
 $conn->close();
 ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once '../db.php';
 
@@ -6,10 +6,32 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../login.php");
     exit();
 }
-$doc = $_GET['doc'] ?? null;
-$sql = "SELECT * FROM document where id = '$doc'";
+
+
+if (isset($_GET['doc'])) {
+    $value = $_GET['doc'];
+    $sql = "SELECT * FROM document WHERE id = '$value'";
+} 
+elseif (isset($_GET['qr_id'])) {
+    $value = $_GET['qr_id'];
+    $sql = "SELECT * FROM document WHERE qr_id = '$value'";
+} 
+elseif (isset($_GET['control'])) {
+    $control = $_GET['control'] ?? null;
+    // JOIN qr_code to document
+    $qrSql = "SELECT * FROM qr_code WHERE control_num = '$control'";
+    $qrSqlResult = $conn->query($qrSql);
+    $row1 = $qrSqlResult->fetch_assoc();
+    $qr_id = $row1['id'];
+    $sql = "SELECT * FROM document WHERE qr_id = '$qr_id'";
+} 
+else {
+    die("No document specified.");
+}
+
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
+
 ?>
 
 
@@ -43,33 +65,28 @@ $row = $result->fetch_assoc();
                     </div>
                 </div>
             <div class="doc-edit-container mt-2">
-                <p class="text-center" style="font-weight: 700;">Edit document</p>
-                <form action="../operation/admin-update-document.php" method="POST">
+                <p class="text-center" style="font-weight: 700;">View document</p>
+                <form action="../operation/sub-admin-update.php" method="POST">
                     <div class="doc-edit-flx">
                     <input type="hidden" name="doc_id" value="<?= $doc ?>">
                     <div>
                     <label for="">Type</label> <br>
-                    <input type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>" class="admin-doc-input">
+                    <input type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
                     <label for="">Description</label> <br>
-                    <textarea name='description' rows="4" id="" class="admin-doc-area"><?= $row['description'] ?></textarea>            
+                    <textarea readonly name='description' rows="4" id="" class="admin-doc-area"><?= $row['description'] ?></textarea>            
                     </div>
 
                     <div class="mt-2">
                     <label for="">Department</label> <br>
-                    <input type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>" class="admin-doc-input">
+                    <input type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>" class="admin-doc-input" readonly>
                     </div>
-
+                
                     <div class="mt-2">
                     <label for="">Status</label> <br>
-                    <select name="status" id='statusSelect' class="admin-doc-input">
-                        <option value="Received" <?= ($row['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
-                        <option value="Reviewed" <?= ($row['status'] ?? '') == 'Reviewed' ? 'selected' : '' ?>>Reviewed</option>
-                        <option value="Released" <?= ($row['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
-                        <option value="Returned" <?= ($row['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
-                    </select>
+                    <input type="text" id="statusSelect" name="status" value="<?= htmlspecialchars($row['status']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
@@ -80,7 +97,7 @@ $row = $result->fetch_assoc();
                         name="released_to"
                         placeholder="Released To"
                         value="<?= htmlspecialchars($row['released_to'] ?? '') ?>"
-                        style="<?= ($row['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;">
+                        style="<?= ($row['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;" readonly>
                     </div>
 
                     <div class="mt-2">
@@ -91,11 +108,15 @@ $row = $result->fetch_assoc();
                         name="returned_reason"
                         placeholder="Return Reason"
                         value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
-                        style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;">                    
+                        style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;" readonly>                    
                     </div>
 
-                    
-                    <button class='btn-submit admin-doc-submit' type='submit' name='submit'>UPDATE</button>
+                    <?php if (
+                            ($_SESSION['role'] == "admin") &&
+                            ($row['status'] == "Received" || $row['status'] == "Returned")
+                        ): ?>
+                            <button class='btn-submit admin-doc-submit' type='submit' name='submit'>REVIEWED</button>
+                        <?php endif; ?>
                     </div>
                 </form>
                 

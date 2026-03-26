@@ -2,7 +2,7 @@
 session_start();
 require_once "../db.php";
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != "superadmin") {
+if (!isset($_SESSION['user_id'])) {
     header("Location: ../login.php");
     exit();
 }
@@ -57,14 +57,15 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                 </div>
 
         </div>
-           <table class="user-table result">
+        <div class="result">
+           <table class="user-table">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>Created At</th>
-                        <th>Role</th>
+                        <th class="no-container">No</th>
+                        <th class="name-container">Name</th>
+                        <th class="status-container">Status</th>
+                        <th class="created-container">Created At</th>
+                        <th class="role-container">Role</th>
                         <th class="action-container">Action</th>
                     </tr>
                 </thead>
@@ -85,14 +86,15 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                             <td><?= htmlspecialchars($users['role'])?></td>
                             <td>
                                 <div class="d-flex">
-                                    <a class="admin-user-edit-btn" href="admin-edit-user.php?user=<?= $users['id'] ?>">Edit</a>
-                                    <a class="admin-user-reset-btn" href="admin-reset-password.php?user=<?= $users['id'] ?>">Reset Password</a>
+                                    <a class="admin-user-edit-btn" href="admin-edit-user.php?user=<?= $users['id'] ?>">EDIT</a>
+                                    <a class="admin-user-reset-btn" href="admin-reset-password.php?user=<?= $users['id'] ?>">RESET PASSWORD</a>
                                 </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
            </table>
+           </div>
         </div>
 
     </div>

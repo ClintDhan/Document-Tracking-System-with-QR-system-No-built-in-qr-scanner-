@@ -39,7 +39,7 @@ echo "<table class='admin-docs-table'>
                 <th class='admin-docs-desc'>Description</th>
                 <th class='admin-docs-sts'>Status</th>
                 <th class='admin-docs-dep'>Department</th>
-                <th class='admin-docs-no'>Pages</th>
+                <th class='admin-docs-no'>Copies</th>
                 <th class='admin-docs-created'>Created by</th>
                 <th class='admin-docs-created-at'>Created at</th>
                 <th class='admin-docs-updt'>Last Updated</th>
@@ -71,6 +71,7 @@ while ($row = $result->fetch_assoc()) {
             <td>".$row['returned_reason']."</td>
             <td>
             <a class='admin-doc-btn' href='../admin/admin-doc-edit.php?doc=".$row['id']."'>EDIT</a>
+            <a class='admin-doc-btn' href='../admin/admin-view-document.php?doc=".$row['id']."' style='background-color: gray;'>VIEW</a>
 
             <a class='admin-doc-btn'
             href='../operation/document-download-qr.php?control=".$row['control_num']."'

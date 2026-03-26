@@ -39,7 +39,7 @@ function generateControlNumber($conn) {
 }
 
 // 3️⃣ Your server IP (local network)
-$serverIP = '192.168.1.15'; // <-- change this to your PC's IP
+$serverIP = '192.168.68.101'; // <-- change this to your PC's IP
 
 // 4️⃣ Generate QR codes in DB
 $codes = [];
@@ -55,7 +55,7 @@ for ($i = 0; $i < $qty; $i++) {
     $stmt->execute();
 
     // URL to your system including control number
-    $url = "http://$serverIP/DocumentTrackingSys/user/user-home.php?control=$control";
+    $url = "http://$serverIP/DocumentTrackingSys/qr-handler.php?control=$control";
 
     $codes[] = ['control' => $control, 'url' => $url];
 }

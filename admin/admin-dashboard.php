@@ -2,7 +2,7 @@
 session_start();
 require_once '../db.php';
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] != "superadmin") {
+if (!isset($_SESSION['user_id'])) {
     header("Location: ../login.php");
     exit();
 }
@@ -120,7 +120,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                     
                 <p class="card-count"><?= $totalReviewCount ?></p>
                 </div>
-                <p class="card-text">UNDER REVIEW</p>
+                <p class="card-text">REVIEWED</p>
             </div>
             <div class="card-flx">
                 <div class="admin-card-circle" style="background-color: #7C3AED;">
@@ -138,7 +138,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
             <div class="first middle-form">
                 <div class="d-flex justify-content-between">
                     <p class="recent-title">RECENT ACTIVITY</p>
-                    <button class="recent-view">VIEW</button>
+                    <a href="admin-logs.php" class="recent-view">VIEW</a>
                 </div>
 
                 <table class="first-table">
@@ -174,7 +174,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <p class="todays-text">Under review</p>
+                    <p class="todays-text">Reviewed</p>
                     <p class="todays-num" style="color: #92400E;"><?= $todayReviewCount ?></p>
                 </div>
 

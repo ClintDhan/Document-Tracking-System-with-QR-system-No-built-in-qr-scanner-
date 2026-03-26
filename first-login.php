@@ -23,7 +23,7 @@ require_once 'db.php';
             <p style='font-weight: 900; color: #003B99; font-size: 30px; line-height: 0.8;'>Change password</p>
             <p style='font-size: 15px; color: #80BBDB; font-weight: bold;'>Please change the password provided by your admin</p>
         <form action="operation/change-pass.php" method="post" class='form-flx'>             
-
+        <input type="hidden" name="redirect" value="<?= $_GET['redirect'] ?? '' ?>">
                 <div class="input-position">
                     <input type="password" name="newPass" placeholder="Enter new password" class='mt-3'>
                     <span 
