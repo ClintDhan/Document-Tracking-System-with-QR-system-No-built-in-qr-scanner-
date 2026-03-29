@@ -39,7 +39,7 @@ function generateControlNumber($conn) {
 }
 
 // 3️⃣ Your server IP (local network)
-$serverIP = '192.168.68.101'; // <-- change this to your PC's IP
+$serverIP = '192.168.68.107'; // <-- change this to your PC's IP
 
 // 4️⃣ Generate QR codes in DB
 $codes = [];
