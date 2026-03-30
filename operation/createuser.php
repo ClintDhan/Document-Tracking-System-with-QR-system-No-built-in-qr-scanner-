@@ -23,7 +23,7 @@ if(isset($_POST['submit'])) {
             $new_user_id = $conn->insert_id;
 
             $action = 'Create user';
-            $sql2 = "INSERT INTO user_log(admin_id, user_id, action) VALUES ($admin_id , $new_user_id, '$action')";
+            $sql2 = "INSERT INTO user_log(performed_by, user_id, action) VALUES ($admin_id , $new_user_id, '$action')";
             $conn->query($sql2);
             header("Location: ../admin/admin-user.php");
             exit;

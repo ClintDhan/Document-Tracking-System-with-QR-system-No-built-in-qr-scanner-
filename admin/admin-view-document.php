@@ -72,6 +72,7 @@ $row = $result->fetch_assoc();
                 <form action="../operation/sub-admin-update.php" method="POST">
                     <div class="doc-edit-flx">
                     <input type="hidden" name="doc_id" value="<?= $doc ?>">
+                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
                     <div>
                     <label for="">Type</label> <br>
                     <input type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>" class="admin-doc-input" readonly>
