@@ -63,7 +63,7 @@ $document = mysqli_fetch_assoc($result);
                     <input type="text" class="update-input" name="department" value="<?= $document['department'] ?>" disabled>
                 </div>
                 <div class="mt-2">
-                        <label for="">Number of pages</label> <br>
+                        <label for="">Number of copies</label> <br>
                         <input type="number" placeholder='Pages' class='update-input' name='pages' value="<?= $document['pages'] ?>" readonly>
                 </div>
                 <?php if($document['status'] == 'Released'): ?>

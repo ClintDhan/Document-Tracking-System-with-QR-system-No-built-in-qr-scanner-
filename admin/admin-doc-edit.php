@@ -26,7 +26,8 @@ $row = $result->fetch_assoc();
         <div class="admin-dash-container">
                 <div class="admin-navbar">
                     <div class="admin-logo">
-                        <a href="">MAYOR'S OFFICE DTS</a>
+                        <a href="" class="admin-logo-title">MAYOR'S OFFICE DTS</a>
+                        <p class="admin-logo-sub">ADMIN</p>
                     </div>
 
                     <div class="nav-anchor">
@@ -39,7 +40,9 @@ $row = $result->fetch_assoc();
                     </div>
 
                     <div class="admin-logout">
-                        <button class='log-out admin-logout'>↪ LOGOUT</button>
+                         <form action="../operation/logout.php" method="POST">
+                            <button class='log-out admin-logout'>↪ LOGOUT</button>
+                        </form>
                     </div>
                 </div>
             <div class="doc-edit-container mt-2">

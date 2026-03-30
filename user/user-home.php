@@ -95,7 +95,7 @@ $returnedDocs = $row3['returned_docs'];
                 <?php if ($qrControl && isset($qr) && $qr['is_used'] == 0): ?>
                     <p>QR Scanned: <?= htmlspecialchars($qr['control_num']) ?></p>
                 <?php elseif ($qrControl && isset($qr) && $qr['is_used'] == 1): ?>
-                    <p>QR Scanned: <?= htmlspecialchars($qr['control_num']) ?> (Already Used)</p>
+                    <p>QR Scanned: <?= htmlspecialchars($qr['control_num']) ?></p>
                 <?php elseif (isset($qrError)): ?>
                     <p style="color:red;"><?= $qrError ?></p>
                 <?php else: ?>
@@ -113,8 +113,16 @@ $returnedDocs = $row3['returned_docs'];
                     <a href="user-update.php?document=<?= $document['id'] ?>&qr=<?= $qr_id ?>&control=<?= urlencode($qrControl)?>" class='btn-update'>UPDATE DOCUMENT</a>
                     <a href="user-view.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>&document=<?= $document['id'] ?>" class='btn-view'>VIEW DOCUMENT</a>
                 </div>
-            <?php elseif ($qrError): ?>
-                <p style="color:red;"><?= $qrError ?></p>
+            <?php elseif (!$qr): ?>
+                 <div class='user-option'>
+                    <p>Enter Control Number</p>
+                    <form action="../operation/control-search.php" method="post">
+                        <div class="control-search-container">
+                            <input class="mt-3" type="text" name="control" placeholder="MO-DATE-123456">
+                            <button class="btn-submit btn-search" name="submit" type="submit">SEARCH</button>
+                        </div>
+                    </form>
+                </div>
             <?php endif; ?>
 
             <!-- DASHBOARD -->

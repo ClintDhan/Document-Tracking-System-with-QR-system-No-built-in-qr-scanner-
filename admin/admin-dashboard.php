@@ -84,7 +84,8 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
     <div class="admin-dash-container">
         <div class="admin-navbar">
             <div class="admin-logo">
-                <a href="">MAYOR'S OFFICE DTS</a>
+                <a href="" class="admin-logo-title">MAYOR'S OFFICE DTS</a>
+                <p class="admin-logo-sub">ADMIN</p>
             </div>
 
             <div class="nav-anchor">
@@ -137,7 +138,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
         <div class="admin-middle-container">
             <div class="first middle-form">
                 <div class="d-flex justify-content-between">
-                    <p class="recent-title">RECENT ACTIVITY</p>
+                    <p class="recent-title">RECENT DOCUMENT LOG</p>
                     <a href="admin-logs.php" class="recent-view">VIEW</a>
                 </div>
 

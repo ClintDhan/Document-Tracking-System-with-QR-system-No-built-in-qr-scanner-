@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['qty'])) {
 $qty = (int) $_POST['qty'];
 
 // 2️⃣ Your server IP
-$serverIP = '192.168.68.107'; // <-- change this to your PC's IP
+$serverIP = '192.168.1.251'; // <-- change this to your PC's IP
 
 // 3️⃣ Fetch unused QR codes from DB
 $codes = [];

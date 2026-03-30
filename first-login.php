@@ -29,7 +29,7 @@ require_once 'db.php';
                     <span 
     onclick="togglePassword(this)"
   >
-    <i class="bi bi-eye"></i>
+    <i class="bi bi-eye-slash toggle-icon"></i>
   </span>
                 </div>
 
@@ -38,7 +38,7 @@ require_once 'db.php';
                     <span 
     onclick="togglePassword(this)"
   >
-    <i class="bi bi-eye"></i>
+    <i class="bi bi-eye-slash toggle-icon"></i>
   </span>
                 </div>
                 <button type="submit" name="submit">Proceed</button>
@@ -58,10 +58,10 @@ require_once 'db.php';
 
     if (input.type === "password") {
         input.type = "text";
-        icon.classList.replace("bi-eye", "bi-eye-slash");
+        icon.classList.replace("bi-eye-slash", "bi-eye");
     } else {
         input.type = "password";
-        icon.classList.replace("bi-eye-slash", "bi-eye");
+        icon.classList.replace("bi-eye", "bi-eye-slash");
     }
 }
 </script>

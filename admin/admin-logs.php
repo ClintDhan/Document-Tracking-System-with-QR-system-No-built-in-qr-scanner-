@@ -21,7 +21,8 @@ if (!isset($_SESSION['user_id'])) {
     <div class="admin-dash-container">
         <div class="admin-navbar">
             <div class="admin-logo">
-                <a href="">MAYOR'S OFFICE DTS</a>
+                <a href="" class="admin-logo-title">MAYOR'S OFFICE DTS</a>
+                <p class="admin-logo-sub">ADMIN</p>
             </div>
 
             <div class="nav-anchor">
