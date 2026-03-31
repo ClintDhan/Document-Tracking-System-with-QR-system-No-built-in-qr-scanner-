@@ -35,11 +35,18 @@ if (!isset($_SESSION['user_id'])) {
             </div>
 
             <div class="nav-anchor">
-                <a href="admin-dashboard.php" class="">DASHBOARD</a>
+                <a href="admin-dashboard.php">DASHBOARD</a>
                 <a href="admin-document.php">DOCUMENTS</a>
-                <a href="admin-logs.php">DOCUMENT LOGS</a>
-                <a href="admin-user-log.php">USER LOGS</a>
-                <a href="admin-qr.php" class="active">QR MANAGEMENT</a>
+
+                <div class="dropdown">
+                    <p class="logs-text">LOGS ▾</p>
+                    <div class="dropdown-content">
+                        <a href="admin-logs.php">DOCUMENT LOGS</a>
+                        <a href="admin-user-log.php">USER LOGS</a>
+                    </div>
+                </div>
+
+                <a href="admin-qr.php"  class="active">QR MANAGEMENT</a>
                 <a href="admin-user.php">USERS</a>
             </div>
 
@@ -54,7 +61,7 @@ if (!isset($_SESSION['user_id'])) {
                 <p>QR Management</p>
 
                 <div class="d-flex">
-                    <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
+                    <input type="text" onkeyup="loadData(this.value)" placeholder="Search for control....">
                 </div>
             </div>
 
@@ -91,6 +98,16 @@ if (!isset($_SESSION['user_id'])) {
 
     </div>
     <script>
+
+    document.addEventListener("click", function (e) {
+    const dropdown = document.querySelector(".dropdown");
+
+    if (dropdown.contains(e.target)) {
+        dropdown.querySelector(".dropdown-content").classList.toggle("show");
+    } else {
+        dropdown.querySelector(".dropdown-content").classList.remove("show");
+    }
+    });
         function loadData(query) {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "../operation/admin-qr-search.php" , true);

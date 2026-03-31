@@ -545,7 +545,17 @@ body {
     gap: 5px;
 }
 
-.nav-anchor a {
+.nav-anchor a{
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 700;
+    color: #333333;
+    padding: 10px 10px;
+    transition: all 0.5s ease;
+    border-radius: 8px;
+}
+
+.logs-text {
     text-decoration: none;
     font-size: 10px;
     font-weight: 700;
@@ -559,6 +569,7 @@ body {
     background-color: #aaaaaa;
     color: white;
 }
+
 
 .admin-logout {
     height: 35px;
@@ -1129,3 +1140,36 @@ tbody tr td {
 }
 
 
+/* Dropdown container */
+.dropdown {
+    position: relative;
+}
+
+/* Hidden menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 180px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+/* Links inside dropdown */
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+/* Hover effect */
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content.show {
+    display: block;
+}

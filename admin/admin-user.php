@@ -32,8 +32,15 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
             <div class="nav-anchor">
                 <a href="admin-dashboard.php">DASHBOARD</a>
                 <a href="admin-document.php">DOCUMENTS</a>
-                <a href="admin-logs.php">DOCUMENT LOGS</a>
-                <a href="admin-user-log.php">USER LOGS</a>
+
+                <div class="dropdown">
+                    <p class="logs-text">LOGS ▾</p>
+                    <div class="dropdown-content">
+                        <a href="admin-logs.php">DOCUMENT LOGS</a>
+                        <a href="admin-user-log.php">USER LOGS</a>
+                    </div>
+                </div>
+
                 <a href="admin-qr.php">QR MANAGEMENT</a>
                 <a href="admin-user.php" class="active">USERS</a>
             </div>
@@ -103,6 +110,16 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
         </div>
 
     </div>
-    
+<script>
+     document.addEventListener("click", function (e) {
+    const dropdown = document.querySelector(".dropdown");
+
+    if (dropdown.contains(e.target)) {
+        dropdown.querySelector(".dropdown-content").classList.toggle("show");
+    } else {
+        dropdown.querySelector(".dropdown-content").classList.remove("show");
+    }
+    });
+</script>
 </body>
 </html>

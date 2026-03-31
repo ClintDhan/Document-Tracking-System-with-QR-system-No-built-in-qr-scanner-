@@ -33,11 +33,18 @@ $password = random_int(100000, 999999);
                 <p class="admin-logo-sub">ADMIN</p>
             </div>
 
-            <div class="nav-anchor">
+             <div class="nav-anchor">
                 <a href="admin-dashboard.php">DASHBOARD</a>
                 <a href="admin-document.php">DOCUMENTS</a>
-                <a href="admin-logs.php">DOCUMENT LOGS</a>
-                <a href="admin-user-log.php">USER LOGS</a>
+
+                <div class="dropdown">
+                    <p class="logs-text">LOGS ▾</p>
+                    <div class="dropdown-content">
+                        <a href="admin-logs.php">DOCUMENT LOGS</a>
+                        <a href="admin-user-log.php">USER LOGS</a>
+                    </div>
+                </div>
+
                 <a href="admin-qr.php">QR MANAGEMENT</a>
                 <a href="admin-user.php" class="active">USERS</a>
             </div>
@@ -64,13 +71,26 @@ $password = random_int(100000, 999999);
                     <button class="btn-submit" name="submit">Save</button>
                 </form>
             </div>
-
+<button class="adm-bck-btn" onclick="window.location.href='admin-user.php'">
+  ❮ BACK
+</button>
         </div>
     </div>
 
     
 
+<script>
+ document.addEventListener("click", function (e) {
+    const dropdown = document.querySelector(".dropdown");
 
+    if (dropdown.contains(e.target)) {
+        dropdown.querySelector(".dropdown-content").classList.toggle("show");
+    } else {
+        dropdown.querySelector(".dropdown-content").classList.remove("show");
+    }
+    });
+
+</script>
 </body>
 
 </html>

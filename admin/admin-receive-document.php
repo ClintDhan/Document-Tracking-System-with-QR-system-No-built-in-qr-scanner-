@@ -33,10 +33,17 @@ $row = $result->fetch_assoc();
                     </div>
 
                     <div class="nav-anchor">
-                        <a href="admin-dashboard.php" class="">DASHBOARD</a>
+                        <a href="admin-dashboard.php">DASHBOARD</a>
                         <a href="admin-document.php" class="active">DOCUMENTS</a>
-                        <a href="admin-logs.php">DOCUMENT LOGS</a>
-                        <a href="admin-user-log.php">USER LOGS</a>
+
+                        <div class="dropdown">
+                            <p class="logs-text">LOGS ▾</p>
+                            <div class="dropdown-content">
+                                <a href="admin-logs.php">DOCUMENT LOGS</a>
+                                <a href="admin-user-log.php">USER LOGS</a>
+                            </div>
+                        </div>
+
                         <a href="admin-qr.php">QR MANAGEMENT</a>
                         <a href="admin-user.php">USERS</a>
                     </div>
@@ -126,6 +133,16 @@ function showInput() {
 
 showInput();
 statusSelect.addEventListener('change' ,showInput );
+
+ document.addEventListener("click", function (e) {
+    const dropdown = document.querySelector(".dropdown");
+
+    if (dropdown.contains(e.target)) {
+        dropdown.querySelector(".dropdown-content").classList.toggle("show");
+    } else {
+        dropdown.querySelector(".dropdown-content").classList.remove("show");
+    }
+    });
 </script>
 </body>
 
