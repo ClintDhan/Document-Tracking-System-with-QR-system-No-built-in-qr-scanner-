@@ -565,6 +565,7 @@ body {
     border-radius: 8px;
 }
 
+
 .nav-anchor a:hover {
     background-color: #aaaaaa;
     color: white;
@@ -940,14 +941,15 @@ tbody tr td {
 .action-container {
     min-width: 300px;
 }
+
 .no-container {
-    min-width: 100px;
+    min-width: 120px;
 }
 .status-container {
     min-width: 200px;
 }
 .name-container {
-    min-width: 100px;
+    min-width: 200px;
 }
 .created-container {
     min-width: 200px;
@@ -956,7 +958,7 @@ tbody tr td {
     min-width: 200px;
 }
 .action-container {
-    min-width: 200px;
+    min-width: 80px;
 }
 
 .search-container {

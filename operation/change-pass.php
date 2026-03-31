@@ -6,6 +6,7 @@ if(isset($_POST['submit'])) {
 
     $newPass = $_POST['newPass'];
     $reEnterPass = $_POST['rePass'];
+    $performed = 'Logged In';
 
     // Get current user
     $sql = "SELECT * FROM user WHERE id = ".$_SESSION['user_id'];
@@ -24,18 +25,27 @@ if(isset($_POST['submit'])) {
         $conn->query($updatePass);
 
         // ✅ Handle redirect from QR or login
-        $redirect = urldecode($_GET['redirect'] ?? '');
+        $redirect = urldecode($_POST['redirect'] ?? '');
 
         if(!empty($redirect)) {
+            $sql = "INSERT INTO auth_logs (performed, user_id) 
+                        VALUES ('$performed', {$_SESSION['user_id']})";
+                $conn->query($sql);
             header("Location: $redirect");
             exit;
         }
 
         // Default behavior if no redirect
         if($row['role'] === 'superadmin' || $row['role'] === 'admin') {
+          $sql2 = "INSERT INTO auth_logs (performed, user_id) 
+                    VALUES ('$performed', {$_SESSION['user_id']})";
+            $conn->query($sql2);
             header("Location: ../admin/admin-dashboard.php");
             exit;
         } else {
+            $sql3 = "INSERT INTO auth_logs (performed, user_id) 
+                    VALUES ('$performed', {$_SESSION['user_id']})";
+            $conn->query($sql3);
             header("Location: ../user/user-home.php");
             exit;
         }

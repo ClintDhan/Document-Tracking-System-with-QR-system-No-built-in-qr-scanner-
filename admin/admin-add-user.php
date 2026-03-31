@@ -78,7 +78,7 @@ $password = random_int(100000, 999999);
     
 <script>
 
-     document.addEventListener("click", function (e) {
+    document.addEventListener("click", function (e) {
     const dropdown = document.querySelector(".dropdown");
 
     if (dropdown.contains(e.target)) {

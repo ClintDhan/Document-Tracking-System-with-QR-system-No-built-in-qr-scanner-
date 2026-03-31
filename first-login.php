@@ -7,6 +7,7 @@ require_once 'db.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First login</title>
@@ -23,8 +24,8 @@ require_once 'db.php';
             <p style='font-weight: 900; color: #003B99; font-size: 30px; line-height: 0.8;'>Change password</p>
             <p style='font-size: 15px; color: #80BBDB; font-weight: bold;'>Please change the password provided by your admin</p>
         <form action="operation/change-pass.php" method="post" class='form-flx'>             
-        <input type="hidden" name="redirect" value="<?= $_GET['redirect'] ?? '' ?>">
-                <div class="input-position">
+            <input type="hidden" name="redirect" value="<?= htmlspecialchars($_GET['redirect'] ?? '') ?>">                
+            <div class="input-position">
                     <input type="password" name="newPass" placeholder="Enter new password" class='mt-3'>
                     <span 
     onclick="togglePassword(this)"

@@ -4,7 +4,7 @@ require_once '../db.php';
 
 $name = $_POST['name'];
 $password = $_POST['password'];
-
+$performed = 'Logged In';
 // get redirect (from QR)
 $redirect = '../user/user-home.php';
 if (!empty($_POST['redirect'])) {
@@ -35,15 +35,24 @@ if ($result->num_rows == 1) {
 
             // ALREADY LOGGED IN → use QR redirect if available
             if (!empty($_POST['redirect'])) {
+                $sql = "INSERT INTO auth_logs (performed, user_id) 
+                        VALUES ('$performed', {$_SESSION['user_id']})";
+                $conn->query($sql);
                 header("Location: $redirect");
                 exit;
             }
 
             // DEFAULT DASHBOARD
             if ($user['role'] == "superadmin" || $user['role'] == "admin") {
+               $sq2 = "INSERT INTO auth_logs (performed, user_id) 
+                                VALUES ('$performed', {$_SESSION['user_id']})";
+                        $conn->query($sq2);
                 header("Location: ../admin/admin-dashboard.php");
                 exit;
             } else {
+                $sql3 = "INSERT INTO auth_logs (performed, user_id) 
+                            VALUES ('$performed', {$_SESSION['user_id']})";
+                    $conn->query($sq3);
                 header("Location: ../user/user-home.php");
                 exit;
             }
