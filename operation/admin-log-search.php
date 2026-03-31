@@ -40,12 +40,16 @@ while ($row = $result->fetch_assoc()) {
         <tr class='tr-hover'>
             <td>".$row['id']."</td>
             <td>".$row['document_type']."</td>
-            <td><div style='border-radius: 4px;' class='".
-                ($row['action'] == 'Returned' ? 'status-returned' :
-                ($row['action'] == 'Reviewed' ? 'status-review' :
-                ($row['action'] == 'Released' ? 'status-released' :
-                'status-default')))
-            ."'>".$row['action']."</div></td>
+            <td>
+            <div class='document-action-container'>
+                <div style='border-radius: 4px;' class='".
+                    ($row['action'] == 'Returned' ? 'status-returned' :
+                    ($row['action'] == 'Reviewed' ? 'status-review' :
+                    ($row['action'] == 'Released' ? 'status-released' :
+                    'status-default')))
+                ."'>".$row['action']."</div>
+            </div>
+            </td>
             <td style='text-align: justify;'>".$row['changes']."</td>
             <td>".$row['performed_at']."</td>
             <td>".$row['performer']."</td>

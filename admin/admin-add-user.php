@@ -55,7 +55,7 @@ $password = random_int(100000, 999999);
                         <input type="text" class="admin-add-user-input" name="name">
                     </div>
 
-                    <div class="admin-add-user-flx">
+                    <div class="admin-add-user-flx mt-2">
                         <p>User's Password</p>
                         <input type="text" value="<?= $password ?>" name="password" class="admin-add-user-input" readonly>
                     </div>

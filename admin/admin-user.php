@@ -75,14 +75,18 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
                         <tr class="tr-hover">
                             <td><?= htmlspecialchars($users['id'])?></td>
                             <td><?= htmlspecialchars($users['name'])?></td>
-                            <td><?php 
+                            <td>
+                                <div class="user-status-container">
+                                <?php 
                                     if($users['is_active'] == 0) {
-                                        echo "Inactive";
+                                        echo "<div style='background-color:#EF4444; color: white; padding: 2px; border-radius: 4px;'>Inactive</div>";
                                     } 
                                     else {
-                                        echo "Active";
+                                        echo "<div style='background-color:#22C55E; color: white; padding: 2px; border-radius: 4px;'>Active</div>";
                                     }
-                            ?></td>
+                            ?>
+                            </div>
+                        </td>
                             <td><?= htmlspecialchars($users['created_at'])?></td>
                             <td><?= htmlspecialchars($users['role'])?></td>
                             <td>

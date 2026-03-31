@@ -61,7 +61,7 @@ $user = $result->fetch_assoc();
                         <input type="text" value="<?= $user['name'] ?>" class="admin-add-user-input" name="name">
                     </div>
 
-                    <div class="admin-add-user-flx">
+                    <div class="admin-add-user-flx mt-2">
                         <p>Status</p>
                         <select name="is_active">
                             <option value="1" <?= ($user['is_active'] == 1) ? 'selected' : '' ?>>Active</option>
@@ -69,7 +69,7 @@ $user = $result->fetch_assoc();
                         </select>
                     </div>
 
-                     <div class="admin-add-user-flx">
+                     <div class="admin-add-user-flx mt-2">
                         <p>Role</p>
                         <select name="role">
                             <option value="superadmin" <?= ($user['role'] == 'superadmin') ? 'selected' : '' ?>>Superadmin</option>

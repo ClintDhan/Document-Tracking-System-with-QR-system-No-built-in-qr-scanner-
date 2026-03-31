@@ -46,12 +46,17 @@ while ($row = $result->fetch_assoc()) {
             <td>".$row['id']."</td>
             <td>".$row['creator_name']."</td>
             <td>".$row['date_performed']."</td>
-            <td><div style='border-radius: 4px;' class='".
-                ($row['action'] == 'Changed user information' ? 'status-returned' :
-                ($row['action'] == 'Reset password' ? 'status-review' :
-                ($row['action'] == 'Created a new user' ? 'status-released' :
-                'status-default')))
-            ."'>".$row['action']."</div></td>
+            <td>
+            <div class='user-action-container'>
+                <div style='border-radius: 4px;' class='".
+                    ($row['action'] == 'Changed user information' ? 'status-returned' :
+                    ($row['action'] == 'Reset password' ? 'status-review' :
+                    ($row['action'] == 'Created a new user' ? 'status-released' :
+                    'status-default')))
+                ."'>".$row['action']."</div>
+            </div>
+            
+            </td>
             <td>".$row['note']."</td>
             <td>".$row['target_name']."</td>
         </tr>";
