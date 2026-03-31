@@ -696,8 +696,8 @@ tbody tr td {
 }
 
 .admin-docs-desc {
-    min-width: 140px;
-    max-width: 150px;
+    min-width: 220px;
+    max-width: 220px;
 }
 
 .admin-docs-sts {
@@ -744,6 +744,34 @@ tbody tr td {
     width: max-content;
     
 }
+
+.admin-doc-sub-contain {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sub-contain-btn-container {
+    display: flex;
+    gap: 5px;
+}
+
+.sub-contain-btn-container form select {
+    height: 25px;
+    border-radius: 8px;
+    color: white;
+    border: 1px solid #d1d5db;
+}
+
+.generate-select {
+    background-color: green;
+}
+
+.unused-select {
+    background-color: rgb(253, 93, 120);
+} 
+
+
+
 
 #result {
     max-width: 1010px;
@@ -929,7 +957,6 @@ tbody tr td {
     font-size: 2em;
     color: #5f5f5f;
     font-weight: 700;
-    margin-bottom: 10px;
 }
 
 .search-container div input , .search-container input{

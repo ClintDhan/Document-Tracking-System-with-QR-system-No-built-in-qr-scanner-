@@ -51,29 +51,40 @@ if (!isset($_SESSION['user_id'])) {
 
         <div class="admin-qr-container">
             <div class="search-container">
-            <p>QR Management</p>
+                <p>QR Management</p>
 
-            <div class="d-flex gap-2">
-                <form action="../operation/generate_qr_download.php" method="POST" target="_blank">
-                    <select name="qty" required style="height: 35px; border-radius: 8px; background-color: #D6ECFF;" onchange="generateQR(this)">
-                        <option value="" disabled selected hidden>GENERATE QR</option>
-                        <option value="5">5 QR</option>
-                        <option value="10">10 QR</option>
-                        <option value="20">20 QR</option>
-                    </select>
-                </form>
-                <form action="../operation/regenerate_unused_qr.php" method="POST" target="_blank">
-                    <select name="qty" required style="height: 35px; border-radius: 8px; background-color: #DFF7E4;"
-                        onchange="this.form.submit()">
-                        <option value="" disabled selected hidden>GENERATE UNUSED QR</option>
-                        <option value="5">5 QR</option>
-                        <option value="10">10 QR</option>
-                        <option value="20">20 QR</option>
-                    </select>
-                 </form>
-                <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
+                <div class="d-flex">
+                    <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
+                </div>
             </div>
-            </div>            <div id="result">
+
+            <div class="admin-doc-sub-contain">
+                <div>
+
+                </div>
+                <div class="sub-contain-btn-container">
+                    <form action="../operation/generate_qr_download.php" method="POST" target="_blank">
+                        <select name="qty" class="generate-select" required  onchange="generateQR(this)">
+                            <option value="" disabled selected hidden>GENERATE QR</option>
+                            <option value="5">5 QR</option>
+                            <option value="10">10 QR</option>
+                            <option value="20">20 QR</option>
+                        </select>
+                    </form>
+                    <form action="../operation/regenerate_unused_qr.php" method="POST" target="_blank">
+                        <select name="qty" class="unused-select" required
+                            onchange="this.form.submit()">
+                            <option value="" disabled selected hidden>DOWNLOAD UNUSED QR</option>
+                            <option value="5">5 QR</option>
+                            <option value="10">10 QR</option>
+                            <option value="20">20 QR</option>
+                        </select>
+                    </form>
+                </div>
+
+            </div>
+
+            <div id="result">
                 <?php require_once "../operation/admin-qr-search.php" ?>
             </div>
         </div>

@@ -16,7 +16,7 @@ $sql = $sql = "SELECT document.id, document.type,
         document.updated_at, document.released_to,
         document.returned_reason, document.pages,
         user.name AS creator_name,
-        qr_code.control_num
+        qr_code.control_num AS control_num
         FROM document
         INNER JOIN user ON document.created_by = user.id
         LEFT JOIN qr_code ON document.qr_id = qr_code.id";
@@ -25,7 +25,7 @@ $sql = $sql = "SELECT document.id, document.type,
 if ($search != "") {
     $sql .= " WHERE document.type LIKE '%$search%' OR document.description LIKE '%$search%' OR document.status LIKE '%$search%' OR 
                 document.department LIKE '%$search%' OR document.created_at LIKE '%$search%' OR document.updated_at LIKE '%$search%'
-                OR document.released_to LIKE '%$search%' OR document.returned_reason LIKE '%$search%' OR user.name LIKE '%$search%'";
+                OR document.released_to LIKE '%$search%' OR document.returned_reason LIKE '%$search%' OR user.name LIKE '%$search%' OR control_num LIKE '%$search%'";
 }
 
 $sql .= " ORDER BY document.id DESC , document.created_at DESC";
@@ -42,9 +42,7 @@ echo "<table class='admin-docs-table'>
                 <th class='admin-docs-no'>Copies</th>
                 <th class='admin-docs-created'>Created by</th>
                 <th class='admin-docs-created-at'>Created at</th>
-                <th class='admin-docs-updt'>Last Updated</th>
-                <th class='admin-docs-released'>Released To</th>
-                <th class='admin-docs-returned'>Returned Reason</th>
+                <th class='admin-docs-created-at'>Control</th>
                 <th class='admin-docs-action'>Action</th>
             </tr>
          </thead>
@@ -71,9 +69,7 @@ while ($row = $result->fetch_assoc()) {
             <td>".$row['pages']."</td>
             <td>".$row['creator_name']."</td>
             <td>".$row['created_at']."</td>
-            <td>".$row['updated_at']."</td>
-            <td>".$row['released_to']."</td>
-            <td>".$row['returned_reason']."</td>
+            <td>".$row['control_num']."</td>
             <td>
             <a class='admin-doc-btn' href='../admin/admin-doc-edit.php?doc=".$row['id']."'>
             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
@@ -87,14 +83,6 @@ while ($row = $result->fetch_assoc()) {
             </svg>
             </a>
 
-            <a class='admin-doc-btn'
-            href='../operation/document-download-qr.php?control=".$row['control_num']."'
-            target='_blank' style='background: green;'>
-             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-download' viewBox='0 0 16 16'>
-                <path d='M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5'/>
-                <path d='M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z'/>
-            </svg>
-            </a>
             </td>
 
 

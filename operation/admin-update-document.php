@@ -13,6 +13,7 @@ if(isset($_POST['submit'])) {
     $released_to = $_POST['released_to'] ?? null;
     $document_id = $_POST['doc_id'];
     $returned_reason = $_POST['returned_reason'] ?? null;
+    $copies = $_POST['pages'];
 
     $changes = [];
 
@@ -34,6 +35,9 @@ if(isset($_POST['submit'])) {
     if($row['department'] != $department) {
         $changes[] = "Department: {$row['department']} -> {$department}<br>";
     }
+    if($row['pages'] != $copies) {
+        $changes[] = "Copies: {$row['pages']} -> {$copies}<br>";
+    }
 
     $changesString = !empty($changes) ? implode("", $changes) : null;
 
@@ -51,6 +55,7 @@ if(isset($_POST['submit'])) {
     $sql = "UPDATE document 
             SET type = '$type',
                 description = '$description',
+                pages = '$copies',
                 status = '$status',
                 released_to = " . ($released_to ? "'$released_to'" : "NULL") . ",
                 returned_reason = " . ($returned_reason ? "'$returned_reason'" : "NULL") . "

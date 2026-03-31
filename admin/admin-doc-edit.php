@@ -66,6 +66,11 @@ $row = $result->fetch_assoc();
                     </div>
 
                     <div class="mt-2">
+                    <label for="">Number of Copies</label> <br>
+                    <input type="number" name='pages' value="<?= htmlspecialchars($row['pages']) ?>" class="admin-doc-input">
+                    </div>
+
+                    <div class="mt-2">
                     <label for="">Status</label> <br>
                     <select name="status" id='statusSelect' class="admin-doc-input">
                         <option value="Received" <?= ($row['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>

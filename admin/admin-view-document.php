@@ -11,20 +11,46 @@ if (!isset($_SESSION['user_id'])) {
 if (isset($_GET['doc'])) {
     $value = $_GET['doc'];
     $sql = "SELECT * FROM document WHERE id = '$value'";
-} 
+    $result = $conn->query($sql);
+    $row1 = $result->fetch_assoc();
+
+    if ($row1) {
+        $qr_id = $row1['qr_id'];
+
+        $qrQuery = "SELECT * FROM qr_code WHERE id = '$qr_id'";
+        $result1 = $conn->query($qrQuery);
+        $qr = $result1->fetch_assoc();
+
+        $control_num = $qr ? $qr['control_num'] : '';
+    }
+}
 elseif (isset($_GET['qr_id'])) {
     $value = $_GET['qr_id'];
     $sql = "SELECT * FROM document WHERE qr_id = '$value'";
-} 
+    $result = $conn->query($sql);
+    $row1 = $result->fetch_assoc();
+
+    if ($row1) {
+        $qr_id = $row1['qr_id'];
+
+        $qrQuery = "SELECT * FROM qr_code WHERE id = '$qr_id'";
+        $result1 = $conn->query($qrQuery);
+        $qr = $result1->fetch_assoc();
+
+        $control_num = $qr ? $qr['control_num'] : '';
+    }
+}
 elseif (isset($_GET['control'])) {
     $control = $_GET['control'] ?? null;
-    // JOIN qr_code to document
+
     $qrSql = "SELECT * FROM qr_code WHERE control_num = '$control'";
     $qrSqlResult = $conn->query($qrSql);
     $row1 = $qrSqlResult->fetch_assoc();
-    $qr_id = $row1['id'];
-    $sql = "SELECT * FROM document WHERE qr_id = '$qr_id'";
-} 
+
+     if ($row1) {
+        $control_num = $row1['control_num'];
+    }
+}
 else {
     die("No document specified.");
 }
@@ -87,10 +113,25 @@ $row = $result->fetch_assoc();
                     <label for="">Department</label> <br>
                     <input type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>" class="admin-doc-input" readonly>
                     </div>
+
+                    <div class="mt-2">
+                    <label for="">Number of Copies</label> <br>
+                    <input type="number" name='pages' value="<?= htmlspecialchars($row['pages']) ?>" class="admin-doc-input" readonly>
+                    </div>
                 
                     <div class="mt-2">
                     <label for="">Status</label> <br>
                     <input type="text" id="statusSelect" name="status" value="<?= htmlspecialchars($row['status']) ?>" class="admin-doc-input" readonly>
+                    </div>
+
+                    <div class="mt-2">
+                    <label for="">Last Updated</label> <br>
+                    <input type="text" name="updated_at" value="<?= htmlspecialchars($row['updated_at']) ?>" class="admin-doc-input" readonly>
+                    </div>
+
+                    <div class="mt-2">
+                    <label for="">Control Number</label> <br>
+                    <input type="text" id="" name="control_num" value="<?= htmlspecialchars($control_num) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
