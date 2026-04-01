@@ -34,15 +34,16 @@ $document = mysqli_fetch_assoc($result);
             <div class='user-nav-bar'>
                 <div class='user-name'>
                     <p>Hi <span class="span-name"><?= $_SESSION['name']; ?>!</p>
-                    <p><?= date('m/d/Y') ?></p>
+                    <p style="color: gray;"><?= date('m/d/Y') ?></p>
                 </div>
                 <form action="../operation/logout.php" method='POST'>
                     <button class='log-out'>LOGOUT</button>
                 </form>
             </div>
 
-            <button class='btn-home d-flex justify-content-center' onclick="history.back()">&larr; <span class="span-home">Home</span></button>
-
+<button class="btn-home" onclick="history.back()">
+  ❮ BACK
+</button>
             <div class='option-form'>
                 <p class='option-receive' style="text-align: center;">View Document</p>
 
@@ -69,7 +70,12 @@ $document = mysqli_fetch_assoc($result);
                 <?php if($document['status'] == 'Released'): ?>
                     <div class="mt-2">
                         <label for="">Status</label> <br>
-                        <input type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
+                        <input
+                        style="<?= ($document['status'] ?? '') == 'Returned' ? 'background-color: #f8d7da; color: #555;' :
+                                (($document['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
+                                (($document['status'] ?? '') == 'Received' ? 'background-color: #d4edda; color: #555;' :
+                                (($document['status'] ?? '') == 'Reviewed' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"
+                        type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
                     </div>
                     <div class="mt-2">
                         <label for="">Released To</label> <br>
@@ -78,7 +84,12 @@ $document = mysqli_fetch_assoc($result);
                 <?php elseif($document['status'] == 'Returned'): ?>
                      <div class="mt-2">
                         <label for="">Status</label> <br>
-                        <input type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
+                        <input
+                        style="<?= ($document['status'] ?? '') == 'Returned' ? 'background-color: #f8d7da; color: #555;' :
+                                (($document['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
+                                (($document['status'] ?? '') == 'Received' ? 'background-color: #d4edda; color: #555;' :
+                                (($document['status'] ?? '') == 'Reviewed' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"
+                        type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
                     </div>
                     <div class="mt-2">
                         <label for="">Returned Reason</label> <br>
@@ -87,7 +98,12 @@ $document = mysqli_fetch_assoc($result);
                 <?php else: ?> 
                     <div class="mt-2">
                         <label for="">Status</label> <br>
-                        <input type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
+                        <input
+                        style="<?= ($document['status'] ?? '') == 'Returned' ? 'background-color: #f8d7da; color: #555;' :
+                                (($document['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
+                                (($document['status'] ?? '') == 'Received' ? 'background-color: #d4edda; color: #555;' :
+                                (($document['status'] ?? '') == 'Reviewed' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"
+                        type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
                     </div>
                 <?php endif; ?>
                 <div class="mt-2">

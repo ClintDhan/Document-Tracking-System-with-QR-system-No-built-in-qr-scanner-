@@ -33,6 +33,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="dropdown">
                     <p class="logs-text" style="background-color: #aaaaaa; color: white;">LOGS ▾</p>
                     <div class="dropdown-content">
+                        <a href="admin-auth-log.php">AUTHENTICATION LOGS</a>
                         <a href="admin-logs.php">DOCUMENT LOGS</a>
                         <a href="admin-user-log.php">USER LOGS</a>
                     </div>

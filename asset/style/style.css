@@ -131,7 +131,7 @@ body {
     cursor: pointer;
 }
 .form-flx input::placeholder {
-    color: #B2C1E5;
+    color: #333;
     font-weight: 300;
 }
 
@@ -152,16 +152,13 @@ body {
 }
 
 .btn-home {
-     height: 35px;
-     width: 100px;
-     background-color: #A0C4FF;
-     color: white;
-     padding: 10px 10px;
-     font-size: 12px;
-     margin: 10px 0;
-     border-radius: 12px;
-     border: none;
-     cursor: pointer;
+    width: auto;
+    height: 35px;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    color: gray;
+    margin: 5px 0 5px 0;
 }
 
 .span-home {
@@ -355,21 +352,20 @@ body {
 .user-received {
     grid-column-start: 1;
     grid-column-end: 3;
-    background-color: #86E8B8;
+    background-color: #d9f2e6;
 }
 
 .user-released {
-    background-color: #9CCBFF;
+    background-color: #dbe9f9  ;
 }
 
 .user-returned {
-    background-color: #F25757;
+    background-color: #f8d7da;
 }
 
 .user-dash-count {
     font-weight: 900;
     font-size: 20px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 
@@ -402,7 +398,7 @@ body {
     background-color: transparent;
     border: 1px solid #E6E6E6;
     padding: 5px;
-    color: #B2C1E5;
+    color: #333;
 }
 
 
@@ -412,7 +408,7 @@ body {
 }
 
 .receive-input,.update-input::placeholder {
-    color: #B2C1E5;
+    color: #333;
     font-weight: 300;
 }
 
@@ -421,11 +417,11 @@ body {
     background-color: transparent;
     border: 1px solid #E6E6E6;
     padding: 5px;
-    color: #B2C1E5;
+    color: #333;
 }
 
 .receive-textarea,.update-textare::placeholder {
-    color: #B2C1E5;
+    color: #333;
     padding: 5px 0 0 2px;
 }
 
@@ -445,7 +441,6 @@ body {
 
 .option-receive {
     font-weight: 500;
-    color: #2FB823;
     font-size: 14px;
 }
 
@@ -688,7 +683,7 @@ tbody tr td {
 
 
 .admin-docs-container , .admin-logs-container , 
-.admin-qr-container , .admin-user-container {
+.admin-qr-container , .admin-user-container  {
     width: 1030px;
     border-radius: 8px;
     height: auto;
@@ -752,10 +747,15 @@ tbody tr td {
 
 
 
-.admin-docs-table {
+.admin-docs-table , admin-auth-table {
     width: max-content;
     
 }
+
+.admin-auth-table {
+    width: 100%;
+}
+
 
 .admin-doc-sub-contain {
     display: flex;

@@ -85,6 +85,7 @@ $row = $result->fetch_assoc();
                         <div class="dropdown">
                             <p class="logs-text">LOGS ▾</p>
                             <div class="dropdown-content">
+                                <a href="admin-auth-log.php">AUTHENTICATION LOGS</a>
                                 <a href="admin-logs.php">DOCUMENT LOGS</a>
                                 <a href="admin-user-log.php">USER LOGS</a>
                             </div>
@@ -128,17 +129,14 @@ $row = $result->fetch_assoc();
                 
                     <div class="mt-2">
                     <label for="">Status</label> <br>
-                    <input type="text" id="statusSelect" name="status" value="<?= htmlspecialchars($row['status']) ?>" class="admin-doc-input" readonly>
-                    </div>
-
-                    <div class="mt-2">
-                    <label for="">Last Updated</label> <br>
-                    <input type="text" name="updated_at" value="<?= htmlspecialchars($row['updated_at']) ?>" class="admin-doc-input" readonly>
-                    </div>
-
-                    <div class="mt-2">
-                    <label for="">Control Number</label> <br>
-                    <input type="text" id="" name="control_num" value="<?= htmlspecialchars($control_num) ?>" class="admin-doc-input" readonly>
+                    <input 
+                    style="<?= ($row['status'] ?? '') == 'Returned' ? 'background-color: #f8d7da; color: #555;' :
+                                (($row['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
+                                (($row['status'] ?? '') == 'Received' ? 'background-color: #d4edda; color: #555;' :
+                                (($row['status'] ?? '') == 'Reviewed' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"                   
+                                            
+                     
+                     type="text" id="statusSelect" name="status" value="<?= htmlspecialchars($row['status']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
@@ -154,13 +152,21 @@ $row = $result->fetch_assoc();
 
                     <div class="mt-2">
                     <label for="" id="returnedInputLabel">Return Reason</label>
-                        <input type="text"
-                        id="returnReason"
-                        class="admin-doc-input"
-                        name="returned_reason"
-                        placeholder="Return Reason"
-                        value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
-                        style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;" readonly>                    
+                        <textarea id="returnReason" readonly name="returned_reason" name='description' rows="4" id="" class="admin-doc-area"
+                         value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
+                        style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;"
+                        ><?= $row['returned_reason'] ?></textarea>            
+
+                    </div>
+
+                    <div class="mt-2">
+                    <label for="">Last Updated</label> <br>
+                    <input type="text" name="updated_at" value="<?= htmlspecialchars($row['updated_at']) ?>" class="admin-doc-input" readonly>
+                    </div>
+
+                    <div class="mt-2">
+                    <label for="">Control Number</label> <br>
+                    <input type="text" id="" name="control_num" value="<?= htmlspecialchars($control_num) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <?php if (

@@ -44,15 +44,15 @@ if ($result->num_rows == 1) {
 
             // DEFAULT DASHBOARD
             if ($user['role'] == "superadmin" || $user['role'] == "admin") {
-               $sq2 = "INSERT INTO auth_logs (performed, user_id) 
+               $sql2 = "INSERT INTO auth_logs (performed, user_id) 
                                 VALUES ('$performed', {$_SESSION['user_id']})";
-                        $conn->query($sq2);
+                        $conn->query($sql2);
                 header("Location: ../admin/admin-dashboard.php");
                 exit;
             } else {
                 $sql3 = "INSERT INTO auth_logs (performed, user_id) 
                             VALUES ('$performed', {$_SESSION['user_id']})";
-                    $conn->query($sq3);
+                    $conn->query($sql3);
                 header("Location: ../user/user-home.php");
                 exit;
             }

@@ -6,26 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ../login.php");
     exit();
 }
-// $sql ="
-//     SELECT 
-//         document.id,
-//         document.type,
-//         document.description,
-//         document.status,
-//         document.department,
-//         document.created_at,
-//         document.updated_at,
-//         document.released_to,
-//         document.returned_reason,
-//         user.name AS creator_name
-//     FROM document
-//     INNER JOIN user 
-//         ON document.created_by = user.id
-//     ORDER BY document.id DESC , document.created_at DESC
-// ";
 
-// $result = $conn->query($sql);
-// $documents = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Documents</title>
+    <title>Authentication Log</title>
     <link rel="stylesheet" href="../asset/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
@@ -47,10 +28,10 @@ if (!isset($_SESSION['user_id'])) {
 
             <div class="nav-anchor">
                 <a href="admin-dashboard.php">DASHBOARD</a>
-                <a href="admin-document.php" class="active">DOCUMENTS</a>
+                <a href="admin-document.php">DOCUMENTS</a>
 
                 <div class="dropdown">
-                    <p class="logs-text">LOGS ▾</p>
+                    <p class="logs-text" style="background-color: #aaaaaa; color: white;">LOGS ▾</p>
                     <div class="dropdown-content">
                         <a href="admin-auth-log.php">AUTHENTICATION LOGS</a>
                         <a href="admin-logs.php">DOCUMENT LOGS</a>
@@ -71,11 +52,11 @@ if (!isset($_SESSION['user_id'])) {
 
         <div class="admin-docs-container">
             <div class="search-container">
-            <p>Documents</p>
+            <p>Authentication Logs</p>
             <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
             </div>
             <div id="result">
-                <?php require_once "../operation/admin-document-search.php" ?>
+                <?php require_once "../operation/admin-auth-log.php" ?>
             </div>
         </div>
 
@@ -94,7 +75,7 @@ if (!isset($_SESSION['user_id'])) {
     
         function loadData(query) {
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "../operation/admin-document-search.php" , true);
+            xhr.open("POST", "../operation/admin-auth-log.php" , true);
 
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {

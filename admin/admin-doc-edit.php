@@ -37,6 +37,7 @@ $row = $result->fetch_assoc();
                         <div class="dropdown">
                             <p class="logs-text">LOGS ▾</p>
                             <div class="dropdown-content">
+                                <a href="admin-auth-log.php">AUTHENTICATION LOGS</a>
                                 <a href="admin-logs.php">DOCUMENT LOGS</a>
                                 <a href="admin-user-log.php">USER LOGS</a>
                             </div>
@@ -100,13 +101,10 @@ $row = $result->fetch_assoc();
 
                     <div class="mt-2">
                     <label for="" id="returnedInputLabel">Return Reason</label>
-                        <input type="text"
-                        id="returnReason"
-                        class="admin-doc-input"
-                        name="returned_reason"
-                        placeholder="Return Reason"
-                        value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
-                        style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;">                    
+                        <textarea id="returnReason" name="returned_reason" name='description' rows="4" id="" class="admin-doc-area"
+                         value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
+                        style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;"
+                        ><?= $row['returned_reason'] ?></textarea>                     
                     </div>
 
                     

@@ -83,7 +83,7 @@ $returnedDocs = $row3['returned_docs'];
             <div class='user-nav-bar'>
                 <div class='user-name'>
                     <p>Hi <span class="span-name"><?= $_SESSION['name']; ?>!</p>
-                    <p><?= date('m/d/Y') ?></p>
+                    <p style="color: gray;"><?= date('m/d/Y') ?></p>
                 </div>
                 <form action="../operation/logout.php" method='POST'>
                     <button class='log-out'>LOGOUT</button>

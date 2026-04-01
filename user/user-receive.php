@@ -42,15 +42,17 @@ if (!$qr) {
             <div class='user-nav-bar'>
                 <div class='user-name'>
                     <p>Hi <span class="span-name"><?= $_SESSION['name']; ?>!</p>
-                    <p><?= date('m/d/Y') ?></p>
+                    <p style="color: gray;"><?= date('m/d/Y') ?></p>
                 </div>
                 <form action="../operation/logout.php" method='POST'>
                     <button class='log-out'>LOGOUT</button>
                 </form>
             </div>
 
-            <button class='btn-home d-flex justify-content-center' onclick="history.back()">&larr; <span class="span-home">Home</span></button>
-
+            <!-- <button class='btn-home d-flex justify-content-center' onclick="history.back()">&larr; <span class="span-home">Home</span></button> -->
+            <button class="btn-home" onclick="history.back()">
+  ❮ BACK
+</button>
             <div class='option-form'>
                     <p class='option-receive' style="text-align: center;">Receive Document</p>
                     <p class='option-text' style="text-align: center;">Please indicate document information</p>
