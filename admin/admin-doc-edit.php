@@ -107,6 +107,11 @@ $row = $result->fetch_assoc();
                         ><?= $row['returned_reason'] ?></textarea>                     
                     </div>
 
+                    <div class="mt-2">
+                    <label for="">Remarks</label> <br>
+                    <input type="text" name='remark' placeholder="Remarks (Optional)"class="admin-doc-input">
+                    </div>
+
                     
                     <button class='btn-submit admin-doc-submit' type='submit' name='submit'>UPDATE</button>
                     </div>

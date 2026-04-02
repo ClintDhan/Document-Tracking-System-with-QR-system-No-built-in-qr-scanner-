@@ -14,6 +14,8 @@ if(isset($_POST['submit'])) {
     $document_id = $_POST['doc_id'];
     $returned_reason = $_POST['returned_reason'] ?? null;
     $copies = $_POST['pages'];
+    $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
+
 
     $changes = [];
 
@@ -63,8 +65,8 @@ if(isset($_POST['submit'])) {
     $conn->query($sql);
 
     
-    $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by) 
-               VALUES('$document_id', '$status', '$changesString', '$updatedby')";
+    $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by, remarks) 
+               VALUES('$document_id', '$status', '$changesString', '$updatedby', '$remark')";
     $conn->query($logSql);
 
 

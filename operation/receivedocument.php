@@ -12,12 +12,14 @@ if(isset($_POST['submit'])) {
     $pages = $_POST['pages'];
     $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
 
-    // Check if a document with the same title exists
-    $sql = "SELECT * FROM document WHERE type = '$type'";
+    // Check if a document with the same desc exists
+    $sql = "SELECT * FROM document WHERE type = '$description'";
     $result = $conn->query($sql);
 
     if($result->num_rows > 0) {
-        echo 'Document already exists';
+        $_SESSION['error'] = "Document description already exists.";
+        header("Location: ../user/user-home.php?control=" . urlencode($control));
+        exit();
     } else {
         // Insert document
         $sql1 = "INSERT INTO document (qr_id, type, description, department, created_by, pages) 
@@ -41,7 +43,9 @@ if(isset($_POST['submit'])) {
             header("Location: ../user/user-home.php?control=" . urlencode($control));
             exit();
         } else {
-            echo 'Something went wrong.';
+            $_SESSION['error'] = "Something went wrong";
+            header("Location: ../user/user-home.php?control=" . urlencode($control));
+            exit();
         }
     }
 }
