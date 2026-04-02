@@ -11,7 +11,16 @@ $qr_id = $_GET['qr'] ?? null;
 $document_id = $_GET['document'] ?? null;
 $control = $_GET['control'] ?? null;
 
-$sql = "SELECT * FROM document WHERE qr_id = '$qr_id'";
+$sql = "
+SELECT d.*, dl.remarks
+FROM document d
+LEFT JOIN document_log dl 
+    ON d.id = dl.document_id
+WHERE d.qr_id = '$qr_id'
+ORDER BY dl.performed_at DESC
+LIMIT 1
+";
+
 $result = $conn->query($sql);
 $document = mysqli_fetch_assoc($result);
 
@@ -118,7 +127,12 @@ $document = mysqli_fetch_assoc($result);
                      <label for="">Last updated</label> <br>
                     <input type="text" class="update-input" name="status" value="<?= $document['updated_at'] ?>" disabled>
                 </div>
-
+                <?php if($document['remarks'] != NULL): ?>
+                <div class="mt-2">
+                     <label for="">Latest Remark</label> <br>
+                    <input type="text" class="update-input" name="remark" value="<?= $document['remarks'] ?>" disabled>
+                </div>
+                <?php endif;?>
             </div>
 
         </div>

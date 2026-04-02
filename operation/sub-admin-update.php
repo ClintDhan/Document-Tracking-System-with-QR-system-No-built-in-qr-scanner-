@@ -7,6 +7,7 @@ if(isset($_POST['submit'])) {
     $document_id = $_POST['id'] ?? null;
     $updatedby = $_SESSION['user_id'];
     $status = "Reviewed";
+    $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
     $changes = [];
 
     if (!$document_id) {
@@ -32,8 +33,8 @@ if(isset($_POST['submit'])) {
     $result2 = $conn->query($sql2);
 
     if($result2) {
-        $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by) 
-                   VALUES('$document_id', '$status', '$changesString', '$updatedby')";
+        $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by, remarks) 
+                   VALUES('$document_id', '$status', '$changesString', '$updatedby' , '$remark')";
         $conn->query($logSql);
 
         header("Location: ../admin/admin-document.php");

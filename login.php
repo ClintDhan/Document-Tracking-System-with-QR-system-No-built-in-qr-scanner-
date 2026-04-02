@@ -44,14 +44,22 @@ if (isset($_SESSION['user_id']) && isset($_GET['redirect'])) {
                 <div class="input-position mt-3">
                     <input type="password" name="password" placeholder="Password">
                      <span 
-    onclick="togglePassword(this)"
-  >
-    <i class="bi bi-eye-slash toggle-icon"></i>
+                        onclick="togglePassword(this)"
+                    >
+                    <i class="bi bi-eye-slash toggle-icon"></i>
                 </div>
                 <button type="submit">LOGIN</button>
         </form>
 
         </div>
+    </div>
+    <div class="copyright">
+        <p>
+        © 2026 
+        <a href="https://www.facebook.com/GodSonClintoy/" target="_blank">CLNTY</a> 
+        - Designed by 
+        <a href="https://example.com">April Jhea Logroño</a>
+        </p>    
     </div>
 </div>
 

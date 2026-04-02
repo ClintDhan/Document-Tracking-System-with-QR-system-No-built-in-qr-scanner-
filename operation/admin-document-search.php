@@ -51,25 +51,24 @@ echo "<table class='admin-docs-table'>
 while ($row = $result->fetch_assoc()) {
     echo "
         <tr class='tr-hover'>
-            <td>".$row['id']."</td>
-            <td>".$row['type']."</td>
-            <td>".$row['description']."</td>
-            <td>
-            <div class='document-status-container'>
-                <div style='border-radius: 4px;' class='".
-                    ($row['status'] == 'Returned' ? 'status-returned' :
-                    ($row['status'] == 'Reviewed' ? 'status-review' :
-                    ($row['status'] == 'Released' ? 'status-released' :
-                    'status-default')))
-                ."'>".$row['status']."</div>
-            </div>
-            
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['id']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['type']."</td>
+            <td class='truncate admin-docs-type' onclick=\"this.classList.toggle('expanded')\">".$row['description']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">
+                <div class='document-status-container'>
+                    <div style='border-radius: 4px;' class='".
+                        ($row['status'] == 'Returned' ? 'status-returned' :
+                        ($row['status'] == 'Reviewed' ? 'status-review' :
+                        ($row['status'] == 'Released' ? 'status-released' :
+                        'status-default')))
+                    ."'>".$row['status']."</div>
+                </div>
             </td>
-            <td>".$row['department']."</td>
-            <td>".$row['pages']."</td>
-            <td>".$row['creator_name']."</td>
-            <td>".$row['created_at']."</td>
-            <td>".$row['control_num']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['department']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['pages']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['creator_name']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['created_at']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['control_num']."</td>
             <td>
             <a class='admin-doc-btn' href='../admin/admin-doc-edit.php?doc=".$row['id']."'>
             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>

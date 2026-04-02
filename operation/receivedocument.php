@@ -10,6 +10,7 @@ if(isset($_POST['submit'])) {
     $department = $_POST['department'];
     $createdBy = $_SESSION['user_id'];
     $pages = $_POST['pages'];
+    $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
 
     // Check if a document with the same title exists
     $sql = "SELECT * FROM document WHERE type = '$type'";
@@ -32,8 +33,8 @@ if(isset($_POST['submit'])) {
 
         if($result1 && $qrUpdate) {
             
-            $sqlLog = "INSERT INTO document_log (document_id, action, performed_at, performed_by)
-            VALUES ($document_id, 'Received', NOW(), $createdBy)";
+            $sqlLog = "INSERT INTO document_log (document_id, action, performed_at, performed_by, remarks)
+            VALUES ($document_id, 'Received', NOW(), $createdBy, '$remark')";
             $conn->query($sqlLog);
 
             $_SESSION['success'] = "Document successfully received.";

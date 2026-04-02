@@ -28,8 +28,8 @@ body {
 }
 
 .logo-container {
-    margin-bottom: 10px;
-    /* width: 410px; */
+    margin-bottom: 18px;
+    margin-right: 50px;
 }
 
 .logo-form {
@@ -56,6 +56,7 @@ body {
     margin: 0;
     font-size: 0.8em;
     color: #5f5f5f;
+    text-align: center;
 }
 
 
@@ -620,7 +621,7 @@ body {
     font-weight: 500;
     border: 1px solid #d1d5db;
     background-color: transparent;
-    width: 40px;
+    width: 30px;
     height: 30px;
     border-radius: 8px;
 }
@@ -633,6 +634,31 @@ body {
     width: 100%;
     margin-top: 10px;
 }
+
+table {
+     table-layout: fixed;
+}
+
+th, td {
+  word-wrap: break-word ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+td.truncate {
+    max-width: 200px;          /* adjust width */
+    white-space: nowrap;        /* keep single line */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+td.truncate.expanded {
+    white-space: normal;        /* allow wrapping on click */
+    overflow: visible;
+}
+
 thead tr th {
     text-align: center;
     padding: 5px;
@@ -692,65 +718,13 @@ tbody tr td {
     border: 1px solid #d1d5db;
 }
 
-.admin-docs-no {
-    min-width: 60px;
-    max-width: 50px;
-}
-
-.admin-docs-type {
-    min-width: 90px;
-    max-width: 150px;
-}
-
-.admin-docs-desc {
-    min-width: 220px;
-    max-width: 220px;
-}
-
-.admin-docs-sts {
-    min-width: 90px;
-    max-width: 150px;
-}
-
-.admin-docs-dep {
-    min-width: 100px;
-    max-width: 150px;
-}
-
-.admin-docs-created {
-    min-width: 100px;
-    max-width: 100px;
-}
-
-.admin-docs-created-at {
-    min-width: 80px;
-}
-
-.admin-docs-updt {
-    min-width: 80px;
-}
-
-.admin-docs-released {
-    min-width: 100px;
-    max-width: 100px;
-}
-
-.admin-docs-returned {
-    min-width: 120px;
-    max-width: 150px;
-}
-
-.admin-docs-action {
-    min-width: 80px;
-    max-width: 80px;
-}
 
 
 
-.admin-docs-table , admin-auth-table {
+/* .admin-docs-table , admin-auth-table {
     width: max-content;
     
-}
+} */
 
 .admin-auth-table {
     width: 100%;
@@ -908,14 +882,6 @@ tbody tr td {
 }
 
 /* LOG SEARCH */
-
-.admin-logs-table thead tr th {
-    width: 20%;
-}
-
-.admin-logs-table {
-    width: 100%;
-}
 
 /* qr search */
 
@@ -1124,6 +1090,10 @@ tbody tr td {
   overflow-x: auto;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
 .user-table {
   width: max-content;
 }
@@ -1174,4 +1144,16 @@ tbody tr td {
 
 .dropdown-content.show {
     display: block;
+}
+
+.copyright {
+    font-size: 14px;
+    color: #a2a3a5;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.copyright a {
+    text-decoration: none;
+    color: #424242;
 }

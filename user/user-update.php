@@ -8,13 +8,25 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+
 $qr_id = $_GET['qr'] ?? null;
 $document_id = $_GET['document'] ?? null;
 $control_num = $_GET['control'] ?? null;
 
-$sql = "SELECT * FROM document WHERE qr_id = '$qr_id'";
+$sql = "
+SELECT d.*, dl.remarks
+FROM document d
+LEFT JOIN document_log dl 
+    ON d.id = dl.document_id
+WHERE d.qr_id = '$qr_id'
+ORDER BY dl.performed_at DESC
+LIMIT 1
+";
+
 $result = $conn->query($sql);
 $document = mysqli_fetch_assoc($result);
+
+
 
 ?>
 
@@ -103,7 +115,11 @@ $document = mysqli_fetch_assoc($result);
                         value="<?= htmlspecialchars($document['returned_reason'] ?? '') ?>"
                         style="<?= ($document['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;">
                     </div>
-                    
+
+                    <div class="mt-2">
+                        <label for="">Remarks</label> <br>
+                        <input type="text" placeholder='Remarks (Optional)' class='update-input' name='remark'>
+                    </div>
 
                     <button class='btn-submit' type='submit' name='submit'>UPDATE</button>
                 </form>

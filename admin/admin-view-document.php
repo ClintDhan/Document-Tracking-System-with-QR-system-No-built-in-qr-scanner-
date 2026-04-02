@@ -10,7 +10,13 @@ if (!isset($_SESSION['user_id'])) {
 
 if (isset($_GET['doc'])) {
     $value = $_GET['doc'];
-    $sql = "SELECT * FROM document WHERE id = '$value'";
+    $sql = "SELECT d.*, dl.remarks
+            FROM document d
+            LEFT JOIN document_log dl 
+                ON d.id = dl.document_id
+            WHERE d.id = '$value'
+            ORDER BY dl.performed_at DESC
+            LIMIT 1";
     $result = $conn->query($sql);
     $row1 = $result->fetch_assoc();
 
@@ -26,7 +32,13 @@ if (isset($_GET['doc'])) {
 }
 elseif (isset($_GET['qr_id'])) {
     $value = $_GET['qr_id'];
-    $sql = "SELECT * FROM document WHERE qr_id = '$value'";
+    $sql = "SELECT d.*, dl.remarks
+            FROM document d
+            LEFT JOIN document_log dl 
+                ON d.id = dl.document_id
+            WHERE d.id = '$value'
+            ORDER BY dl.performed_at DESC
+            LIMIT 1";
     $result = $conn->query($sql);
     $row1 = $result->fetch_assoc();
 
@@ -41,19 +53,33 @@ elseif (isset($_GET['qr_id'])) {
     }
 }
 elseif (isset($_GET['control'])) {
+
     $control = $_GET['control'] ?? null;
 
-    $qrSql = "SELECT * FROM qr_code WHERE control_num = '$control'";
-    $qrSqlResult = $conn->query($qrSql);
+    // QR QUERY (para sa $row1)
+    $sql = "SELECT * FROM qr_code WHERE control_num = '$control'";
+    $qrSqlResult = $conn->query($sql);
     $row1 = $qrSqlResult->fetch_assoc();
 
-     if ($row1) {
+    if ($row1) {
         $control_num = $row1['control_num'];
     }
-}
-else {
+
+    // JOIN QUERY (para sa $row)
+    $sql = "
+        SELECT qc.*, dl.remarks
+        FROM qr_code qc
+        LEFT JOIN document d ON qc.id = d.qr_id
+        LEFT JOIN document_log dl ON d.id = dl.document_id
+        WHERE qc.control_num = '$control'
+        ORDER BY dl.performed_at DESC
+        LIMIT 1
+    ";
+
+} else {
     die("No document specified.");
 }
+
 
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
@@ -169,11 +195,24 @@ $row = $result->fetch_assoc();
                     <input type="text" id="" name="control_num" value="<?= htmlspecialchars($control_num) ?>" class="admin-doc-input" readonly>
                     </div>
 
+                    <?php if(!empty($row['remarks'])): ?>
+                    <div class="mt-2">
+                        <label for="">Latest Remark</label> <br>
+                        <input type="text" id="" value="<?= htmlspecialchars($row['remarks']) ?>" class="admin-doc-input" readonly>
+                    </div>
+                    <?php endif; ?>
+
                     <?php if (
                             ($_SESSION['role'] == "admin") &&
                             ($row['status'] == "Received" || $row['status'] == "Returned")
                         ): ?>
-                            <button class='btn-submit admin-doc-submit' type='submit' name='submit'>REVIEWED</button>
+
+                    <div class="mt-2">
+                        <label for="">Remarks</label> <br>
+                        <input type="text" id="" placeholder="Remarks (Optional)" name="remark" class="admin-doc-input">
+                    </div>
+
+                    <button class='btn-submit admin-doc-submit' type='submit' name='submit'>REVIEWED</button>
                         <?php endif; ?>
                     </div>
                 </form>

@@ -64,7 +64,7 @@ if (!$qr) {
                     
                     <div>
                         <label for="">Type</label><br>
-                        <input class='receive-input' type="text" placeholder='Title' name='type'>
+                        <input class='receive-input' type="text" placeholder='Type' name='type'>
                     </div>
                     <div class="mt-2">
                         <label for="">Description</label> <br>
@@ -72,12 +72,19 @@ if (!$qr) {
                     </div>
                     <div class="mt-2">
                         <label for="">Number of copies</label> <br>
-                        <input class='receive-input' type="number" placeholder='Pages' name='pages'>
+                        <input class='receive-input' type="number" placeholder='Copies' name='pages'>
                     </div>
+
                     <div class="mt-2">
                         <label for="">Department</label> <br>
                         <input type="text" placeholder='Department' class='receive-input' name='department'>
                     </div>
+
+                    <div class="mt-2">
+                        <label for="">Remarks</label> <br>
+                        <input type="text" placeholder='Remarks' class='receive-input' name='remark'>
+                    </div>
+
                     <button class='btn-submit' type="submit" name="submit">CREATE</button>
                 </form>
             </div>
