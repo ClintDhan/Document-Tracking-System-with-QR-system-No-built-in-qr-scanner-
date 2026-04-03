@@ -19,6 +19,10 @@ body {
     box-sizing: border-box;
 }
 
+.burger-icon {
+    display: none;
+}
+
 .login-container {
     display: flex;
     justify-content: center;
@@ -759,10 +763,7 @@ tbody tr td {
 
 
 
-#result {
-    max-width: 1010px;
-    overflow-x: auto;
-}
+
 
 .result {
     max-width: 1010px;
@@ -1112,12 +1113,12 @@ table {
 }
 
 
-/* Dropdown container */
+
 .dropdown {
     position: relative;
 }
 
-/* Hidden menu */
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -1127,7 +1128,7 @@ table {
     z-index: 1;
 }
 
-/* Links inside dropdown */
+
 .dropdown-content a {
     display: block;
     padding: 10px;
@@ -1135,9 +1136,7 @@ table {
     text-decoration: none;
 }
 
-/* Hover effect */
 
-/* Show dropdown on hover */
 .dropdown:hover .dropdown-content {
     display: block;
 }
@@ -1226,3 +1225,85 @@ table {
         padding: 1em 1.5em;
     }
 }
+
+/* admin dashboard */
+
+@media (max-width: 1042px) {
+    .admin-navbar , .admin-card-container {
+        width: 100%;
+    }
+
+    .admin-docs-container {
+        width: 100% !important;
+    }
+    .admin-dash-container {
+        padding: 5px;
+    }
+
+    .admin-middle-container{
+        grid-template-columns: 49vw 49vw;
+    }
+}
+
+@media (max-width:850px) {
+    .nav-anchor , .admin-logout {
+        display: none;
+    }
+    .dashboard-total-documents {
+        grid-row-start: 1;
+        grid-row-end: 3;
+        height: 244px !important;
+    }
+    .burger-icon {
+        display: block;
+    }
+    .admin-card-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    .admin-card-container > div {
+        width: 100%;
+    }
+    .first {
+        grid-row: auto;
+    }
+    .admin-middle-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto auto;
+    }
+    #result {
+        max-width: 1010px;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width:520px) { 
+    .card-text {
+        font-size: 12px;
+    }
+}
+
+@media (max-width:475px) { 
+    .first-table thead tr th {
+        font-size: 10px;
+    }
+
+    .recent-log {
+        width: 10% !important;
+    }
+    
+}
+
+@media (max-width: 400px) {
+    .admin-card-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    }
+    .dashboard-total-documents {
+        height: 120px !important;
+        grid-column: 1 / 3;
+    }
+}
+
+

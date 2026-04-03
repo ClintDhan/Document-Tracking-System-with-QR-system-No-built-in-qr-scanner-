@@ -110,10 +110,15 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                 <button class='log-out admin-logout'>↪ LOGOUT</button>
                 </form>
             </div>
+            <div class="burger-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+            </div>
         </div>
 
         <div class="admin-card-container">
-            <div class="card-flx">
+            <div class="card-flx dashboard-total-documents">
                 <div class="admin-card-circle" style="background-color: #3B82F6;">
                 <p class="card-count"><?= $totalDocsCount ?></p>
             </div>
