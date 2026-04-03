@@ -1157,3 +1157,72 @@ table {
     text-decoration: none;
     color: #424242;
 }
+
+
+/* LOGIN RESPO */
+
+@media (max-width: 440px) {
+    .login-form {
+        width: 350px;
+        height: 400px;
+    }
+
+    .logo-blue {
+        height: 50px;
+        width: 50px;
+    }
+
+    .logo-title {
+        font-size: 1em;
+    }
+
+    .logo-sub {
+        font-size: 0.6em;
+    }
+    .copyright {
+        font-size: 12px;
+    }
+}
+
+/* user home respo */
+
+@media (max-width: 455px) {
+    .user-form {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .user-dash-flx {
+        width: 100%;
+    }
+    
+}
+
+@media (max-width: 425px) {
+    .user-dash-grid {
+        grid-template-columns: 45vw 45vw;
+    }
+    .user-option > a {
+        width: 95%;
+    }
+}
+
+@media (max-width: 360px) {
+    .user-received {
+        grid-column: unset;
+    }
+    .user-dash-grid {
+        grid-template-columns: 90vw;
+    }
+    .user-returned {
+        padding-bottom: 10px;
+    }
+}
+
+/* user view document respo */
+@media (max-width: 455px) {
+    .option-form {
+        width: 100%;
+        padding: 1em 1.5em;
+    }
+}
