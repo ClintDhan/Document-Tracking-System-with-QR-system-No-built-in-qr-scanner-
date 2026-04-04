@@ -110,7 +110,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                 <button class='log-out admin-logout'>↪ LOGOUT</button>
                 </form>
             </div>
-            <div class="burger-icon">
+            <div class="burger-icon" id="onclickModalBtn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                     </svg>
@@ -213,9 +213,35 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
         </div>
     </div>
 
+    <div class="onclick-container" id="modal">
+        <div class="modal-close-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="bi bi-x-lg modal-close" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+            </svg>
+        </div>
+        <div class="burger-modal">
+            <a href="">Dashboard</a>
+            <a href="">Documents</a>
+            <p>Logs</p>
+            <a href="">Authentication Logs</a>
+            <a href="">Document Logs</a>
+            <a href="">User Logs</a>
+            <a href="">QR Management</a>
+            <a href="">Users</a>
+        </div>
+    </div>
+
     <script>
 
-         document.addEventListener("click", function (e) {
+    document.getElementById('onclickModalBtn').addEventListener('click', function () {
+        document.getElementById('modal').classList.add('show');
+    });
+
+    document.querySelector('.modal-close').addEventListener('click', function () {
+        document.getElementById('modal').classList.remove('show');
+    });
+
+    document.addEventListener("click", function (e) {
     const dropdown = document.querySelector(".dropdown");
 
     if (dropdown.contains(e.target)) {

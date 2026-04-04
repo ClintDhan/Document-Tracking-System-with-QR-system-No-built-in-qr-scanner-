@@ -14,7 +14,7 @@ p {
 }
 
 body {
-    background-color: #EFEFEF;
+    background: linear-gradient(135deg, #EFEFEF, #FFFFFF) !important;
     height: 100%;
     box-sizing: border-box;
 }
@@ -462,8 +462,52 @@ body {
 
 .admin-body {
     background-color: #EFEFEF;
+    position: relative;
 }
 
+.onclick-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px);
+    height: 100%;
+    display: none;
+    z-index: -1;
+}
+
+.burger-modal{
+    height: 100%;
+    width: 300px;
+    background: linear-gradient(135deg, #EFEFEF, #FFFFFF);
+    
+}
+
+.burger-modal > * {
+    display: inline-block;
+}
+
+.show {
+    z-index: 1 !important;
+    display: flex !important;
+    justify-content: end;
+    align-items: start;
+
+}
+
+.modal-close-container {
+    margin-right: 10px;
+}
+
+.modal-close {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    fill: white;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
 .admin-dash-container {
     padding: 10px 0;
     height: 100vh;
@@ -1142,6 +1186,13 @@ table {
         height: 400px;
     }
 
+    .first-login-title {
+        font-size: 1em !important;
+    }
+    .first-login-sub {
+        font-size: 0.6em !important;
+    }
+
     .logo-blue {
         height: 50px;
         width: 50px;
@@ -1152,7 +1203,7 @@ table {
     }
 
     .logo-sub {
-        font-size: 0.6em;
+         font-size: 0.6em;
     }
     .copyright {
         font-size: 12px;
@@ -1232,6 +1283,7 @@ table {
     }
     .burger-icon {
         display: block;
+        cursor: pointer;
     }
     .admin-card-container {
         display: grid;
