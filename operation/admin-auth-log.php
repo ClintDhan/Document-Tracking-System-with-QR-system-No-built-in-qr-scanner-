@@ -41,7 +41,7 @@ while ($row = $result->fetch_assoc()) {
         <tr class='tr-hover'>
             <td>".$row['id']."</td>
             <td>".$row['performed']."</td>
-            <td>".$row['performed_at']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['performed_at']."</td>
             <td>".$row['creator_name']."</td>
 
         </tr>";

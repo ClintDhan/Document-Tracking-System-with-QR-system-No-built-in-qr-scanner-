@@ -35,7 +35,7 @@ $result = $conn->query($sql);
 echo "<table class='admin-qr-table'>
         <thead>
             <tr>
-               <th>No</th>
+                <th>No</th>
                 <th>Control Number</th>
                 <th>Used/Not Used</th>
                 <th>Created By</th>

@@ -79,7 +79,7 @@ if (!isset($_SESSION['user_id'])) {
             <p>Documents</p>
             <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
             </div>
-            <div id="result">
+            <div id="result" class="result-scroll">
                 <?php require_once "../operation/admin-document-search.php" ?>
             </div>
         </div>

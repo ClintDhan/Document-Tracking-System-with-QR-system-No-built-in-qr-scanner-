@@ -60,7 +60,7 @@ if (!isset($_SESSION['user_id'])) {
             <p>User Logs</p>
             <input type="text" onkeyup="loadData(this.value)" placeholder="Search for user log....">
             </div>
-            <div id="result">
+            <div id="result" class="result-scroll user-log-scroll">
                 <?php require_once "../operation/admin-user-log-search.php" ?>
             </div>
         </div>

@@ -52,7 +52,7 @@ if (!isset($_SESSION['user_id'])) {
             </div>
 
             <div class="admin-logout">
-<form action="../operation/logout.php" method="POST">
+            <form action="../operation/logout.php" method="POST">
                 <button class='log-out admin-logout'>↪ LOGOUT</button>
                 </form>           
              </div>
@@ -98,7 +98,7 @@ if (!isset($_SESSION['user_id'])) {
 
             </div>
 
-            <div id="result">
+            <div id="result" class="result-scroll">
                 <?php require_once "../operation/admin-qr-search.php" ?>
             </div>
         </div>
