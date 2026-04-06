@@ -1442,4 +1442,23 @@ table {
     }
 }
 
+@media (max-width: 530px) {
+    .doc-edit-container , .admin-add-user-container, .admin-edit-user-container {
+        margin-top: 34px !important;
+    }
+    .adm-bck-btn {
+        top: -40px;
+        left: 0;
+    }
+}
+
+@media(max-width:370px) {
+    .doc-edit-container , .admin-add-user-container, .admin-edit-user-container {
+        width: 100% !important;
+    }
+    .admin-doc-input , .admin-doc-area, .admin-btn-sub {
+        width: 80vw !important;
+    }
+}
+
 

@@ -131,48 +131,48 @@ $row = $result->fetch_assoc();
                             <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                         </svg>
                     </div>
+                
             </div>
-                </div>
             <div class="doc-edit-container mt-2">
                 <p class="text-center" style="font-weight: 700;">View document</p>
                 <form action="../operation/sub-admin-update.php" method="POST">
                     <div class="doc-edit-flx">
-                    <input type="hidden" name="doc_id" value="<?= $doc ?>">
-                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                        <input type="hidden" name="doc_id" value="<?= $doc ?>">
+                        <input type="hidden" name="id" value="<?= $row['id'] ?>">
                     <div>
-                    <label for="">Type</label> <br>
-                    <input type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>" class="admin-doc-input" readonly>
+                        <label for="">Type</label> <br>
+                        <input type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
-                    <label for="">Description</label> <br>
-                    <textarea readonly name='description' rows="4" id="" class="admin-doc-area"><?= $row['description'] ?></textarea>            
+                        <label for="">Description</label> <br>
+                        <textarea readonly name='description' rows="4" id="" class="admin-doc-area"><?= $row['description'] ?></textarea>            
                     </div>
 
                     <div class="mt-2">
-                    <label for="">Department</label> <br>
-                    <input type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>" class="admin-doc-input" readonly>
+                        <label for="">Department</label> <br>
+                        <input type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
-                    <label for="">Number of Copies</label> <br>
-                    <input type="number" name='pages' value="<?= htmlspecialchars($row['pages']) ?>" class="admin-doc-input" readonly>
+                        <label for="">Number of Copies</label> <br>
+                        <input type="number" name='pages' value="<?= htmlspecialchars($row['pages']) ?>" class="admin-doc-input" readonly>
                     </div>
                 
                     <div class="mt-2">
-                    <label for="">Status</label> <br>
-                    <input 
-                    style="<?= ($row['status'] ?? '') == 'Returned' ? 'background-color: #f8d7da; color: #555;' :
-                                (($row['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
-                                (($row['status'] ?? '') == 'Received' ? 'background-color: #d4edda; color: #555;' :
-                                (($row['status'] ?? '') == 'Reviewed' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"                   
-                                            
-                     
-                     type="text" id="statusSelect" name="status" value="<?= htmlspecialchars($row['status']) ?>" class="admin-doc-input" readonly>
+                        <label for="">Status</label> <br>
+                        <input 
+                        style="<?= ($row['status'] ?? '') == 'Returned' ? 'background-color: #f8d7da; color: #555;' :
+                                    (($row['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
+                                    (($row['status'] ?? '') == 'Received' ? 'background-color: #d4edda; color: #555;' :
+                                    (($row['status'] ?? '') == 'Reviewed' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"                   
+                                                
+                        
+                        type="text" id="statusSelect" name="status" value="<?= htmlspecialchars($row['status']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
-                     <label for="" id="releasedInputLabel">Released To</label>
+                        <label for="" id="releasedInputLabel">Released To</label>
                         <input type="text"
                         id="releasedTo"
                         class="admin-doc-input"
@@ -183,22 +183,22 @@ $row = $result->fetch_assoc();
                     </div>
 
                     <div class="mt-2">
-                    <label for="" id="returnedInputLabel">Return Reason</label>
-                        <textarea id="returnReason" readonly name="returned_reason" name='description' rows="4" id="" class="admin-doc-area"
-                         value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
-                        style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;"
-                        ><?= $row['returned_reason'] ?></textarea>            
+                        <label for="" id="returnedInputLabel">Return Reason</label>
+                            <textarea id="returnReason" readonly name="returned_reason" name='description' rows="4" id="" class="admin-doc-area"
+                            value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
+                            style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;"
+                            ><?= $row['returned_reason'] ?></textarea>            
 
                     </div>
 
                     <div class="mt-2">
-                    <label for="">Last Updated</label> <br>
-                    <input type="text" name="updated_at" value="<?= htmlspecialchars($row['updated_at']) ?>" class="admin-doc-input" readonly>
+                        <label for="">Last Updated</label> <br>
+                        <input type="text" name="updated_at" value="<?= htmlspecialchars($row['updated_at']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
-                    <label for="">Control Number</label> <br>
-                    <input type="text" id="" name="control_num" value="<?= htmlspecialchars($control_num) ?>" class="admin-doc-input" readonly>
+                        <label for="">Control Number</label> <br>
+                        <input type="text" id="" name="control_num" value="<?= htmlspecialchars($control_num) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <?php if(!empty($row['remarks'])): ?>
@@ -218,14 +218,14 @@ $row = $result->fetch_assoc();
                         <input type="text" id="" placeholder="Remarks (Optional)" name="remark" class="admin-doc-input">
                     </div>
 
-                    <button class='btn-submit admin-doc-submit' type='submit' name='submit'>REVIEWED</button>
+                    <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='submit'>REVIEWED</button>
                         <?php endif; ?>
                     </div>
                 </form>
                 
-            <button class="adm-bck-btn" onclick="window.location.href='admin-document.php'">
-  ❮ BACK
-</button>
+                <button class="adm-bck-btn" onclick="window.location.href='admin-document.php'">
+                    ❮ BACK
+                </button>
             </div>
         </div>
 

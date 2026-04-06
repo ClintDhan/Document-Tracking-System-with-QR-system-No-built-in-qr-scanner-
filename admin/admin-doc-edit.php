@@ -99,7 +99,6 @@ $row = $result->fetch_assoc();
                         id="releasedTo"
                         class="admin-doc-input"
                         name="released_to"
-                        placeholder="Released To"
                         value="<?= htmlspecialchars($row['released_to'] ?? '') ?>"
                         style="<?= ($row['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;">
                     </div>
@@ -114,11 +113,11 @@ $row = $result->fetch_assoc();
 
                     <div class="mt-2">
                     <label for="">Remarks</label> <br>
-                    <input type="text" name='remark' placeholder="Remarks (Optional)"class="admin-doc-input">
+                    <input type="text" name='remark' placeholder="(Optional)"class="admin-doc-input">
                     </div>
 
                     
-                    <button class='btn-submit admin-doc-submit' type='submit' name='submit'>UPDATE</button>
+                    <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='submit'>UPDATE</button>
                     </div>
                 </form>
                 

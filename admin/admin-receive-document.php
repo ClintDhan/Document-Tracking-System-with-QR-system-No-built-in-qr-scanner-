@@ -67,6 +67,7 @@ $row = $result->fetch_assoc();
                     <div class="doc-edit-flx">
 
                     <input type="hidden" name="qr_id" value="<?= $row['id'] ?>">
+                    <input type="hidden" name="control" value="<?= $control ?>">
 
                     <div>
                         <label for="">Type</label> <br>
@@ -88,8 +89,13 @@ $row = $result->fetch_assoc();
                         <input type="text" name='department' class="admin-doc-input">
                     </div>
 
+                    <div class="mt-2">
+                        <label for="">Remarks</label> <br>
+                        <input type="text" name='remark' placeholder="(Optional)" class="admin-doc-input">
+                    </div>
+
                     
-                    <button class='btn-submit admin-doc-submit' type='submit' name='submit'>SAVE</button>
+                    <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='submit'>SAVE</button>
                     </div>
                 </form>
                 

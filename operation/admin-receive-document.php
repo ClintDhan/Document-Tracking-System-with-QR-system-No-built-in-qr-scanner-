@@ -4,18 +4,22 @@ require_once '../db.php';
 
 if(isset($_POST['submit'])) {
     $qr_id = $_POST['qr_id'];
+    $control = $_POST['control'];
     $type = $_POST['type'];
     $description = $_POST['description'];
     $department = $_POST['department'];
     $createdBy = $_SESSION['user_id'];
     $pages = $_POST['pages'];
+    $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
 
 
-    $sql = "SELECT * FROM document WHERE type = '$type'";
+    $sql = "SELECT * FROM document WHERE type = '$description'";
     $result = $conn->query($sql);
 
     if($result->num_rows > 0) {
-        echo 'Document already exists';
+        $_SESSION['error'] = "Document description already exists.";
+        header("Location: ../admin/admin-receive-document.php?control=" . urlencode($control));
+        exit();
     } else {
         // Insert document
         $sql1 = "INSERT INTO document (qr_id, type, description, department, created_by, pages) 
@@ -31,7 +35,7 @@ if(isset($_POST['submit'])) {
 
         if($result1 && $qrUpdate) {
             
-            $sqlLog = "INSERT INTO document_log (document_id, action, performed_at, performed_by)
+            $sqlLog = "INSERT INTO document_log (document_id, action, performed_at, performed_by, remarks)
             VALUES ($document_id, 'Received', NOW(), $createdBy)";
             $conn->query($sqlLog);
 
@@ -39,7 +43,9 @@ if(isset($_POST['submit'])) {
             header("Location: ../admin/admin-document.php");
             exit();
         } else {
-            echo 'Something went wrong.';
+            $_SESSION['error'] = "Something went wrong";
+            header("Location: ../admin/admin-receive-document.php?control=" . urlencode($control));
+            exit();
         }
     }
 }
