@@ -67,7 +67,7 @@ elseif (isset($_GET['control'])) {
 
     // JOIN QUERY (para sa $row)
     $sql = "
-        SELECT qc.*, dl.remarks
+        SELECT qc.*, d.*, dl.remarks
         FROM qr_code qc
         LEFT JOIN document d ON qc.id = d.qr_id
         LEFT JOIN document_log dl ON d.id = dl.document_id
@@ -97,6 +97,12 @@ $row = $result->fetch_assoc();
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <body class="admin-body">
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error']; ?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
         <div class="admin-dash-container">
                 <div class="admin-navbar">
                     <div class="admin-logo">

@@ -25,6 +25,14 @@ $row = $result->fetch_assoc();
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <body class="admin-body">
+
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error']; ?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
         <div class="admin-dash-container">
                 <div class="admin-navbar">
                     <div class="admin-logo">

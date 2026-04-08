@@ -17,6 +17,15 @@ if(isset($_POST['submit'])) {
     $getUserResult = $conn->query($getUser);
     $row = $getUserResult->fetch_assoc();
 
+    $checkUser = "SELECT * FROM user WHERE name = '$name' AND id != '$id'";
+    $checkUserResult = $conn->query($checkUser);    
+
+    if($checkUserResult->num_rows > 0) {
+        $_SESSION['error'] = "Username {$name} already exists.";
+        header("Location: ../admin/admin-edit-user.php?user=$id");
+        exit();
+    }
+
     if ($row['name'] != $name) {
         $changes[] = "Name: {$row['name']} -> {$name}<br>";
     }

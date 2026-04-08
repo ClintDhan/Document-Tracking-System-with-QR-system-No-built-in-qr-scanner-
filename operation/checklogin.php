@@ -5,16 +5,23 @@ require_once '../db.php';
 $name = $_POST['name'];
 $password = $_POST['password'];
 $performed = 'Logged In';
-// get redirect (from QR)
+
+// Default redirect after login
 $redirect = '../user/user-home.php';
 if (!empty($_POST['redirect'])) {
     $redirect = urldecode($_POST['redirect']);
 }
 
+// Prepare login redirect for error cases
+$loginRedirect = '../login.php';
+if (!empty($_POST['redirect'])) {
+    $loginRedirect .= '?redirect=' . urlencode($_POST['redirect']);
+}
+
 $sql = "SELECT * FROM user WHERE name = '$name' AND password = '$password'";
 $result = $conn->query($sql);
 
-if ($result->num_rows == 1) {
+if ($result && $result->num_rows == 1) {
     $user = $result->fetch_assoc();
 
     if ($password === $user['password']) {
@@ -27,10 +34,9 @@ if ($result->num_rows == 1) {
 
             // FIRST LOGIN CHECK
             if ($user['first_login'] == 0) {
-                // pass redirect to first-login page
-                $redirectParam = !empty($_POST['redirect']) ? '?redirect=' . urlencode($_POST['redirect']) : '';
-                header("Location: ../first-login.php$redirectParam");
-                exit;
+                $firstLoginRedirect = !empty($_POST['redirect']) ? '?redirect=' . urlencode($_POST['redirect']) : '';
+                header("Location: ../first-login.php$firstLoginRedirect");
+                exit();
             }
 
             // ALREADY LOGGED IN → use QR redirect if available
@@ -39,32 +45,41 @@ if ($result->num_rows == 1) {
                         VALUES ('$performed', {$_SESSION['user_id']})";
                 $conn->query($sql);
                 header("Location: $redirect");
-                exit;
+                exit();
             }
 
             // DEFAULT DASHBOARD
             if ($user['role'] == "superadmin" || $user['role'] == "admin") {
-               $sql2 = "INSERT INTO auth_logs (performed, user_id) 
-                                VALUES ('$performed', {$_SESSION['user_id']})";
-                        $conn->query($sql2);
+                $sql2 = "INSERT INTO auth_logs (performed, user_id) 
+                        VALUES ('$performed', {$_SESSION['user_id']})";
+                $conn->query($sql2);
                 header("Location: ../admin/admin-dashboard.php");
-                exit;
+                exit();
             } else {
                 $sql3 = "INSERT INTO auth_logs (performed, user_id) 
-                            VALUES ('$performed', {$_SESSION['user_id']})";
-                    $conn->query($sql3);
+                        VALUES ('$performed', {$_SESSION['user_id']})";
+                $conn->query($sql3);
                 header("Location: ../user/user-home.php");
-                exit;
+                exit();
             }
 
         } else {
-            echo 'Your account is invalid';
+            // Account inactive
+            $_SESSION['error'] = "Your account was tagged as Inactive. Please reach out to your administrator";
+            header("Location: $loginRedirect");
+            exit();
         }
     } else {
-        echo 'Invalid Password';
+        // Invalid password
+        $_SESSION['error'] = "Invalid Password";
+        header("Location: $loginRedirect");
+        exit();
     }
 } else {
-    echo "Invalid username or password";
+    // Invalid username
+    $_SESSION['error'] = "Invalid username or password";
+    header("Location: $loginRedirect");
+    exit();
 }
 
 $conn->close();

@@ -20,9 +20,12 @@ $result = $conn->query($upSql);
         $resultLog = $conn->query($logSql);
 
         if(!$resultLog) {
-            echo "naay mali ani haha";
+            $_SESSION['error'] = "There is an error reseting {$name}'s password";
+            header("Location: ../admin/admin-reset-password?user=$id");
+            exit();
         }
         else {
+            $_SESSION['success'] = "{$name}'s password has been reset. Please check the user logs to verify.";            
             header("Location: ../admin/admin-user.php");
             exit();
         }
@@ -30,7 +33,9 @@ $result = $conn->query($upSql);
     }
 
     else {
-        echo "naay error";
+        $_SESSION['error'] = "There is an error reseting {$name}'s password";
+        header("Location: ../admin/admin-reset-password?user=$id");
+        exit();
     }
 
 

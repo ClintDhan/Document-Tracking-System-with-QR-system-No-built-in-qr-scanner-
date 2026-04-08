@@ -22,6 +22,16 @@ if(isset($_POST['submit'])) {
     $getDoc = "SELECT * FROM document where id ='$document_id'";
     $getDocResult = $conn->query($getDoc);
     $row = $getDocResult->fetch_assoc();
+    $row_description = $row['description'];
+
+    $check = "SELECT * FROM document WHERE description = '$description' AND id != '$document_id'";
+    $checkResult = $conn->query($check);
+
+    if($checkResult->num_rows > 0) {
+        $_SESSION['error'] = "Document description already exists.";
+        header("Location: ../admin/admin-doc-edit.php");
+        exit();
+    }
 
     if($row['type'] != $type) {
         $changes[] = "Type: {$row['type']} -> {$type}<br>";
@@ -70,11 +80,14 @@ if(isset($_POST['submit'])) {
     $conn->query($logSql);
 
 
+    $_SESSION['success'] = "Document successfully updated.";
     header("Location: ../admin/admin-document.php");
     exit();
 }
 
 else {
-    echo "error";
+    $_SESSION['error'] = "Something went wrong";
+    header("Location: ../admin/admin-doc-edit.php");
+    exit();
 }
 ?>

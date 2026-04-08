@@ -21,6 +21,14 @@ $password = random_int(100000, 999999);
 </head>
 
 <body class="admin-body">
+    
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error']; ?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
     <div class="admin-dash-container">
         <div class="admin-navbar">
             <div class="admin-logo">

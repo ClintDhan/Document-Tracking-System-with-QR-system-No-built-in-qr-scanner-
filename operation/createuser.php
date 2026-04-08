@@ -13,7 +13,9 @@ if(isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if($result->num_rows > 0) {
-        echo 'user already existed!';
+        $_SESSION['error'] = "Username {$name} already exists.";
+        header("Location: ../admin/admin-add-user.php");
+        exit();
     }
     else {
         $sql1 = "INSERT INTO user (name , password) VALUES ('$name' , $password)";
@@ -25,7 +27,9 @@ if(isset($_POST['submit'])) {
             $action = 'Create user';
             $sql2 = "INSERT INTO user_log(performed_by, user_id, action) VALUES ($admin_id , $new_user_id, '$action')";
             $conn->query($sql2);
+            $_SESSION['success'] = "User created successfully.";
             header("Location: ../admin/admin-user.php");
+            exit();
             exit;
         }
     }

@@ -38,6 +38,14 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <body class="admin-body">
+
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success">
+            <?= $_SESSION['success']; ?>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
+
     <div class="admin-dash-container">
         <div class="admin-navbar">
             <div class="admin-logo">

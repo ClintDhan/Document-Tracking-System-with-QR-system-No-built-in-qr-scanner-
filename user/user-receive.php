@@ -36,6 +36,14 @@ if (!$qr) {
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 <body>
+    
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error']; ?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
     <div class='user-container'>
         <div class="user-form">
 

@@ -13,7 +13,7 @@ if(isset($_POST['submit'])) {
     $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
 
     // Check if a document with the same desc exists
-    $sql = "SELECT * FROM document WHERE type = '$description'";
+    $sql = "SELECT * FROM document WHERE description = '$description' AND id != '$document_id'";
     $result = $conn->query($sql);
 
     if($result->num_rows > 0) {

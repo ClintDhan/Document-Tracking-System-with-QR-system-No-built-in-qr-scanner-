@@ -17,6 +17,12 @@ require_once 'db.php';
 
 </head>
 <body>
+<?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error']; ?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 
 <div class='login-container'>
     <div class='login-form'>
