@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     $pages = $_POST['pages'];
     $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
 
-    // Adjust based on status
+    
     if ($status != 'Released') {
         $released_to = null;
     }

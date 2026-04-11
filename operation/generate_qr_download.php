@@ -1,7 +1,8 @@
 <?php
 session_start();
 require_once '../db.php';
-require_once '../phpqrcode/qrlib.php'; // offline QR code library
+ob_clean();
+require_once __DIR__ . '/../phpqrcode/qrlib.php'; // offline QR code library
 
 
 // 1️⃣ Validate POST

@@ -57,7 +57,7 @@ while ($row = $result->fetch_assoc()) {
             </div>
             
             </td>
-            <td>".$row['note']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['note']."</td>
             <td>".$row['target_name']."</td>
         </tr>";
 }

@@ -85,15 +85,6 @@ if (!isset($_SESSION['user_id'])) {
                             <option value="20">20 QR</option>
                         </select>
                     </form>
-                    <form action="../operation/regenerate_unused_qr.php" method="POST" target="_blank">
-                        <select name="qty" class="unused-select" required
-                            onchange="this.form.submit()">
-                            <option value="" disabled selected hidden>DOWNLOAD UNUSED QR</option>
-                            <option value="5">5 QR</option>
-                            <option value="10">10 QR</option>
-                            <option value="20">20 QR</option>
-                        </select>
-                    </form>
                 </div>
 
             </div>

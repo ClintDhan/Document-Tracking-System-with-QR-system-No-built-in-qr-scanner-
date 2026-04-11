@@ -9,6 +9,11 @@ $performedBy = $_SESSION['user_id'];
 $password = $_POST['password'];
 
 
+$nameSql = "SELECT * FROM user where id ='$id'";
+$nameResult = $conn->query($nameSql);
+$nameResult1 = $nameResult->fetch_assoc();
+$name = $nameResult1['name'];
+
 $upSql = "UPDATE user SET password ='$password', first_login = 0 WHERE id ='$id'";
 $result = $conn->query($upSql);
 

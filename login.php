@@ -24,7 +24,9 @@ if (isset($_SESSION['user_id']) && isset($_GET['redirect'])) {
 <div class='login-container'>
     <div class="logo-container">
         <div class="logo-form">
-            <div class="logo-blue"></div>
+            <div class="logo-blue">
+                <img src="asset/img/paper-logo.png" class="logo-img" alt="">
+            </div>
             <div>
                 <p class="logo-title">MAYOR'S OFFICE DTS</p>
                 <p class="logo-sub">DOCUMENT TRACKING SYSTEM</p>

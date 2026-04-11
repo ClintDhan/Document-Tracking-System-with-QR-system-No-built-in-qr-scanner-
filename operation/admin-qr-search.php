@@ -48,7 +48,7 @@ while ($row = $result->fetch_assoc()) {
     echo "
         <tr class='tr-hover'>
             <td>".$row['id']."</td>
-            <td>".$row['control_num']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['control_num']."</td>
             <td>".(($row['is_used'] == 0) ? "Not used" : "Used")."</td>
             <td>".$row['creator']."</td>
             <td><a class='admin-doc-btn'

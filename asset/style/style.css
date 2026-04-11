@@ -13,6 +13,11 @@ p {
     font-family: "Roboto";
 }
 
+.logo-img {
+    width: 60px;
+    height: 60px;
+}
+
 body {
     background-color: #EFEFEF;
     height: 100%;
@@ -42,10 +47,13 @@ body {
 }
 
 .logo-blue {
-    background-color: #80BBDB;
+    background-color: #aacadb;
     height: 60px;
     width: 60px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo-title {
@@ -1258,6 +1266,10 @@ table {
     .logo-blue {
         height: 50px;
         width: 50px;
+    }
+    .logo-img {
+        height: 35px;
+        width: 35px;
     }
 
     .logo-title {

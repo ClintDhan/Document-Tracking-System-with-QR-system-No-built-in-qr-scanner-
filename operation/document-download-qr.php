@@ -1,6 +1,8 @@
 <?php
 require_once '../db.php';
-require_once '../phpqrcode/qrlib.php';
+ob_clean();
+require_once __DIR__ . '/../phpqrcode/qrlib.php'; // offline QR code library
+
 
 if (!isset($_GET['control'])) {
     die("Invalid request");

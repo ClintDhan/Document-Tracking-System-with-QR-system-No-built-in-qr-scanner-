@@ -207,9 +207,9 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                 </div>
                 
             </div>
-            <div class="middle-form">
+            <!-- <div class="middle-form">
                 <p class="todays-title">AUTHENTICATION ACTIVITY</p>
-            </div>
+            </div> -->
         </div>
     </div>
 
