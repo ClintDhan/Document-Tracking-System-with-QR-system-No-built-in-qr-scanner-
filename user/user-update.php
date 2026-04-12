@@ -78,20 +78,20 @@ $document = mysqli_fetch_assoc($result);
 
                     <div>
                         <label for="">Type</label> <br>
-                        <input type="text" placeholder='Type' class='update-input' name='type' value="<?= $document['type'] ?>">
+                        <input required type="text" placeholder='Type' class='update-input' name='type' value="<?= $document['type'] ?>">
                     </div>
                     <div class="mt-2">
                         <label for="">Description</label> <br>
-                        <textarea id="" placeholder='Description' class='update-textare' name='description'><?= $document['description'] ?></textarea>
+                        <textarea required id="" placeholder='Description' class='update-textare' name='description'><?= $document['description'] ?></textarea>
 
                     </div>
                     <div class="mt-2">
                         <label for="">Department</label> <br>
-                        <input type="text" placeholder='Department' class='update-input' name='department' value="<?= $document['department']?>">
+                        <input required type="text" placeholder='Department' class='update-input' name='department' value="<?= $document['department']?>">
                     </div>
                     <div class="mt-2">
                         <label for="">Number of pages</label> <br>
-                        <input type="number" placeholder='Pages' class='update-input' name='pages' value="<?= $document['pages'] ?>">
+                        <input required type="number" placeholder='Pages' class='update-input' name='pages' value="<?= $document['pages'] ?>">
                     </div>
                     <div class="mt-2">
                         <label for="">Status</label> <br>
@@ -104,6 +104,7 @@ $document = mysqli_fetch_assoc($result);
                     <div class="mt-2">
                         <label for="" id="releasedInputLabel">Released To</label>
                         <input type="text"
+                        required
                         id="releasedTo"
                         class="update-input"
                         name="released_to"
@@ -115,6 +116,7 @@ $document = mysqli_fetch_assoc($result);
                     <div class="mt-2">
                         <label for="" id="returnedInputLabel">Return Reason</label>
                         <input type="text"
+                        required
                         id="returnReason"
                         class="update-input"
                         name="returned_reason"
@@ -125,7 +127,7 @@ $document = mysqli_fetch_assoc($result);
 
                     <div class="mt-2">
                         <label for="">Remarks</label> <br>
-                        <input type="text" placeholder='Remarks (Optional)' class='update-input' name='remark'>
+                        <input type="text" placeholder='(Optional)' class='update-input' name='remark'>
                     </div>
 
                     <button class='btn-submit' type='submit' name='submit'>UPDATE</button>

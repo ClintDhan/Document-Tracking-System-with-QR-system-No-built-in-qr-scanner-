@@ -146,27 +146,27 @@ $row = $result->fetch_assoc();
                         <input type="hidden" name="doc_id" value="<?= $doc ?>">
                         <input type="hidden" name="id" value="<?= $row['id'] ?>">
                     <div>
-                        <label for="">Type</label> <br>
+                        <label for="" style="font-weight: 600;">Type</label> <br>
                         <input type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
-                        <label for="">Description</label> <br>
+                        <label for="" style="font-weight: 600;">Description</label> <br>
                         <textarea readonly name='description' rows="4" id="" class="admin-doc-area"><?= $row['description'] ?></textarea>            
                     </div>
 
                     <div class="mt-2">
-                        <label for="">Department</label> <br>
+                        <label for="" style="font-weight: 600;">Department</label> <br>
                         <input type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
-                        <label for="">Number of Copies</label> <br>
+                        <label for="" style="font-weight: 600;">Number of Copies</label> <br>
                         <input type="number" name='pages' value="<?= htmlspecialchars($row['pages']) ?>" class="admin-doc-input" readonly>
                     </div>
                 
                     <div class="mt-2">
-                        <label for="">Status</label> <br>
+                        <label for="" style="font-weight: 600;">Status</label> <br>
                         <input 
                         style="<?= ($row['status'] ?? '') == 'Returned' ? 'background-color: #f8d7da; color: #555;' :
                                     (($row['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
@@ -178,7 +178,7 @@ $row = $result->fetch_assoc();
                     </div>
 
                     <div class="mt-2">
-                        <label for="" id="releasedInputLabel">Released To</label>
+                        <label for="" id="releasedInputLabel" style="font-weight: 600;">Released To</label>
                         <input type="text"
                         id="releasedTo"
                         class="admin-doc-input"
@@ -189,7 +189,7 @@ $row = $result->fetch_assoc();
                     </div>
 
                     <div class="mt-2">
-                        <label for="" id="returnedInputLabel">Return Reason</label>
+                        <label for="" id="returnedInputLabel" style="font-weight: 600;">Return Reason</label>
                             <textarea id="returnReason" readonly name="returned_reason" name='description' rows="4" id="" class="admin-doc-area"
                             value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
                             style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;"
@@ -198,18 +198,18 @@ $row = $result->fetch_assoc();
                     </div>
 
                     <div class="mt-2">
-                        <label for="">Last Updated</label> <br>
+                        <label for="" style="font-weight: 600;">Last Updated</label> <br>
                         <input type="text" name="updated_at" value="<?= htmlspecialchars($row['updated_at']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
-                        <label for="">Control Number</label> <br>
+                        <label for="" style="font-weight: 600;">Control Number</label> <br>
                         <input type="text" id="" name="control_num" value="<?= htmlspecialchars($control_num) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <?php if(!empty($row['remarks'])): ?>
                     <div class="mt-2">
-                        <label for="">Latest Remark</label> <br>
+                        <label for="" style="font-weight: 600;">Latest Remark</label> <br>
                         <input type="text" id="" value="<?= htmlspecialchars($row['remarks']) ?>" class="admin-doc-input" readonly>
                     </div>
                     <?php endif; ?>
@@ -220,8 +220,8 @@ $row = $result->fetch_assoc();
                         ): ?>
 
                     <div class="mt-2">
-                        <label for="">Remarks</label> <br>
-                        <input type="text" id="" placeholder="Remarks (Optional)" name="remark" class="admin-doc-input">
+                        <label for="" style="font-weight: 600;">Remarks</label> <br>
+                        <input type="text" id="" placeholder="(Optional)" name="remark" class="admin-doc-input">
                     </div>
 
                     <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='submit'>REVIEWED</button>

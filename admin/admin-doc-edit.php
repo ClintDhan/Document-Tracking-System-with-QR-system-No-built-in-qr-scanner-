@@ -69,25 +69,25 @@ $row = $result->fetch_assoc();
                 <p class="text-center" style="font-weight: 700;">Edit document</p>
                 <form action="../operation/admin-update-document.php" method="POST">
                     <div class="doc-edit-flx">
-                    <input type="hidden" name="doc_id" value="<?= $doc ?>">
+                    <input type="hidden" name="doc_id" value="<?= $doc ?>" required>
                     <div>
                     <label for="">Type</label> <br>
-                    <input type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>" class="admin-doc-input">
+                    <input required type="text" name='type' value="<?= htmlspecialchars($row['type']) ?>" class="admin-doc-input">
                     </div>
 
                     <div class="mt-2">
                     <label for="">Description</label> <br>
-                    <textarea name='description' rows="4" id="" class="admin-doc-area"><?= $row['description'] ?></textarea>            
+                    <textarea required name='description' rows="4" id="" class="admin-doc-area"><?= $row['description'] ?></textarea>            
                     </div>
 
                     <div class="mt-2">
                     <label for="">Department</label> <br>
-                    <input type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>" class="admin-doc-input">
+                    <input required type="text" name='department' value="<?= htmlspecialchars($row['department']) ?>" class="admin-doc-input">
                     </div>
 
                     <div class="mt-2">
                     <label for="">Number of Copies</label> <br>
-                    <input type="number" name='pages' value="<?= htmlspecialchars($row['pages']) ?>" class="admin-doc-input">
+                    <input required type="number" name='pages' value="<?= htmlspecialchars($row['pages']) ?>" class="admin-doc-input">
                     </div>
 
                     <div class="mt-2">
@@ -107,12 +107,12 @@ $row = $result->fetch_assoc();
                         class="admin-doc-input"
                         name="released_to"
                         value="<?= htmlspecialchars($row['released_to'] ?? '') ?>"
-                        style="<?= ($row['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;">
+                        style="<?= ($row['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;" required>
                     </div>
 
                     <div class="mt-2">
                     <label for="" id="returnedInputLabel">Return Reason</label>
-                        <textarea id="returnReason" name="returned_reason" name='description' rows="4" id="" class="admin-doc-area"
+                        <textarea required id="returnReason" name="returned_reason" name='description' rows="4" id="" class="admin-doc-area"
                          value="<?= htmlspecialchars($row['returned_reason'] ?? '') ?>"
                         style="<?= ($row['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;"
                         ><?= $row['returned_reason'] ?></textarea>                     

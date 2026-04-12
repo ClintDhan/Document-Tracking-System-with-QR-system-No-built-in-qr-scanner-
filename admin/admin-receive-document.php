@@ -79,22 +79,22 @@ $row = $result->fetch_assoc();
 
                     <div>
                         <label for="">Type</label> <br>
-                        <input type="text" name='type' value="" class="admin-doc-input">
+                        <input required type="text" name='type' value="" class="admin-doc-input">
                     </div>
 
                     <div class="mt-2">
                         <label for="">Description</label> <br>
-                        <textarea name='description' rows="4" id="" class="admin-doc-area"></textarea>            
+                        <textarea required name='description' rows="4" id="" class="admin-doc-area"></textarea>            
                     </div>
 
                     <div class="mt-2">
                         <label for="">Number of copies</label> <br>
-                        <input type="number" name='pages' class="admin-doc-input">
+                        <input required type="number" name='pages' class="admin-doc-input">
                     </div>
 
                     <div class="mt-2">
                         <label for="">Department</label> <br>
-                        <input type="text" name='department' class="admin-doc-input">
+                        <input required type="text" name='department' class="admin-doc-input">
                     </div>
 
                     <div class="mt-2">

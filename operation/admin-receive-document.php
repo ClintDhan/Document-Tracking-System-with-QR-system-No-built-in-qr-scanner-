@@ -13,7 +13,7 @@ if(isset($_POST['submit'])) {
     $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
 
 
-    $sql = "SELECT * FROM document WHERE type = '$description'";
+    $sql = "SELECT * FROM document WHERE description = '$description'";
     $result = $conn->query($sql);
 
     if($result->num_rows > 0) {
@@ -36,7 +36,7 @@ if(isset($_POST['submit'])) {
         if($result1 && $qrUpdate) {
             
             $sqlLog = "INSERT INTO document_log (document_id, action, performed_at, performed_by, remarks)
-            VALUES ($document_id, 'Received', NOW(), $createdBy)";
+            VALUES ($document_id, 'Received', NOW(), $createdBy, '$remark')";
             $conn->query($sqlLog);
 
             $_SESSION['success'] = "Document successfully received.";

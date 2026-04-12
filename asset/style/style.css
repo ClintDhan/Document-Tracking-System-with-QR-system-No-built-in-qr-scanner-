@@ -245,6 +245,20 @@ body {
     background-color: rgb(227, 63, 63);
 }
 
+.in-use {
+    background-color: #22C55E;
+    color: white;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.not-used {
+    background-color: #EF4444;
+    color: white;
+    padding: 2px;
+    border-radius: 4px;
+}
+
 .qr-status-container {
     margin-top: 12px;
     width: 100%;
@@ -294,6 +308,7 @@ body {
 
 .btn-search {
     margin-top: 10px !important;
+    background-color: #80BBDB !important;
 }
 
 .btn-receive {

@@ -20,7 +20,12 @@ if (isset($_SESSION['user_id']) && isset($_GET['redirect'])) {
     <link rel="stylesheet" href="asset/style/style.css">
 </head>
 <body>
-
+<?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error']; ?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 <div class='login-container'>
     <div class="logo-container">
         <div class="logo-form">

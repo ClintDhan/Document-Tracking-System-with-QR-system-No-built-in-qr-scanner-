@@ -79,7 +79,7 @@ $user = $result->fetch_assoc();
                     <input type="hidden" name="id" value="<?= $user['id'] ?>">
                     <div class="admin-add-user-flx mt-3">
                         <p>Name</p>
-                        <input type="text" value="<?= $user['name'] ?>" class="admin-add-user-input" name="name">
+                        <input required type="text" value="<?= $user['name'] ?>" class="admin-add-user-input" name="name">
                     </div>
 
                     <div class="admin-add-user-flx mt-2">

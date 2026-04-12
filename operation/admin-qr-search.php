@@ -49,7 +49,13 @@ while ($row = $result->fetch_assoc()) {
         <tr class='tr-hover'>
             <td>".$row['id']."</td>
             <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['control_num']."</td>
-            <td>".(($row['is_used'] == 0) ? "Not used" : "Used")."</td>
+            <td>
+                <div class='user-status-container'>
+                    <div class='".($row['is_used'] == 0 ? "not-used" : "in-use")."'>
+                        ".($row['is_used'] == 0 ? "Not used" : "In-use")."
+                    </div>
+                </div>
+            </td>
             <td>".$row['creator']."</td>
             <td><a class='admin-doc-btn'
                     href='../operation/document-download-qr.php?control=".$row['control_num']."'

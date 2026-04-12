@@ -73,7 +73,7 @@ $password = random_int(100000, 999999);
                 <form action="../operation/createuser.php" method="POST">
                     <div class="admin-add-user-flx mt-3">
                         <p>User's name</p>
-                        <input type="text" class="admin-add-user-input" name="name">
+                        <input required type="text" class="admin-add-user-input" name="name">
                     </div>
 
                     <div class="admin-add-user-flx mt-2">
