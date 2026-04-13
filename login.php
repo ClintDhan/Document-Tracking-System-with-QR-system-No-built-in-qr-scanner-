@@ -15,6 +15,7 @@ if (isset($_SESSION['user_id']) && isset($_GET['redirect'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="icon" type="image/png" href="../asset/img/log.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css" integrity="sha512-t7Few9xlddEmgd3oKZQahkNI4dS6l80+eGEzFQiqtyVYdvcSG2D3Iub77R20BdotfRPA9caaRkg1tyaJiPmO0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="asset/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="asset/style/style.css">
@@ -30,7 +31,7 @@ if (isset($_SESSION['user_id']) && isset($_GET['redirect'])) {
     <div class="logo-container">
         <div class="logo-form">
             <div class="logo-blue">
-                <img src="asset/img/paper-logo.png" class="logo-img" alt="">
+                <img src="asset/img/log.png" class="logo-img" alt="">
             </div>
             <div>
                 <p class="logo-title">MAYOR'S OFFICE DTS</p>

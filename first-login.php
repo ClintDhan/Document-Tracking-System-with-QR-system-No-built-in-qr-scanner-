@@ -11,6 +11,8 @@ require_once 'db.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First login</title>
+        <link rel="icon" type="image/png" href="../asset/img/log.png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css" integrity="sha512-t7Few9xlddEmgd3oKZQahkNI4dS6l80+eGEzFQiqtyVYdvcSG2D3Iub77R20BdotfRPA9caaRkg1tyaJiPmO0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="asset/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="asset/style/style.css">
@@ -25,6 +27,19 @@ require_once 'db.php';
     <?php endif; ?>
 
 <div class='login-container'>
+        <div class="logo-container">
+            <div class="logo-form">
+                <div class="logo-blue">
+                    <img src="asset/img/log.png" class="logo-img" alt="">
+                </div>
+                <div>
+                    <p class="logo-title">MAYOR'S OFFICE DTS</p>
+                    <p class="logo-sub">DOCUMENT TRACKING SYSTEM</p>
+                </div>
+
+        </div>
+        </div>
+
     <div class='login-form'>
         <div class='login-centered'>
             <p style='font-weight: 900; color: #2B308A; font-size: 30px; line-height: 0.8;' class="first-login-title">Change password</p>
@@ -32,27 +47,27 @@ require_once 'db.php';
         <form action="operation/change-pass.php" method="post" class='form-flx'>             
             <input type="hidden" name="redirect" value="<?= htmlspecialchars($_GET['redirect'] ?? '') ?>">                
             <div class="input-position">
-                    <input type="password" name="newPass" placeholder="Enter new password" class='mt-3'>
-                    <span 
-    onclick="togglePassword(this)"
-  >
-    <i class="bi bi-eye-slash toggle-icon"></i>
-  </span>
-                </div>
+                                    <input minlength="6" type="password" name="newPass" placeholder="Enter new password" class='mt-3'>
+                                                <span 
+                                onclick="togglePassword(this)"
+                            >
+                                <i class="bi bi-eye-slash toggle-icon"></i>
+                            </span>
+            </div>
 
-                <div class="input-position">
-                    <input  type="password" name="rePass" placeholder="Re-enter new password" class='mt-3'>
-                    <span 
-    onclick="togglePassword(this)"
-  >
-    <i class="bi bi-eye-slash toggle-icon"></i>
-  </span>
-                </div>
-                <button type="submit" name="submit">Proceed</button>
-        </form>
+            <div class="input-position">
+                                <input minlength="6"  type="password" name="rePass" placeholder="Re-enter new password" class='mt-3'>
+                                <span 
+                onclick="togglePassword(this)"
+            >
+                <i class="bi bi-eye-slash toggle-icon"></i>
+            </span>
+                            </div>
+                            <button type="submit" name="submit">Proceed</button>
+                    </form>
 
-        </div>
-    </div>
+                    </div>
+                </div>
 </div>
 
 

@@ -16,6 +16,7 @@ $password = random_int(100000, 999999);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
+    <link rel="icon" type="image/png" href="../asset/img/log.png">
     <link rel="stylesheet" href="../asset/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
@@ -73,7 +74,7 @@ $password = random_int(100000, 999999);
                 <form action="../operation/createuser.php" method="POST">
                     <div class="admin-add-user-flx mt-3">
                         <p>User's name</p>
-                        <input required type="text" class="admin-add-user-input" name="name">
+                        <input minlength="3" maxlength="15" required type="text" class="admin-add-user-input" name="name">
                     </div>
 
                     <div class="admin-add-user-flx mt-2">
