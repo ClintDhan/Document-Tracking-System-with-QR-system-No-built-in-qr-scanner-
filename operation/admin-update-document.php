@@ -16,16 +16,21 @@ if(isset($_POST['submit'])) {
     $copies = $_POST['pages'];
     $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
 
-
     $changes = [];
 
-    $getDoc = "SELECT * FROM document where id ='$document_id'";
-    $getDocResult = $conn->query($getDoc);
+    // ✅ GET document
+    $stmt = $conn->prepare("SELECT * FROM document WHERE id = ?");
+    $stmt->bind_param("s", $document_id);
+    $stmt->execute();
+    $getDocResult = $stmt->get_result();
     $row = $getDocResult->fetch_assoc();
     $row_description = $row['description'];
 
-    $check = "SELECT * FROM document WHERE description = '$description' AND id != '$document_id'";
-    $checkResult = $conn->query($check);
+    // ✅ CHECK duplicate
+    $stmt = $conn->prepare("SELECT * FROM document WHERE description = ? AND id != ?");
+    $stmt->bind_param("ss", $description, $document_id);
+    $stmt->execute();
+    $checkResult = $stmt->get_result();
 
     if($checkResult->num_rows > 0) {
         $_SESSION['error'] = "Document description already exists.";
@@ -53,9 +58,6 @@ if(isset($_POST['submit'])) {
 
     $changesString = !empty($changes) ? implode("", $changes) : null;
 
-
-
-    
     if($status != 'Released') {
         $released_to = null;
     }
@@ -64,21 +66,23 @@ if(isset($_POST['submit'])) {
         $returned_reason = null;
     }
 
-    $sql = "UPDATE document 
-            SET type = '$type',
-                description = '$description',
-                pages = '$copies',
-                status = '$status',
-                released_to = " . ($released_to ? "'$released_to'" : "NULL") . ",
-                returned_reason = " . ($returned_reason ? "'$returned_reason'" : "NULL") . "
-            WHERE id = '$document_id'";
-    $conn->query($sql);
+    // ✅ UPDATE document
+    $stmt = $conn->prepare("UPDATE document 
+            SET type = ?,
+                description = ?,
+                pages = ?,
+                status = ?,
+                released_to = ?,
+                returned_reason = ?
+            WHERE id = ?");
+    $stmt->bind_param("sssssss", $type, $description, $copies, $status, $released_to, $returned_reason, $document_id);
+    $stmt->execute();
 
-    
-    $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by, remarks) 
-               VALUES('$document_id', '$status', '$changesString', '$updatedby', '$remark')";
-    $conn->query($logSql);
-
+    // ✅ INSERT log
+    $stmt = $conn->prepare("INSERT INTO document_log(document_id, action, changes, performed_by, remarks) 
+               VALUES(?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $document_id, $status, $changesString, $updatedby, $remark);
+    $stmt->execute();
 
     $_SESSION['success'] = "Document successfully updated.";
     header("Location: ../admin/admin-document.php");

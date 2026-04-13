@@ -8,9 +8,11 @@ if(isset($_POST['submit'])) {
     $name = $_POST['name'];
     $password = $_POST['password'];
 
-
-    $sql = "SELECT * FROM user WHERE name = '$name'";
-    $result = $conn->query($sql);
+    // ✅ SELECT
+    $stmt = $conn->prepare("SELECT * FROM user WHERE name = ?");
+    $stmt->bind_param("s", $name);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if($result->num_rows > 0) {
         $_SESSION['error'] = "Username {$name} already exists.";
@@ -18,15 +20,21 @@ if(isset($_POST['submit'])) {
         exit();
     }
     else {
-        $sql1 = "INSERT INTO user (name , password) VALUES ('$name' , $password)";
-        $result1 = $conn->query($sql1);
+        // ✅ INSERT user
+        $stmt = $conn->prepare("INSERT INTO user (name , password) VALUES (?, ?)");
+        $stmt->bind_param("ss", $name, $password);
+        $result1 = $stmt->execute();
 
         if($result1) {
             $new_user_id = $conn->insert_id;
 
             $action = 'Create user';
-            $sql2 = "INSERT INTO user_log(performed_by, user_id, action) VALUES ($admin_id , $new_user_id, '$action')";
-            $conn->query($sql2);
+
+            // ✅ INSERT log
+            $stmt = $conn->prepare("INSERT INTO user_log(performed_by, user_id, action) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $admin_id, $new_user_id, $action);
+            $stmt->execute();
+
             $_SESSION['success'] = "User created successfully.";
             header("Location: ../admin/admin-user.php");
             exit();

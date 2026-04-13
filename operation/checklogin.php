@@ -18,8 +18,11 @@ if (!empty($_POST['redirect'])) {
     $loginRedirect .= '?redirect=' . urlencode($_POST['redirect']);
 }
 
-$sql = "SELECT * FROM user WHERE name = '$name' AND password = '$password'";
-$result = $conn->query($sql);
+// SELECT 
+$stmt = $conn->prepare("SELECT * FROM user WHERE name = ? AND password = ?");
+$stmt->bind_param("ss", $name, $password);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result && $result->num_rows == 1) {
     $user = $result->fetch_assoc();
@@ -41,24 +44,27 @@ if ($result && $result->num_rows == 1) {
 
             // ALREADY LOGGED IN → use QR redirect if available
             if (!empty($_POST['redirect'])) {
-                $sql = "INSERT INTO auth_logs (performed, user_id) 
-                        VALUES ('$performed', {$_SESSION['user_id']})";
-                $conn->query($sql);
+                $stmt = $conn->prepare("INSERT INTO auth_logs (performed, user_id) VALUES (?, ?)");
+                $stmt->bind_param("ss", $performed, $_SESSION['user_id']);
+                $stmt->execute();
+
                 header("Location: $redirect");
                 exit();
             }
 
             // DEFAULT DASHBOARD
             if ($user['role'] == "superadmin" || $user['role'] == "admin") {
-                $sql2 = "INSERT INTO auth_logs (performed, user_id) 
-                        VALUES ('$performed', {$_SESSION['user_id']})";
-                $conn->query($sql2);
+                $stmt = $conn->prepare("INSERT INTO auth_logs (performed, user_id) VALUES (?, ?)");
+                $stmt->bind_param("ss", $performed, $_SESSION['user_id']);
+                $stmt->execute();
+
                 header("Location: ../admin/admin-dashboard.php");
                 exit();
             } else {
-                $sql3 = "INSERT INTO auth_logs (performed, user_id) 
-                        VALUES ('$performed', {$_SESSION['user_id']})";
-                $conn->query($sql3);
+                $stmt = $conn->prepare("INSERT INTO auth_logs (performed, user_id) VALUES (?, ?)");
+                $stmt->bind_param("ss", $performed, $_SESSION['user_id']);
+                $stmt->execute();
+
                 header("Location: ../user/user-home.php");
                 exit();
             }

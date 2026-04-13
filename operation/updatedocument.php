@@ -20,7 +20,6 @@ if (isset($_POST['submit'])) {
     $pages = $_POST['pages'];
     $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
 
-    
     if ($status != 'Released') {
         $released_to = null;
     }
@@ -28,15 +27,20 @@ if (isset($_POST['submit'])) {
         $returned_reason = null;
     }
 
-    // ✅ Get current document first
-    $getDoc = "SELECT * FROM document WHERE id = '$document_id'";
-    $getDocResult = $conn->query($getDoc);
+    // Get current document first
+    $stmt = $conn->prepare("SELECT * FROM document WHERE id = ?");
+    $stmt->bind_param("s", $document_id);
+    $stmt->execute();
+    $getDocResult = $stmt->get_result();
     $row = $getDocResult->fetch_assoc();
 
-    // ✅ Check duplicate only if description changed
+    // Check duplicate only if description changed
     if ($description != $row['description']) {
-        $checkSql = "SELECT id FROM document WHERE description = '$description'";
-        $checkResult = $conn->query($checkSql);
+        $stmt = $conn->prepare("SELECT id FROM document WHERE description = ?");
+        $stmt->bind_param("s", $description);
+        $stmt->execute();
+        $checkResult = $stmt->get_result();
+
         if ($checkResult->num_rows > 0) {
             $_SESSION['error'] = "Document description already exists.";
             header("Location: ../user/user-update.php?document=" . urlencode($document_id) . "&qr=" . urlencode($qr_id) . "&control=" . urlencode($control));
@@ -44,7 +48,7 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    // ✅ Track changes
+    // this is for changes ngani
     $changes = [];
     if ($row['type'] != $type) $changes[] = "Type: {$row['type']} -> {$type}<br>";
     if ($row['description'] != $description) $changes[] = "Description: {$row['description']} -> {$description}<br>";
@@ -53,23 +57,45 @@ if (isset($_POST['submit'])) {
     if ($row['pages'] != $pages) $changes[] = "Pages: {$row['pages']} -> {$pages}<br>";
     $changesString = !empty($changes) ? implode("", $changes) : null;
 
-    // ✅ UPDATE document
-    $sql = "UPDATE document 
-            SET type = '$type',
-                description = '$description',
-                status = '$status',
-                pages = '$pages',
-                released_to = " . ($released_to ? "'$released_to'" : "NULL") . ",
-                returned_reason = " . ($returned_reason ? "'$returned_reason'" : "NULL") . "
-            WHERE qr_id = '$qr_id'";
-    $conn->query($sql);
+    // UPDATE 
+    $stmt = $conn->prepare("UPDATE document 
+            SET type = ?,
+                description = ?,
+                status = ?,
+                pages = ?,
+                released_to = ?,
+                returned_reason = ?
+            WHERE qr_id = ?");
 
-    // ✅ INSERT log
-    $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by, remarks) 
-               VALUES('$document_id', '$status', '$changesString', '$updatedby', '$remark')";
-    $conn->query($logSql);
+    $stmt->bind_param(
+        "sssssss",
+        $type,
+        $description,
+        $status,
+        $pages,
+        $released_to,
+        $returned_reason,
+        $qr_id
+    );
 
-    // ✅ Success
+    $stmt->execute();
+
+    // INSERT log
+    $stmt = $conn->prepare("INSERT INTO document_log(document_id, action, changes, performed_by, remarks) 
+               VALUES(?, ?, ?, ?, ?)");
+
+    $stmt->bind_param(
+        "sssss",
+        $document_id,
+        $status,
+        $changesString,
+        $updatedby,
+        $remark
+    );
+
+    $stmt->execute();
+
+
     $_SESSION['success'] = "Document successfully updated.";
     header("Location: ../user/user-home.php?control=" . urlencode($control));
     exit();

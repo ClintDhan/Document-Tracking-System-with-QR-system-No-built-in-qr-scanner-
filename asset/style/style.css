@@ -14,8 +14,8 @@ p {
 }
 
 .logo-img {
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
 }
 
 body {
@@ -47,7 +47,7 @@ body {
 }
 
 .logo-blue {
-    background-color: #aacadb;
+    background-color: #b0c2fa;
     height: 60px;
     width: 60px;
     border-radius: 50%;
@@ -60,7 +60,7 @@ body {
     font-size: 1.3em;
     margin: 0;
     font-weight: 800;
-    color: #80BBDB;
+    color: #5A81FA;
 
 }
 
@@ -68,7 +68,6 @@ body {
     margin: 0;
     font-size: 0.8em;
     color: #5f5f5f;
-    text-align: center;
 }
 
 
@@ -156,7 +155,7 @@ body {
 .form-flx button {
     height: 47px;
     width: 309px;
-    background-color: #80BBDB;
+    background-color: #5A81FA;
     color: white;
     border: none;
     cursor: pointer;
@@ -242,7 +241,7 @@ body {
     cursor: pointer;
     height: 100%;
     color: white;
-    background-color: rgb(227, 63, 63);
+    background-color: rgb(251, 100, 100);
 }
 
 .in-use {
@@ -308,7 +307,8 @@ body {
 
 .btn-search {
     margin-top: 10px !important;
-    background-color: #80BBDB !important;
+    background-color: #5A81FA !important;
+    border-radius: 8px;
 }
 
 .btn-receive {
@@ -661,7 +661,7 @@ body {
     color: #333333;
     margin: 0;
     line-height: 0;
-    color: #80BBDB;
+    color: #5A81FA;
 }
 .admin-logo-sub {
     font-size: 12px;

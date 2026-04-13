@@ -125,7 +125,7 @@ $returnedDocs = $row3['returned_docs'];
                     <p>Enter Control Number</p>
                     <form action="../operation/control-search.php" method="post">
                         <div class="control-search-container">
-                            <input class="mt-3" type="text" name="control" placeholder="MO-YEAR-123456">
+                            <input class="mt-3" type="text" name="control" placeholder="MO-YEAR-123456" required>
                             <button class="btn-submit btn-search" name="submit" type="submit">SEARCH</button>
                         </div>
                     </form>

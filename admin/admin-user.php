@@ -56,7 +56,7 @@ $user = $result->fetch_all(MYSQLI_ASSOC);
 
             <div class="admin-logout">
                 <form action="../operation/logout.php" method="POST">
-                <button class='log-out admin-logout'>↪ LOGOUT</button>
+                <button class='log-out admin-logout'> LOGOUT</button>
                 </form>            
              </div>
             <div class="burger-icon" id="onclickModalBtn">

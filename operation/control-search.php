@@ -6,8 +6,11 @@ if(isset($_POST['submit'])) {
 
     $control = $_POST['control'];
 
-    $sql = "SELECT * FROM qr_code WHERE control_num = '$control'";
-    $result = $conn->query($sql);
+    // ✅ SELECT
+    $stmt = $conn->prepare("SELECT * FROM qr_code WHERE control_num = ?");
+    $stmt->bind_param("s", $control);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if($result->num_rows > 0) {
         header("Location: ../user/user-home.php?control=" . urlencode($control));

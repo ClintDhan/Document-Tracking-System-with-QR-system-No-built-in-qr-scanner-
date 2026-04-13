@@ -13,12 +13,18 @@ if(isset($_POST['submit'])) {
 
     $changes = [];
 
-    $getUser = "SELECT * FROM user where id ='$id'";
-    $getUserResult = $conn->query($getUser);
+    // ✅ GET user
+    $stmt = $conn->prepare("SELECT * FROM user WHERE id = ?");
+    $stmt->bind_param("s", $id);
+    $stmt->execute();
+    $getUserResult = $stmt->get_result();
     $row = $getUserResult->fetch_assoc();
 
-    $checkUser = "SELECT * FROM user WHERE name = '$name' AND id != '$id'";
-    $checkUserResult = $conn->query($checkUser);    
+    // ✅ CHECK duplicate username
+    $stmt = $conn->prepare("SELECT * FROM user WHERE name = ? AND id != ?");
+    $stmt->bind_param("ss", $name, $id);
+    $stmt->execute();
+    $checkUserResult = $stmt->get_result();    
 
     if($checkUserResult->num_rows > 0) {
         $_SESSION['error'] = "Username {$name} already exists.";
@@ -43,18 +49,20 @@ if(isset($_POST['submit'])) {
 
     $changesString = !empty($changes) ? implode("", $changes) : null;
 
+    // ✅ UPDATE user
+    $stmt = $conn->prepare("UPDATE user 
+            SET name = ?,
+                is_active = ?,
+                role = ?
+            WHERE id = ?");
+    $stmt->bind_param("ssss", $name, $status, $role, $id);
+    $stmt->execute();
 
-    $sql = "UPDATE user 
-            SET name = '$name',
-                is_active = '$status',
-                role = '$role'
-            WHERE id = '$id'";
-    $conn->query($sql);
-
-   
-    $logSql = "INSERT INTO user_log(performed_by, user_id, action, note) 
-               VALUES('$updatedby', '$id', '$action' , '$changesString')";
-    $conn->query($logSql);
+    // ✅ INSERT log
+    $stmt = $conn->prepare("INSERT INTO user_log(performed_by, user_id, action, note) 
+               VALUES(?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $updatedby, $id, $action, $changesString);
+    $stmt->execute();
 
     $_SESSION['success'] = "User successfully updated.";
     header("Location: ../admin/admin-user.php");

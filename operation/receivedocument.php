@@ -13,8 +13,10 @@ if(isset($_POST['submit'])) {
     $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
 
     // Check if a document with the same desc exists
-    $sql = "SELECT * FROM document WHERE description = '$description' AND id != '$document_id'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM document WHERE description = ?");
+    $stmt->bind_param("ss", $description, $document_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if($result->num_rows > 0) {
         $_SESSION['error'] = "Document description already exists.";
@@ -22,9 +24,10 @@ if(isset($_POST['submit'])) {
         exit();
     } else {
         // Insert document
-        $sql1 = "INSERT INTO document (qr_id, type, description, department, created_by, pages) 
-                 VALUES ('$qr_id', '$type', '$description', '$department', '$createdBy', '$pages')";
-        $result1 = $conn->query($sql1);
+        $stmt = $conn->prepare("INSERT INTO document (qr_id, type, description, department, created_by, pages) 
+                 VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $qr_id, $type, $description, $department, $createdBy, $pages);
+        $result1 = $stmt->execute();
         $document_id = $conn->insert_id;
 
         // Mark QR as used
@@ -32,12 +35,12 @@ if(isset($_POST['submit'])) {
         $stmt2->bind_param("i", $qr_id);
         $qrUpdate = $stmt2->execute();
         
-
         if($result1 && $qrUpdate) {
             
-            $sqlLog = "INSERT INTO document_log (document_id, action, performed_at, performed_by, remarks)
-            VALUES ($document_id, 'Received', NOW(), $createdBy, '$remark')";
-            $conn->query($sqlLog);
+            $stmt = $conn->prepare("INSERT INTO document_log (document_id, action, performed_at, performed_by, remarks)
+            VALUES (?, 'Received', NOW(), ?, ?)");
+            $stmt->bind_param("sss", $document_id, $createdBy, $remark);
+            $stmt->execute();
 
             $_SESSION['success'] = "Document successfully received.";
             header("Location: ../user/user-home.php?control=" . urlencode($control));

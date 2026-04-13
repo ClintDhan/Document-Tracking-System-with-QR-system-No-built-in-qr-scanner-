@@ -27,8 +27,8 @@ require_once 'db.php';
 <div class='login-container'>
     <div class='login-form'>
         <div class='login-centered'>
-            <p style='font-weight: 900; color: #003B99; font-size: 30px; line-height: 0.8;' class="first-login-title">Change password</p>
-            <p style='font-size: 15px; color: #80BBDB; font-weight: bold;' class="first-login-sub">Please change the password provided by your admin</p>
+            <p style='font-weight: 900; color: #2B308A; font-size: 30px; line-height: 0.8;' class="first-login-title">Change password</p>
+            <p style='font-size: 15px; color: #AAB1CE; font-weight: 400;' class="first-login-sub">Please change the password provided by your admin</p>
         <form action="operation/change-pass.php" method="post" class='form-flx'>             
             <input type="hidden" name="redirect" value="<?= htmlspecialchars($_GET['redirect'] ?? '') ?>">                
             <div class="input-position">

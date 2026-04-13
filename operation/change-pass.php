@@ -10,8 +10,10 @@ if(isset($_POST['submit'])) {
     $redirect = urldecode($_POST['redirect'] ?? '');
 
     // Get current user
-    $sql = "SELECT * FROM user WHERE id = ".$_SESSION['user_id'];
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM user WHERE id = ?");
+    $stmt->bind_param("i", $_SESSION['user_id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
     if((empty($newPass) || empty($reEnterPass)) && !empty($redirect)) {
@@ -29,13 +31,14 @@ if(isset($_POST['submit'])) {
     if ($newPass === $reEnterPass) {
 
         // Update password
-        $updatePass = "UPDATE user SET first_login = 1, password = '$newPass' WHERE id = ".$_SESSION['user_id'];
-        $conn->query($updatePass);
+        $stmt = $conn->prepare("UPDATE user SET first_login = 1, password = ? WHERE id = ?");
+        $stmt->bind_param("si", $newPass, $_SESSION['user_id']);
+        $stmt->execute();
 
         // Log once only
-        $sql = "INSERT INTO auth_logs (performed, user_id) 
-                VALUES ('$performed', {$_SESSION['user_id']})";
-        $conn->query($sql);
+        $stmt = $conn->prepare("INSERT INTO auth_logs (performed, user_id) VALUES (?, ?)");
+        $stmt->bind_param("si", $performed, $_SESSION['user_id']);
+        $stmt->execute();
 
         // ✅ Handle redirect
         if (!empty($redirect)) {
@@ -51,10 +54,10 @@ if(isset($_POST['submit'])) {
         }
         exit;
 
-        } else {
-            $_SESSION['error'] = "Both passwords did not match, please double check.";
-            header("Location: ../first-login.php?redirect=" . urlencode($redirect));
-            exit();
+    } else {
+        $_SESSION['error'] = "Both passwords did not match, please double check.";
+        header("Location: ../first-login.php?redirect=" . urlencode($redirect));
+        exit();
     }
 
 } else {
