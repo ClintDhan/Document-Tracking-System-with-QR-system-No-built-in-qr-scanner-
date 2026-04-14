@@ -2,6 +2,12 @@
 session_start();
 require_once 'db.php'; 
 
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +17,7 @@ require_once 'db.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First login</title>
-        <link rel="icon" type="image/png" href="../asset/img/log.png">
-
+    <link rel="icon" type="image/png" href="../asset/img/log.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.13.1/font/bootstrap-icons.min.css" integrity="sha512-t7Few9xlddEmgd3oKZQahkNI4dS6l80+eGEzFQiqtyVYdvcSG2D3Iub77R20BdotfRPA9caaRkg1tyaJiPmO0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="asset/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="asset/style/style.css">

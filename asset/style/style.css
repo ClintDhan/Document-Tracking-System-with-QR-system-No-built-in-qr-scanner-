@@ -468,6 +468,14 @@ body {
     margin-top: 35px;
 }
 
+.btn-export {
+    text-decoration: none;
+    background-color: green;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 8px;
+}
+
 .option-receive {
     font-weight: 500;
     font-size: 14px;
@@ -1432,6 +1440,9 @@ table {
     }
     .user-table {
         width: 661px !important;
+    }
+    .admin-doc-export-contain {
+        justify-content: start !important;
     }
 }
 

@@ -47,6 +47,13 @@ if (!isset($_SESSION['user_id'])) {
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
 
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error']; ?>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
     <div class="admin-dash-container">
         <div class="admin-navbar">
             <div class="admin-logo">
@@ -83,23 +90,27 @@ if (!isset($_SESSION['user_id'])) {
             </div>
         </div>
 
-        <div class="admin-docs-container">
-            <div class="search-container">
-                <p>Documents</p>
-                <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
-            </div>
-             <div class="admin-doc-sub-contain admin-doc-export-contain">
-                <div>
+        <div class="admin-add-user-container">
+                <p style="text-align: center;" class="admin-add-title">Export Documents</p>
+                <p style="text-align: center;" class="admin-add-sub">Select the start and end dates for export</p>
 
-                </div>
-                <div class="">
-                        <a class="btn-export" href="../admin/admin-doc-export.php">EXPORT DOCUMENTS</a>
-                </div>
+            <div>
+                <form action="../operation/admin-document-export.php" method="POST">
+                    <div class="admin-add-user-flx mt-3">
+                        <p>Start Date</p>
+                        <input required type="date" class="admin-add-user-input" name="from">
+                    </div>
 
+                    <div class="admin-add-user-flx mt-2">
+                        <p>End Date</p>
+                        <input type="date" value="<?= $password ?>" name="to" class="admin-add-user-input">
+                    </div>
+                    <button class="btn-submit" name="submit">Export</button>
+                </form>
             </div>
-            <div id="result" class="result-scroll">
-                <?php require_once "../operation/admin-document-search.php" ?>
-            </div>
+            <button class="adm-bck-btn" onclick="window.location.href='admin-document.php'">
+                ❮ BACK
+            </button>
         </div>
 
     </div>
