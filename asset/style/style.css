@@ -748,6 +748,7 @@ body {
 
 .card-text {
     margin-top: 5px;
+    font-size: 12px;
     font-weight: 500;
     color: #808080;
 }
@@ -976,6 +977,12 @@ tbody tr td {
 
 .status-released {
     background-color: #7C3AED;
+    color: white;
+    padding: 2px 3px;
+}
+
+.status-mayor {
+    background-color: #008130;
     color: white;
     padding: 2px 3px;
 }
@@ -1458,7 +1465,7 @@ table {
 
 @media (max-width:520px) { 
     .card-text {
-        font-size: 12px;
+        font-size: 10px;
     }
 
 }

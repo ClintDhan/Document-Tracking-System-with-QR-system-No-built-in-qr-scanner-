@@ -45,7 +45,7 @@ if (isset($_SESSION['user_id']) && isset($_GET['redirect'])) {
         <div class='login-centered'>
             <p style='font-weight: 900; color: #2B308A; font-size: 30px; line-height: 0.8;'>WELCOME!</p>
             <p style='font-size: 15px; color: #AAB1CE; font-weight: 400;'>Please input your details</p>
-        <form action="operation/checklogin.php" method="post" class='form-flx'>
+            <form action="operation/checklogin.php" method="post" class='form-flx'>
                 <!-- hidden input to carry redirect -->
                 <input type="hidden" name="redirect" value="<?= isset($_GET['redirect']) ? htmlspecialchars($_GET['redirect']) : '' ?>">
                 <input type="text" name="name" placeholder="Username" maxlength="15">
@@ -64,7 +64,7 @@ if (isset($_SESSION['user_id']) && isset($_GET['redirect'])) {
     <div class="copyright">
         <p>
         © 2026 
-        <a href="https://www.facebook.com/GodSonClintoy/" target="_blank">CLNTY</a> 
+        <a href="https://www.facebook.com/GodSonClintoy/" target="_blank">Clint Roño</a> 
         - Designed by 
         <a href="https://example.com">April Jhea Logroño</a>
         </p>    

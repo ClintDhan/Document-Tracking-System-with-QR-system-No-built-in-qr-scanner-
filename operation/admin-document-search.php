@@ -60,7 +60,8 @@ while ($row = $result->fetch_assoc()) {
                         ($row['status'] == 'Returned' ? 'status-returned' :
                         ($row['status'] == 'Approved' ? 'status-review' :
                         ($row['status'] == 'Released' ? 'status-released' :
-                        'status-default')))
+                        ($row['status'] == 'For MJCA Approval' ? 'status-mayor' :
+                        'status-default'))))
                     ."'>".$row['status']."</div>
                 </div>
             </td>

@@ -48,7 +48,8 @@ while ($row = $result->fetch_assoc()) {
                     ($row['action'] == 'Returned' ? 'status-returned' :
                     ($row['action'] == 'Approved' ? 'status-review' :
                     ($row['action'] == 'Released' ? 'status-released' :
-                    'status-default')))
+                    ($row['action'] == 'For MJCA Approval' ? 'status-mayor' :
+                    'status-default'))))
                 ."'>".$row['action']."</div>
             </div>
             <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['remarks']."</td>

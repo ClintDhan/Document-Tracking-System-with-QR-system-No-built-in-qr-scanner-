@@ -135,7 +135,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                     
                 <p class="card-count"><?= $totalReviewCount ?></p>
                 </div>
-                <p class="card-text">APPROVED</p>
+                <p class="card-text">APPROVED/MJCA APPROVAL</p>
             </div>
             <div class="card-flx">
                 <div class="admin-card-circle" style="background-color: #7C3AED;">
@@ -175,8 +175,21 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                             <tr>
                                 <td><?= htmlspecialchars($docs['id']) ?></td>
                                 <td><?= htmlspecialchars($docs['type']) ?></td>
-                                <td><?= htmlspecialchars($docs['action']) ?></td>
-                                <td><?= htmlspecialchars($docs['performed']) ?></td>
+                                <td class='truncate' onclick="this.classList.toggle('expanded')">
+                                    <div class='document-status-container'>
+                                        <div style='border-radius: 4px;' class='
+                                            <?php 
+                                                echo ($docs['action'] == 'Returned' ? 'status-returned' :
+                                                    ($docs['action'] == 'Approved' ? 'status-review' :
+                                                    ($docs['action'] == 'Released' ? 'status-released' :
+                                                    ($docs['action'] == 'For MJCA Approval' ? 'status-mayor' :
+                                                    'status-default'))));
+                                            ?>
+                                        '>
+                                            <?php echo htmlspecialchars($docs['action']); ?>
+                                        </div>
+                                    </div>
+                                </td>                                <td><?= htmlspecialchars($docs['performed']) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -193,11 +206,6 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <p class="todays-text">Approved</p>
-                    <p class="todays-num" style="color: #92400E;"><?= $todayReviewCount ?></p>
-                </div>
-
-                <div class="d-flex justify-content-between">
                     <p class="todays-text">Released</p>
                     <p class="todays-num" style="color: #075985;"><?= $todayReleasedCount ?></p>
                 </div>
@@ -205,6 +213,11 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                 <div class="d-flex justify-content-between">
                     <p class="todays-text">Returned</p>
                     <p class="todays-num" style="color: #991B1B"><?= $todayReturnedCount ?></p>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <p class="todays-text">Approved/MJCA Approval</p>
+                    <p class="todays-num" style="color: #92400E;"><?= $todayReviewCount ?></p>
                 </div>
                 
             </div>
