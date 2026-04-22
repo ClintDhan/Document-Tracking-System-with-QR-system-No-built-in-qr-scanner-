@@ -8,6 +8,13 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $doc = $_GET['doc'] ?? null;
+
+if ($doc === NULL) {
+    header("Location: ../admin/admin-dashboard.php");
+    exit();
+}
+
+
 $sql = "SELECT * FROM document where id = '$doc'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
@@ -57,7 +64,7 @@ $row = $result->fetch_assoc();
 
                     <div class="admin-logout">
                         <form action="../operation/logout.php" method="POST">
-                            <button class='log-out admin-logout'>LOGOUT</button>
+                            <button class='log-out admin-logout'>Log out</button>
                         </form>
                     </div>
                      <div class="burger-icon" id="onclickModalBtn">
@@ -95,7 +102,7 @@ $row = $result->fetch_assoc();
                     <label for="">Status</label> <br>
                     <select name="status" id='statusSelect' class="admin-doc-input">
                         <option value="Received" <?= ($row['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
-                        <option value="Reviewed" <?= ($row['status'] ?? '') == 'Reviewed' ? 'selected' : '' ?>>Reviewed</option>
+                        <option value="Approved" <?= ($row['status'] ?? '') == 'Approved' ? 'selected' : '' ?>>Approved</option>
                         <option value="Released" <?= ($row['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
                         <option value="Returned" <?= ($row['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
                     </select>
@@ -199,7 +206,7 @@ $row = $result->fetch_assoc();
             
                 </a>
                 <form action="../operation/logout.php" method="POST">
-                    <button class='burger-logout'>LOGOUT</button>
+                    <button class='burger-logout'>Log out</button>
                 </form>
             </div>
         </div>

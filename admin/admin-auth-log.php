@@ -46,7 +46,7 @@ if (!isset($_SESSION['user_id'])) {
 
             <div class="admin-logout">
                 <form action="../operation/logout.php" method="POST">
-                <button class='log-out admin-logout'> LOGOUT</button>
+                <button class='log-out admin-logout'> Log out</button>
                 </form>
             </div>
              <div class="burger-icon" id="onclickModalBtn">
@@ -59,7 +59,7 @@ if (!isset($_SESSION['user_id'])) {
         <div class="admin-docs-container">
             <div class="search-container">
             <p>Authentication Logs</p>
-            <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
+            <input type="text" onkeyup="loadData(this.value)" placeholder="Search for auth....">
             </div>
             <div id="result" class="result-scroll">
                 <?php require_once "../operation/admin-auth-log.php" ?>
@@ -132,7 +132,7 @@ if (!isset($_SESSION['user_id'])) {
             
                 </a>
                 <form action="../operation/logout.php" method="POST">
-                    <button class='burger-logout'>LOGOUT</button>
+                    <button class='burger-logout'>Log out</button>
                 </form>
             </div>
         </div>

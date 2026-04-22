@@ -41,7 +41,7 @@ $result6 = $conn->query($todayRecs);
 $row5 = $result6->fetch_assoc();
 $todayReceivedCount = $row5['today_received'];
 
-$todayReview = "SELECT COUNT(*) AS today_review FROM document WHERE status = 'Reviewed' AND (DATE(created_at) = CURDATE() OR DATE(updated_at) = CURDATE())";
+$todayReview = "SELECT COUNT(*) AS today_review FROM document WHERE status = 'Approved' AND (DATE(created_at) = CURDATE() OR DATE(updated_at) = CURDATE())";
 $result7 = $conn->query($todayReview);
 $row6 = $result7->fetch_assoc();
 $todayReviewCount = $row6['today_review'];
@@ -108,7 +108,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
 
             <div class="admin-logout">
                 <form action="../operation/logout.php" method="POST">
-                    <button class='log-out admin-logout'> LOGOUT</button>
+                    <button class='log-out admin-logout'> Log out</button>
                 </form>
             </div>
             <div class="burger-icon" id="onclickModalBtn">
@@ -135,7 +135,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                     
                 <p class="card-count"><?= $totalReviewCount ?></p>
                 </div>
-                <p class="card-text">REVIEWED</p>
+                <p class="card-text">APPROVED</p>
             </div>
             <div class="card-flx">
                 <div class="admin-card-circle" style="background-color: #7C3AED;">
@@ -193,7 +193,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <p class="todays-text">Reviewed</p>
+                    <p class="todays-text">Approved</p>
                     <p class="todays-num" style="color: #92400E;"><?= $todayReviewCount ?></p>
                 </div>
 
@@ -278,7 +278,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
             
                 </a>
                 <form action="../operation/logout.php" method="POST">
-                    <button class='burger-logout'>LOGOUT</button>
+                    <button class='burger-logout'>Log out</button>
                 </form>
             </div>
         </div>

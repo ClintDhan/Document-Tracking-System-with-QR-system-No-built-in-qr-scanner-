@@ -8,7 +8,7 @@ if (!isset($_GET['control'])) {
 }
 
 $control = $_GET['control'];
-$serverIP = '192.168.68.100'; // DIRI EEDIT MING
+$serverIP = '192.168.68.101'; // DIRI EEDIT MING
 $url = "http://$serverIP/DocumentTrackingSys/qr-handler.php?control=$control";
 
 // Generate QR to memory (not output directly)

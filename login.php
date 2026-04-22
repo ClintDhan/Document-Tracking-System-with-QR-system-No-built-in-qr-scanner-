@@ -56,7 +56,7 @@ if (isset($_SESSION['user_id']) && isset($_GET['redirect'])) {
                     >
                     <i class="bi bi-eye-slash toggle-icon"></i>
                 </div>
-                <button type="submit">LOGIN</button>
+                <button type="submit">Log in</button>
         </form>
 
         </div>

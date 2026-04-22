@@ -40,7 +40,7 @@ function generateControlNumber($conn) {
 }
 
 // 3️⃣ Your server IP (local network)
-$serverIP = '192.168.68.100'; // <-- change this to your PC's IP
+$serverIP = '192.168.68.101'; // <-- change this to your PC's IP
 
 // 4️⃣ Generate QR codes in DB
 $codes = [];
@@ -103,7 +103,7 @@ foreach ($codes as $codeData) {
     ?>
     <div class="qr-item">
         <img src="<?= $dataUri ?>">
-        <div class="label"><?= $control ?></div>
+        <div class="label" style="font-size: 16px;"><?= $control ?></div>
     </div>
 <?php } ?>
 </div>

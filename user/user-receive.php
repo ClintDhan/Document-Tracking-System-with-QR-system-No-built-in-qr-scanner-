@@ -50,11 +50,11 @@ if (!$qr) {
 
             <div class='user-nav-bar'>
                 <div class='user-name'>
-                    <p>Hi <span class="span-name"><?= $_SESSION['name']; ?>!</p>
+                    <p>Hi, <span class="span-name"><?= $_SESSION['name']; ?>!</p>
                     <p style="color: gray;"><?= date('m/d/Y') ?></p>
                 </div>
                 <form action="../operation/logout.php" method='POST'>
-                    <button class='log-out'>LOGOUT</button>
+                    <button class='log-out'>Log out</button>
                 </form>
             </div>
 
@@ -63,7 +63,7 @@ if (!$qr) {
   ❮ BACK
 </button>
             <div class='option-form'>
-                    <p class='option-receive' style="text-align: center;">Receive Document</p>
+                    <p class='option-receive' style="text-align: center;">Create Document</p>
                     <p class='option-text' style="text-align: center;">Please indicate document information</p>
 
                 <form action="../operation/receivedocument.php" method='POST' 
@@ -75,18 +75,51 @@ if (!$qr) {
                         <label for="">Type</label><br>
                         <input required class='receive-input' type="text" placeholder='Type' name='type'>
                     </div>
+
                     <div class="mt-2">
                         <label for="">Description</label> <br>
                         <textarea required name='description' id="" class='receive-textarea' rows='3' placeholder='Description'></textarea>
                     </div>
+                   
+
                     <div class="mt-2">
+                        <label for="">Department</label> <br>
+                        <input required type="text" placeholder='Department' class='receive-input' name='department'>
+                    </div>
+
+                     <div class="mt-2">
                         <label for="">Number of copies</label> <br>
                         <input required class='receive-input' type="number" placeholder='Copies' name='pages'>
                     </div>
 
                     <div class="mt-2">
-                        <label for="">Department</label> <br>
-                        <input required type="text" placeholder='Department' class='receive-input' name='department'>
+                        <label for="">Status</label> <br>
+                        <select name="status" class="update-input" id='statusSelect'>
+                            <option value="Received">Received</option>
+                            <option value="Released">Released</option>
+                            <option value="Returned">Returned</option>
+                        </select>
+                    </div>
+                    <div class="mt-2">
+                        <label for="" id="releasedInputLabel">Released To</label>
+                        <input type="text"
+                        required
+                        id="releasedTo"
+                        class="receive-input"
+                        name="released_to"
+                        placeholder="Released To"
+                        style="display: none;">
+                    </div>
+
+                    <div class="mt-2">
+                        <label for="" id="returnedInputLabel">Return Reason</label>
+                        <input type="text"
+                        required
+                        id="returnReason"
+                        class="receive-input"
+                        name="returned_reason"
+                        placeholder="Return Reason"
+                        style="display: none;">
                     </div>
 
                     <div class="mt-2">
@@ -94,12 +127,58 @@ if (!$qr) {
                         <input type="text" placeholder='(Optional)' class='receive-input' name='remark'>
                     </div>
 
-                    <button class='btn-submit' type="submit" name="submit">CREATE</button>
+                    <button class='btn-submit' type="submit" name="submit">SAVE</button>
                 </form>
             </div>
 
         </div>
 
     </div>
+
+<script>
+
+const statusSelect = document.getElementById('statusSelect');
+const releasedInput = document.getElementById('releasedTo');
+const releasedInputLabel = document.getElementById('releasedInputLabel');
+const returnedInputLabel = document.getElementById('returnedInputLabel');
+const returnReason = document.getElementById('returnReason');
+
+
+function showInput() {
+    if (statusSelect.value === 'Released') {
+        releasedInputLabel.style.display = 'block';
+        releasedInput.style.display = 'block';
+        releasedInput.required = true;
+        returnedInputLabel.style.display = 'none';
+        returnReason.style.display = 'none';
+        returnReason.required = false;
+    }
+    
+    else if(statusSelect.value === 'Returned') {
+        returnedInputLabel.style.display = 'block';
+        returnReason.style.display = 'block';
+        returnReason.required = true;
+        releasedInputLabel.style.display = 'none';
+        releasedInput.style.display = 'none';
+        releasedInput.required = false;
+    }
+    else {
+        releasedInputLabel.style.display = 'none';
+        releasedInput.style.display = 'none';
+        releasedInput.required = false;
+        releasedInput.value = ''; // ADD THIS
+
+        returnedInputLabel.style.display = 'none';
+        returnReason.style.display = 'none';
+        returnReason.required = false;
+        returnReason.value = ''; // ADD THIS
+    }
+
+}
+
+showInput();
+statusSelect.addEventListener('change' ,showInput );
+
+</script>
 </body>
 </html>

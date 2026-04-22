@@ -130,7 +130,7 @@ $row = $result->fetch_assoc();
 
                     <div class="admin-logout">
                          <form action="../operation/logout.php" method="POST">
-                            <button class='log-out admin-logout'> LOGOUT</button>
+                            <button class='log-out admin-logout'> Log out</button>
                         </form>
                     </div>
                     <div class="burger-icon" id="onclickModalBtn">
@@ -172,9 +172,9 @@ $row = $result->fetch_assoc();
                         style="<?= ($row['status'] ?? '') == 'Returned' ? 'background-color: #f8d7da; color: #555;' :
                                     (($row['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
                                     (($row['status'] ?? '') == 'Received' ? 'background-color: #d4edda; color: #555;' :
-                                    (($row['status'] ?? '') == 'Reviewed' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"                   
+                                    (($row['status'] ?? '') == 'Approved' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"                   
                                                 
-                        
+                         
                         type="text" id="statusSelect" name="status" value="<?= htmlspecialchars($row['status']) ?>" class="admin-doc-input" readonly>
                     </div>
 
@@ -225,7 +225,8 @@ $row = $result->fetch_assoc();
                         <input type="text" id="" placeholder="(Optional)" name="remark" class="admin-doc-input">
                     </div>
 
-                    <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='submit'>REVIEWED</button>
+                    <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='approved'>APPROVE</button>
+                    <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='mayor' style="margin-top: 5px; background-color: green;">FOR MAYOR'S APPROVAL</button>
                         <?php endif; ?>
                     </div>
                 </form>
@@ -300,7 +301,7 @@ $row = $result->fetch_assoc();
             
                 </a>
                 <form action="../operation/logout.php" method="POST">
-                    <button class='burger-logout'>LOGOUT</button>
+                    <button class='burger-logout'>Log out</button>
                 </form>
             </div>
         </div>

@@ -43,11 +43,11 @@ $document = mysqli_fetch_assoc($result);
 
             <div class='user-nav-bar'>
                 <div class='user-name'>
-                    <p>Hi <span class="span-name"><?= $_SESSION['name']; ?>!</p>
+                    <p>Hi, <span class="span-name"><?= $_SESSION['name']; ?>!</p>
                     <p style="color: gray;"><?= date('m/d/Y') ?></p>
                 </div>
                 <form action="../operation/logout.php" method='POST'>
-                    <button class='log-out'>LOGOUT</button>
+                    <button class='log-out'>Log out</button>
                 </form>
             </div>
 
@@ -59,7 +59,7 @@ $document = mysqli_fetch_assoc($result);
 
                 <div>
                     <label for="">Type</label> <br>
-                    <input type="text" class="update-input" name="type" value="<?= $document['type'] ?>" disabled>
+                    <input type="text" class="update-input" name="type" value="<?= $document['type'] ?>" readonly>
                 </div>
                 <div class="mt-2">
                     <label for="">Description</label> <br>
@@ -67,11 +67,11 @@ $document = mysqli_fetch_assoc($result);
                                 class="update-textare" 
                                 name="description" 
                                 rows="3" 
-                                disabled><?= htmlspecialchars($document['description'] ?? '') ?></textarea>                
+                                readonly><?= htmlspecialchars($document['description'] ?? '') ?></textarea>                
                 </div>
                 <div class="mt-2">
                     <label for="">Department</label> <br>
-                    <input type="text" class="update-input" name="department" value="<?= $document['department'] ?>" disabled>
+                    <input type="text" class="update-input" name="department" value="<?= $document['department'] ?>" readonly>
                 </div>
                 <div class="mt-2">
                         <label for="">Number of copies</label> <br>
@@ -85,11 +85,11 @@ $document = mysqli_fetch_assoc($result);
                                 (($document['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
                                 (($document['status'] ?? '') == 'Received' ? 'background-color: #d4edda; color: #555;' :
                                 (($document['status'] ?? '') == 'Reviewed' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"
-                        type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
+                        type="text" class="update-input" name="status" value="<?= $document['status'] ?>" readonly>
                     </div>
                     <div class="mt-2">
                         <label for="">Released To</label> <br>
-                        <input type="text" class="update-input" name="released" value="<?= $document['released_to'] ?>" disabled>
+                        <input type="text" class="update-input" name="released" value="<?= $document['released_to'] ?>" readonly>
                     </div>
                 <?php elseif($document['status'] == 'Returned'): ?>
                      <div class="mt-2">
@@ -99,11 +99,11 @@ $document = mysqli_fetch_assoc($result);
                                 (($document['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
                                 (($document['status'] ?? '') == 'Received' ? 'background-color: #d4edda; color: #555;' :
                                 (($document['status'] ?? '') == 'Reviewed' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"
-                        type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
+                        type="text" class="update-input" name="status" value="<?= $document['status'] ?>" readonly>
                     </div>
                     <div class="mt-2">
                         <label for="">Returned Reason</label> <br>
-                        <input type="text" class="update-input" name="returned_reason" value="<?= $document['returned_reason'] ?>" disabled>
+                        <input type="text" class="update-input" name="returned_reason" value="<?= $document['returned_reason'] ?>" readonly>
                     </div>
                 <?php else: ?> 
                     <div class="mt-2">
@@ -113,25 +113,25 @@ $document = mysqli_fetch_assoc($result);
                                 (($document['status'] ?? '') == 'Released' ? 'background-color: #e6ccff; color: #555;' :
                                 (($document['status'] ?? '') == 'Received' ? 'background-color: #d4edda; color: #555;' :
                                 (($document['status'] ?? '') == 'Reviewed' ? 'background-color: #fff3cd; color: #555;' : '' )))?>"
-                        type="text" class="update-input" name="status" value="<?= $document['status'] ?>" disabled>
+                        type="text" class="update-input" name="status" value="<?= $document['status'] ?>" readonly>
                     </div>
                 <?php endif; ?>
                 <div class="mt-2">
                     <label for="">Control Number</label> <br>
-                    <input type="text" class="update-input" name="control" value="<?= $control ?>" disabled>
+                    <input type="text" class="update-input" name="control" value="<?= $control ?>" readonly>
                 </div>
                 <div class="mt-2">
                      <label for="">Created</label> <br>
-                    <input type="text" class="update-input" name="status" value="<?= $document['created_at'] ?>" disabled>
+                    <input type="text" class="update-input" name="status" value="<?= $document['created_at'] ?>" readonly>
                 </div>
                 <div class="mt-2">
                      <label for="">Last updated</label> <br>
-                    <input type="text" class="update-input" name="status" value="<?= $document['updated_at'] ?>" disabled>
+                    <input type="text" class="update-input" name="status" value="<?= $document['updated_at'] ?>" readonly>
                 </div>
                 <?php if($document['remarks'] != NULL): ?>
                 <div class="mt-2">
                      <label for="">Latest Remark</label> <br>
-                    <input type="text" class="update-input" name="remark" value="<?= $document['remarks'] ?>" disabled>
+                    <input type="text" class="update-input" name="remark" value="<?= $document['remarks'] ?>" readonly>
                 </div>
                 <?php endif;?>
             </div>

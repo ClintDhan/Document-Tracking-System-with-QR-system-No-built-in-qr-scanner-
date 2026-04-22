@@ -61,7 +61,7 @@ $user = $result->fetch_assoc();
 
             <div class="admin-logout">
                 <form action="../operation/logout.php" method="POST">
-                <button class='log-out admin-logout'> LOGOUT</button>
+                <button class='log-out admin-logout'> Log out</button>
                 </form>
             </div>
             <div class="burger-icon" id="onclickModalBtn">
@@ -173,7 +173,7 @@ $user = $result->fetch_assoc();
             
                 </a>
                 <form action="../operation/logout.php" method="POST">
-                    <button class='burger-logout'>LOGOUT</button>
+                    <button class='burger-logout'>Log out</button>
                 </form>
             </div>
         </div>

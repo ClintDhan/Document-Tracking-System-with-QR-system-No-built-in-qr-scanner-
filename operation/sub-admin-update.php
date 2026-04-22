@@ -2,43 +2,68 @@
 session_start();
 require_once "../db.php";
 
-if(isset($_POST['submit'])) {
+if(isset($_POST['approved']) || isset($_POST['mayor'])) {
 
-    $document_id = $_POST['id'] ?? null;
-    $updatedby = $_SESSION['user_id'];
-    $status = "Reviewed";
-    $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
-    $changes = [];
+    $conn->begin_transaction();
 
-    if (!$document_id) {
-        die("Document ID missing");
-    }
+    try {
 
-    $sql = "SELECT * FROM document WHERE id = '$document_id'";
-    $result = $conn->query($sql);
+        $document_id = $_POST['id'] ?? null;
+        $updatedby = $_SESSION['user_id'];
+        $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
+        $changes = [];
 
-    if ($result->num_rows === 0) {
-        die("Document not found");
-    }
+        if (!$document_id) {
+            throw new Exception("Document ID missing");
+        }
 
-    $row = $result->fetch_assoc();
+        // GET DOCUMENT
+        $stmt = $conn->prepare("SELECT * FROM document WHERE id = ?");
+        $stmt->bind_param("s", $document_id);
+        $stmt->execute();
+        $row = $stmt->get_result()->fetch_assoc();
 
-    if($row['status'] != $status){
-        $changes[] = "Status: {$row['status']} -> {$status}";
-    }
+        if (!$row) {
+            throw new Exception("Document not found");
+        }
 
-    $changesString = !empty($changes) ? implode(", ", $changes) : null;
+        // STATUS LOGIC
+        if(isset($_POST['approved'])) {
+            $status = "Reviewed";
+        }
 
-    $sql2 = "UPDATE document SET status = '$status' WHERE id = '$document_id'";
-    $result2 = $conn->query($sql2);
+        if(isset($_POST['mayor'])) {
+            $status = "For MJCA Approval";
+        }
 
-    if($result2) {
-        $logSql = "INSERT INTO document_log(document_id, action, changes, performed_by, remarks) 
-                   VALUES('$document_id', '$status', '$changesString', '$updatedby' , '$remark')";
-        $conn->query($logSql);
+        if($row['status'] != $status){
+            $changes[] = "Status: {$row['status']} -> {$status}";
+        }
+
+        $changesString = !empty($changes) ? implode(", ", $changes) : null;
+
+        // UPDATE DOCUMENT
+        $stmt = $conn->prepare("UPDATE document SET status = ? WHERE id = ?");
+        $stmt->bind_param("ss", $status, $document_id);
+        $stmt->execute();
+
+        // INSERT LOG
+        $stmt = $conn->prepare("
+            INSERT INTO document_log(document_id, action, changes, performed_by, remarks) 
+            VALUES(?, ?, ?, ?, ?)
+        ");
+        $stmt->bind_param("sssss", $document_id, $status, $changesString, $updatedby, $remark);
+        $stmt->execute();
+
+        $conn->commit();
 
         header("Location: ../admin/admin-document.php");
         exit();
+
+    } catch (Exception $e) {
+
+        $conn->rollback();
+        die($e->getMessage());
     }
 }
 ?>

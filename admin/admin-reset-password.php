@@ -61,7 +61,7 @@ $password = random_int(100000, 999999);
 
             <div class="admin-logout">
                 <form action="../operation/logout.php" method="POST">
-                <button class='log-out admin-logout'> LOGOUT</button>
+                <button class='log-out admin-logout'> Log out</button>
                 </form>
             </div>
             <div class="burger-icon" id="onclickModalBtn">
@@ -74,7 +74,7 @@ $password = random_int(100000, 999999);
         <div class="admin-add-user-container">
                 <p style="text-align: center;" class="admin-add-title">Reset User Password</p>
                 <p style="text-align: center;" class="admin-add-sub">
-                    Click save to reset <span class="reset-username"><?= htmlspecialchars($row['name']) ?></span>'s password
+                    Click reset to reset <span class="reset-username"><?= htmlspecialchars($row['name']) ?></span>'s password
                 </p>
             <div>
                 <form action="../operation/resetpass.php" method="POST">
@@ -83,7 +83,7 @@ $password = random_int(100000, 999999);
                         <p>New Password</p>
                         <input type="text" value="<?= $password ?>" name="password" class="admin-add-user-input" readonly>
                     </div>
-                    <button class="btn-submit" name="submit">Save</button>
+                    <button class="btn-submit" name="submit">Reset</button>
                 </form>
             </div>
 <button class="adm-bck-btn" onclick="window.location.href='admin-user.php'">
@@ -157,7 +157,7 @@ $password = random_int(100000, 999999);
             
                 </a>
                 <form action="../operation/logout.php" method="POST">
-                    <button class='burger-logout'>LOGOUT</button>
+                    <button class='burger-logout'>Log out</button>
                 </form>
             </div>
         </div>

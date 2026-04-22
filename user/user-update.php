@@ -53,11 +53,11 @@ $document = mysqli_fetch_assoc($result);
 
             <div class='user-nav-bar'>
                 <div class='user-name'>
-                    <p>Hi <span class="span-name"><?= $_SESSION['name']; ?>!</p>
+                    <p>Hi, <span class="span-name"><?= $_SESSION['name']; ?>!</p>
                     <p style="color: gray;"><?= date('m/d/Y') ?></p>
                 </div>
                 <form action="../operation/logout.php" method='POST'>
-                    <button class='log-out'>LOGOUT</button>
+                    <button class='log-out'>Log out</button>
                 </form>
             </div>
 
@@ -91,9 +91,10 @@ $document = mysqli_fetch_assoc($result);
                         <input required type="text" placeholder='Department' class='update-input' name='department' value="<?= $document['department']?>">
                     </div>
                     <div class="mt-2">
-                        <label for="">Number of pages</label> <br>
+                        <label for="">Number of copies</label> <br>
                         <input required type="number" placeholder='Pages' class='update-input' name='pages' value="<?= $document['pages'] ?>">
                     </div>
+                    
                     <div class="mt-2">
                         <label for="">Status</label> <br>
                         <select name="status" class="update-input" id='statusSelect'>

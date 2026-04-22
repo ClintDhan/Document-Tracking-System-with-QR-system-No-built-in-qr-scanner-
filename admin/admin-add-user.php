@@ -56,7 +56,7 @@ $password = random_int(100000, 999999);
 
             <div class="admin-logout">
                 <form action="../operation/logout.php" method="POST">
-                <button class='log-out admin-logout'> LOGOUT</button>
+                <button class='log-out admin-logout'>Log out</button>
                 </form>
             </div>
             <div class="burger-icon" id="onclickModalBtn">
@@ -85,8 +85,8 @@ $password = random_int(100000, 999999);
                 </form>
             </div>
             <button class="adm-bck-btn" onclick="window.location.href='admin-user.php'">
-  ❮ BACK
-</button>
+                ❮ BACK
+            </button>
         </div>
     </div>
 
@@ -154,7 +154,7 @@ $password = random_int(100000, 999999);
             
                 </a>
                 <form action="../operation/logout.php" method="POST">
-                    <button class='burger-logout'>LOGOUT</button>
+                    <button class='burger-logout'>Log out</button>
                 </form>
             </div>
         </div>

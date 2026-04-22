@@ -4,67 +4,88 @@ require_once '../db.php';
 
 if (isset($_POST['submit'])) {
 
-    $control = $_POST['control_num'];
-    $qr_id = $_POST['qr_id'];
-    $type = $_POST['type'];
-    $description = $_POST['description'];
-    $department = $_POST['department'];
-    $createdBy = $_SESSION['user_id'];
-    $pages = $_POST['pages'];
-    $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
+    $conn->begin_transaction();
 
-    // 🔥 CHECK IF DESCRIPTION ALREADY EXISTS
-    $stmt = $conn->prepare("SELECT id FROM document WHERE description = ?");
-    $stmt->bind_param("s", $description);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    try {
 
-    if ($result->num_rows > 0) {
+        $control = $_POST['control_num'];
+        $qr_id = $_POST['qr_id'];
+        $type = $_POST['type'];
+        $description = $_POST['description'];
+        $department = $_POST['department'];
+        $createdBy = $_SESSION['user_id'];
+        $pages = $_POST['pages'];
+        $status = $_POST['status'];
+        $released_to = $_POST['released_to'] ?? null;
+        $returned_reason = $_POST['returned_reason'] ?? null;
+        $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
 
-        $_SESSION['error'] = "Document description already exists.";
-        header("Location: ../user/user-home.php?control=" . urlencode($control));
-        exit();
+        if ($status != 'Released') $released_to = null;
+        if ($status != 'Returned') $returned_reason = null;
 
-    } else {
+        // CHECK DUPLICATE
+        $stmt = $conn->prepare("SELECT id FROM document WHERE description = ?");
+        $stmt->bind_param("s", $description);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        // 🔥 INSERT DOCUMENT
-        $stmt = $conn->prepare("
-            INSERT INTO document (qr_id, type, description, department, created_by, pages)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ");
-
-        $stmt->bind_param("issssi", $qr_id, $type, $description, $department, $createdBy, $pages);
-        $result1 = $stmt->execute();
-
-        $document_id = $conn->insert_id;
-
-        // 🔥 UPDATE QR CODE
-        $stmt2 = $conn->prepare("UPDATE qr_code SET is_used = 1 WHERE id = ?");
-        $stmt2->bind_param("i", $qr_id);
-        $qrUpdate = $stmt2->execute();
-
-        // 🔥 IF BOTH SUCCESS
-        if ($result1 && $qrUpdate) {
-
-            // 🔥 INSERT LOG
-            $stmt3 = $conn->prepare("
-                INSERT INTO document_log (document_id, action, performed_at, performed_by, remarks)
-                VALUES (?, 'Received', NOW(), ?, ?)
-            ");
-
-            $stmt3->bind_param("iis", $document_id, $createdBy, $remark);
-            $stmt3->execute();
-
-            $_SESSION['success'] = "Document successfully received.";
-            header("Location: ../user/user-home.php?control=" . urlencode($control));
-            exit();
-
-        } else {
-
-            $_SESSION['error'] = "Something went wrong while saving document.";
+        if ($result->num_rows > 0) {
+            $conn->rollback();
+            $_SESSION['error'] = "Document description already exists.";
             header("Location: ../user/user-home.php?control=" . urlencode($control));
             exit();
         }
+
+        // INSERT DOCUMENT
+        $stmt = $conn->prepare("
+            INSERT INTO document 
+            (qr_id, type, description, status, department, created_by, pages, released_to, returned_reason)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+
+        $stmt->bind_param(
+            "issssisss",
+            $qr_id,
+            $type,
+            $description,
+            $status,
+            $department,
+            $createdBy,
+            $pages,
+            $released_to,
+            $returned_reason
+        );
+
+        $stmt->execute();
+        $document_id = $conn->insert_id;
+
+        // UPDATE QR
+        $stmt2 = $conn->prepare("UPDATE qr_code SET is_used = 1 WHERE id = ?");
+        $stmt2->bind_param("i", $qr_id);
+        $stmt2->execute();
+
+        // INSERT LOG
+        $stmt3 = $conn->prepare("
+            INSERT INTO document_log (document_id, action, performed_at, performed_by, remarks)
+            VALUES (?, ?, NOW(), ?, ?)
+        ");
+
+        $stmt3->bind_param("isis", $document_id, $status, $createdBy, $remark);
+        $stmt3->execute();
+
+        $conn->commit();
+
+        $_SESSION['success'] = "Document successfully {$status}.";
+        header("Location: ../user/user-home.php?control=" . urlencode($control));
+        exit();
+
+    } catch (Exception $e) {
+
+        $conn->rollback();
+
+        $_SESSION['error'] = "Something went wrong while saving document.";
+        header("Location: ../user/user-home.php?control=" . urlencode($control));
+        exit();
     }
 }
 ?>

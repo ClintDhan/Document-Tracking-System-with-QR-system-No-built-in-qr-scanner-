@@ -90,11 +90,11 @@ $returnedDocs = $row3['returned_docs'];
             <!-- NAV BAR -->
             <div class='user-nav-bar'>
                 <div class='user-name'>
-                    <p>Hi <span class="span-name"><?= $_SESSION['name']; ?>!</p>
+                    <p>Hi, <span class="span-name"><?= $_SESSION['name']; ?>!</p>
                     <p style="color: gray;"><?= date('m/d/Y') ?></p>
                 </div>
                 <form action="../operation/logout.php" method='POST'>
-                    <button class='log-out'>LOGOUT</button>
+                    <button class='log-out'>Log out</button>
                 </form>
             </div>
 
@@ -114,7 +114,7 @@ $returnedDocs = $row3['returned_docs'];
             <!-- ACTION BUTTONS -->
             <?php if ($qr && !$qr['is_used']): ?>
                 <div class='user-option'>
-                    <a href="user-receive.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>" class='btn-receive'>RECEIVE DOCUMENT</a>
+                    <a href="user-receive.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>" class='btn-receive'>CREATE DOCUMENT</a>
                 </div>
             <?php elseif ($qr && $qr['is_used']): ?>
                 <div class='user-option'>
@@ -130,6 +130,10 @@ $returnedDocs = $row3['returned_docs'];
                             <button class="btn-submit btn-search" name="submit" type="submit">SEARCH</button>
                         </div>
                     </form>
+                </div>
+            <?php elseif ($result && $result->num_rows <= 0): ?>
+                <div class='user-option'>
+                    <p class="text-center" style="font-weight: 700;">SCANNED QR DOES NOT EXIST OR WAS DELETED. PLEASE CONTACT JHEA</p>
                 </div>
             <?php endif; ?>
 

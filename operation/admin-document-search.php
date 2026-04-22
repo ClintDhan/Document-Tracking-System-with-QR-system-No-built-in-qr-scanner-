@@ -58,7 +58,7 @@ while ($row = $result->fetch_assoc()) {
                 <div class='document-status-container'>
                     <div style='border-radius: 4px;' class='".
                         ($row['status'] == 'Returned' ? 'status-returned' :
-                        ($row['status'] == 'Reviewed' ? 'status-review' :
+                        ($row['status'] == 'Approved' ? 'status-review' :
                         ($row['status'] == 'Released' ? 'status-released' :
                         'status-default')))
                     ."'>".$row['status']."</div>

@@ -11,7 +11,11 @@ if (!isset($_SESSION['user_id'])) {
 $control = $_GET['control'] ?? null;
 $sql = "SELECT * FROM qr_code WHERE control_num ='$control'";
 $result = $conn->query($sql);
-$row = $result->fetch_assoc();
+
+if($result && $result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+}
+
 ?>
 
 
@@ -60,7 +64,7 @@ $row = $result->fetch_assoc();
 
                     <div class="admin-logout">
                          <form action="../operation/logout.php" method="POST">
-                            <button class='log-out admin-logout'> LOGOUT</button>
+                            <button class='log-out admin-logout'> Log out</button>
                         </form>
                     </div>
                     
@@ -71,7 +75,9 @@ $row = $result->fetch_assoc();
                      </div>
                 </div>
             <div class="doc-edit-container mt-2">
+                <?php if($result && $result->num_rows > 0): ?>
                 <p class="text-center" style="font-weight: 700;">Receive document</p>
+                <p class='option-text' style="text-align: center;">Please indicate document information</p>
                 <form action="../operation/admin-receive-document.php" method="POST">
                     <div class="doc-edit-flx">
 
@@ -104,14 +110,19 @@ $row = $result->fetch_assoc();
                     </div>
 
                     
-                    <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='submit'>SAVE</button>
+                    <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='approve'>APPROVE</button>
+                    <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='mayor' style="margin-top: 5px; background-color: green;">FOR MAYOR'S APPROVAL</button>
                     </div>
                 </form>
                 
-            <button class="adm-bck-btn" onclick="window.location.href='admin-document.php'">
-  ❮ BACK
-</button>
+                            <button class="adm-bck-btn" onclick="window.location.href='admin-document.php'">
+                ❮ BACK
+                </button>
+                <?php else: ?>
+                <p class="text-center" style="font-weight: 700;">SCANNED QR DOES NOT EXIST OR WAS DELETED. PLEASE CONTACT JHEA</p>
+                <?php endif; ?>
             </div>
+           
         </div>
 
 <div class="onclick-container" id="modal">
@@ -178,53 +189,12 @@ $row = $result->fetch_assoc();
             
                 </a>
                 <form action="../operation/logout.php" method="POST">
-                    <button class='burger-logout'>LOGOUT</button>
+                    <button class='burger-logout'>Log out</button>
                 </form>
             </div>
         </div>
     </div>
 <script>
-const statusSelect = document.getElementById('statusSelect');
-const releasedInput = document.getElementById('releasedTo');
-const releasedInputLabel = document.getElementById('releasedInputLabel');
-const returnedInputLabel = document.getElementById('returnedInputLabel');
-const returnReason = document.getElementById('returnReason');
-
-
-function showInput() {
-    if (statusSelect.value === 'Released') {
-        releasedInputLabel.style.display = 'block';
-        releasedInput.style.display = 'block';
-        releasedInput.required = true;
-        returnedInputLabel.style.display = 'none';
-        returnReason.style.display = 'none';
-        returnReason.required = false;
-    }
-    
-    else if(statusSelect.value === 'Returned') {
-        returnedInputLabel.style.display = 'block';
-        returnReason.style.display = 'block';
-        returnReason.required = true;
-         releasedInputLabel.style.display = 'none';
-        releasedInput.style.display = 'none';
-        releasedInput.required = false;
-    }
-    else {
-        releasedInputLabel.style.display = 'none';
-        releasedInput.style.display = 'none';
-        releasedInput.required = false;
-        releasedInput.value = ''; // ADD THIS
-
-        returnedInputLabel.style.display = 'none';
-        returnReason.style.display = 'none';
-        returnReason.required = false;
-        returnReason.value = ''; // ADD THIS
-    }
-
-}
-
-showInput();
-statusSelect.addEventListener('change' ,showInput );
 
  document.addEventListener("click", function (e) {
     const dropdown = document.querySelector(".dropdown");

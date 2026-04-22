@@ -47,7 +47,7 @@ body {
 }
 
 .logo-blue {
-    background-color: #b0c2fa;
+    background-color: #f1f4fd;
     height: 60px;
     width: 60px;
     border-radius: 50%;
@@ -179,8 +179,9 @@ body {
 }
 
 .span-name {
-    color: #8F8DFF;
+    color: #413fc1;
     font-weight: 900 !important;
+    text-transform: capitalize;
 }
 
 /* USER HOME */
@@ -215,7 +216,7 @@ body {
     width: 100%;
     margin-right: 7px;
     border-radius: 20px;
-    color: #8F8DFF;
+    color: gray;
     font-weight: 200;
 }
 
@@ -267,7 +268,6 @@ body {
     border-radius: 12px;
     color: #222;
     border: 1px solid #d1d5db;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
 }
 
 .user-option {
@@ -292,7 +292,7 @@ body {
     text-align: center;
     border: none;
     cursor: pointer;
-    color: white;
+    color: #f8f9fa;
     font-weight: 900;
     font-size: 20px;
     text-decoration: none;
@@ -318,7 +318,7 @@ body {
     align-items: center;       
     height: 107px;
     width: 395px;
-    background-color: #ADF7B6;
+    background-color: #5A81FA;
     margin-top: 5px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
@@ -329,19 +329,19 @@ body {
     align-items: center;       
     height: 107px;
     width: 395px;
-    background-color: #A0CED9;
+    background-color: #5A81FA;
     margin-top: 9px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 
 }
 
-.btn-view {
+.btn-view { 
     display: flex;
     justify-content: center;   
     align-items: center;       
     height: 107px;
     width: 395px;
-    background-color: #FFEE93;
+    background-color: rgb(227, 223, 0);
     margin-top: 9px;
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 
@@ -422,11 +422,11 @@ body {
 }
 
 .receive-input , .update-input {
-    height: 47px;
+    height: 30px;
     width: 100%;
     background-color: transparent;
     border: 1px solid #E6E6E6;
-    padding: 5px;
+    padding: 2px;
     color: #333;
 }
 
@@ -461,16 +461,17 @@ body {
 .btn-submit {
     height: 47px;
     width: 100% !important;
-    background-color: #7BE0AD;
+    background-color: #5A81FA;
     color: white;
     border: none;
     cursor: pointer;
     margin-top: 35px;
+    border-radius: 8px;
 }
 
 .btn-export {
     text-decoration: none;
-    background-color: green;
+    background-color: #22C55E;
     color: white;
     padding: 2px 4px;
     border-radius: 8px;
@@ -690,7 +691,7 @@ body {
 
 .nav-anchor a{
     text-decoration: none;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 700;
     color: #333333;
     padding: 10px 10px;
@@ -700,7 +701,7 @@ body {
 
 .logs-text {
     text-decoration: none;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 700;
     color: #333333;
     padding: 10px 10px;
@@ -728,7 +729,7 @@ body {
 }
 
 .card-flx:hover {
-    border-bottom: solid #111111;
+    border-bottom: solid #a2a2a2;
 }
 
 .admin-card-circle {
@@ -896,7 +897,7 @@ tbody tr td {
 }
 
 .generate-select {
-    background-color: green;
+    background-color: #22C55E;
 }
 
 .unused-select {
@@ -919,7 +920,7 @@ tbody tr td {
 
 
 #result::-webkit-scrollbar {
-    height: 8px;
+    height: 5px;
     width: 8px; 
 }
 
@@ -931,12 +932,12 @@ tbody tr td {
 
 /* Scroll thumb */
 #result::-webkit-scrollbar-thumb {
-    background: #7eff06;
+    background: #9ba58f;
     border-radius: 8px;
 }
 
 .result::-webkit-scrollbar {
-    height: 8px;
+    height: 4px;
     width: 8px; 
 }
 
@@ -1443,6 +1444,7 @@ table {
     }
     .admin-doc-export-contain {
         justify-content: start !important;
+        margin-top: 5px
     }
 }
 
