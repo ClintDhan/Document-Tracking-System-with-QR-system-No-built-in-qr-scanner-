@@ -1410,8 +1410,12 @@ table {
         overflow-x: auto !important;
         margin-top: 10px;
     }
-    .admin-docs-table , .admin-logs-table{
+    .admin-logs-table{
         width: max-content !important;
+    }
+
+    .admin-docs-table {
+        width: 850px !important;
     }
 
     .admin-auth-table , .admin-qr-table {
@@ -1445,6 +1449,10 @@ table {
     .admin-doc-export-contain {
         justify-content: start !important;
         margin-top: 5px
+    }
+
+    .admin-docs-table {
+        width: max-content !important;
     }
 }
 

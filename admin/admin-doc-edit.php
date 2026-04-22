@@ -98,16 +98,18 @@ $row = $result->fetch_assoc();
                     <input required type="number" name='pages' value="<?= htmlspecialchars($row['pages']) ?>" class="admin-doc-input">
                     </div>
 
-                    <div class="mt-2">
-                    <label for="">Status</label> <br>
-                    <select name="status" id='statusSelect' class="admin-doc-input">
-                        <option value="Received" <?= ($row['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
-                        <option value="Approved" <?= ($row['status'] ?? '') == 'Approved' ? 'selected' : '' ?>>Approved</option>
-                        <option value="Released" <?= ($row['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
-                        <option value="Returned" <?= ($row['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
-                    </select>
-                    </div>
 
+                
+                    <div class="mt-2">
+                        <label for="">Status</label> <br>
+                        <select name="status" id='statusSelect' class="admin-doc-input">
+                            <option value="Received" <?= ($row['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
+                            <option value="Approved" <?= ($row['status'] ?? '') == 'Approved' ? 'selected' : '' ?>>Approved</option>
+                            <option value="Released" <?= ($row['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
+                            <option value="Returned" <?= ($row['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
+                            <option value="For MJCA Approval" <?= ($row['status'] ?? '') == 'For MJCA Approval' ? 'selected' : '' ?>>For MJCA Approval</option>
+                        </select>
+                    </div>
                     <div class="mt-2">
                      <label for="" id="releasedInputLabel">Released To</label>
                         <input type="text"

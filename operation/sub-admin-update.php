@@ -29,7 +29,7 @@ if(isset($_POST['approved']) || isset($_POST['mayor'])) {
 
         // STATUS LOGIC
         if(isset($_POST['approved'])) {
-            $status = "Reviewed";
+            $status = "Approved";
         }
 
         if(isset($_POST['mayor'])) {

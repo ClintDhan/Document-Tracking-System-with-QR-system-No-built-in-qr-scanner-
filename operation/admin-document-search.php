@@ -34,16 +34,16 @@ $result = $conn->query($sql);
 echo "<table class='admin-docs-table'>
         <thead>
             <tr>
-                <th class='admin-docs-no'>No</th>
+                <th class='admin-docs-no' style='width:50px;'>No</th>
                 <th class='admin-docs-type'>Type</th>
-                <th class='admin-docs-desc'>Description</th>
+                <th class='admin-docs-desc' style='width:150px;'>Description</th>
                 <th class='admin-docs-sts'>Status</th>
                 <th class='admin-docs-dep'>Department</th>
-                <th class='admin-docs-no'>Copies</th>
+                <th class='admin-docs-no' style='width:50px;'>Copies</th>
                 <th class='admin-docs-created'>Created by</th>
                 <th class='admin-docs-created-at'>Created at</th>
                 <th class='admin-docs-created-at'>Control</th>
-                <th class='admin-docs-action'>Action</th>
+                <th class='admin-docs-action' style='width:80px;'>Action</th>
             </tr>
          </thead>
          <tbody>";
