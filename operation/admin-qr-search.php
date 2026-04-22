@@ -32,7 +32,7 @@ if ($search != "") {
 $sql .= " ORDER BY qr_code.id DESC";
 
 $result = $conn->query($sql);
-echo "<table class='admin-qr-table'>
+echo "<table class='admin-qr-table table table-striped'>
         <thead>
             <tr>
                 <th>No</th>

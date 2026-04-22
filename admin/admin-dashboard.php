@@ -16,7 +16,9 @@ $result2 = $conn->query($totalRecs);
 $row1 = $result2->fetch_assoc();
 $totalReceivedCount = $row1['total_received'];
 
-$totalUnderReview = "SELECT COUNT(*) AS total_review FROM document WHERE status = 'Reviewed'";
+$totalUnderReview = "SELECT COUNT(*) AS total_review 
+                     FROM document 
+                     WHERE status = 'Approved'";
 $result3 = $conn->query($totalUnderReview);
 $row2 = $result3->fetch_assoc();
 $totalReviewCount = $row2['total_review'];
@@ -30,6 +32,11 @@ $totalReturned = "SELECT COUNT(*) AS total_returned FROM document WHERE status =
 $result5 = $conn->query($totalReturned);
 $row4 = $result5->fetch_assoc();
 $totalReturnedCount = $row4['total_returned'];
+
+$totalReturned = "SELECT COUNT(*) AS total_mayor FROM document WHERE status = 'For MJCA Approval'";
+$result11 = $conn->query($totalReturned);
+$row11 = $result11->fetch_assoc();
+$totalMayor = $row11['total_mayor'];
 
 // today count 
 
@@ -64,7 +71,7 @@ $recent = "SELECT document_log.id,
                     FROM document_log
                     INNER JOIN user ON document_log.performed_by = user.id
                     INNER JOIN document ON document_log.document_id = document.id
-                    ORDER BY document_log.id DESC LIMIT 7";
+                    ORDER BY document_log.id DESC LIMIT 5";
 $result10 = $conn->query($recent);
 $document_log = $result10->fetch_all(MYSQLI_ASSOC);
 
@@ -135,7 +142,14 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                     
                 <p class="card-count"><?= $totalReviewCount ?></p>
                 </div>
-                <p class="card-text">APPROVED/MJCA APPROVAL</p>
+                <p class="card-text">APPROVED</p>
+            </div>
+            <div class="card-flx">
+                <div class="admin-card-circle" style="background-color: #008130;">
+                    
+                <p class="card-count"><?= $totalMayor ?></p>
+                </div>
+                <p class="card-text">FOR MJCA APPROVAL</p>
             </div>
             <div class="card-flx">
                 <div class="admin-card-circle" style="background-color: #7C3AED;">
@@ -160,7 +174,7 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                     </a>
                 </div>
 
-                <table class="first-table">
+                <table class="first-table table table-striped">
                     <thead>
                         <tr>
                             <th class="recent-log">No</th>
@@ -216,8 +230,13 @@ $document_log = $result10->fetch_all(MYSQLI_ASSOC);
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <p class="todays-text">Approved/MJCA Approval</p>
+                    <p class="todays-text">Approved</p>
                     <p class="todays-num" style="color: #92400E;"><?= $todayReviewCount ?></p>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <p class="todays-text">For MJCA Approval</p>
+                    <p class="todays-num" style="color: #008130;"><?= $todayReviewCount ?></p>
                 </div>
                 
             </div>

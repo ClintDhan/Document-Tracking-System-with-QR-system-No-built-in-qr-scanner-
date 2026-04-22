@@ -31,7 +31,7 @@ if ($search != "") {
 $sql .= " ORDER BY document.id DESC , document.created_at DESC";
 
 $result = $conn->query($sql);
-echo "<table class='admin-docs-table'>
+echo "<table class='admin-docs-table table table-striped'>
         <thead>
             <tr>
                 <th class='admin-docs-no' style='width:50px;'>No</th>
@@ -43,7 +43,7 @@ echo "<table class='admin-docs-table'>
                 <th class='admin-docs-created'>Created by</th>
                 <th class='admin-docs-created-at'>Created at</th>
                 <th class='admin-docs-created-at'>Control</th>
-                <th class='admin-docs-action' style='width:80px;'>Action</th>
+                <th class='admin-docs-action' style='width:85px;'>Action</th>
             </tr>
          </thead>
          <tbody>";

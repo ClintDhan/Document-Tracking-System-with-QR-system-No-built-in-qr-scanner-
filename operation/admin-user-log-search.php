@@ -27,7 +27,7 @@ if ($search != "") {
 $sql .= " ORDER BY user_log.id DESC , user_log.date_performed DESC";
 
 $result = $conn->query($sql);
-echo "<table class='user-log-table'>
+echo "<table class='user-log-table table table-striped'>
         <thead>
             <tr>
                 <th class='user-log-no'>No</th>

@@ -25,7 +25,7 @@ if ($search != "") {
 $sql .= " ORDER BY auth_logs.id DESC , auth_logs.performed_at DESC";
 
 $result = $conn->query($sql);
-echo "<table class='admin-auth-table'>
+echo "<table class='admin-auth-table table table-striped'>
         <thead>
             <tr>
                 <th>No</th>

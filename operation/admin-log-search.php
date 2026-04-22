@@ -22,7 +22,7 @@ if ($search != "") {
 $sql .= " ORDER BY document_log.performed_at DESC";
 
 $result = $conn->query($sql);
-echo "<table class='admin-logs-table'>
+echo "<table class='admin-logs-table table table-striped'>
         <thead>
             <tr>
                 <th class='logs-no'>No</th>

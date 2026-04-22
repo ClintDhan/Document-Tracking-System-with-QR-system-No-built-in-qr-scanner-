@@ -569,9 +569,7 @@ body {
     /* margin-bottom: 12px; */
 }
 
-.side-anchor-user-logs {
-    /* margin-bottom: 12px; */
-}
+
 
 
 
@@ -916,7 +914,7 @@ tbody tr td {
 }
 
 .tr-hover:hover {
-    background-color: rgb(227, 227, 227);
+    background-color: rgb(227, 227, 227) !important;
 }
 
 
@@ -1387,11 +1385,6 @@ table {
     .nav-anchor , .admin-logout {
         display: none;
     }
-    .dashboard-total-documents {
-        grid-row-start: 1;
-        grid-row-end: 3;
-        height: 244px !important;
-    }
     .burger-icon {
         display: block;
         cursor: pointer;
@@ -1475,6 +1468,10 @@ table {
         font-size: 10px;
     }
 
+    .first-table tbody tr td {
+        font-size: 10px;
+    }
+
     .recent-log {
         width: 10% !important;
     }
@@ -1488,10 +1485,6 @@ table {
     .admin-card-container {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    }
-    .dashboard-total-documents {
-        height: 120px !important;
-        grid-column: 1 / 3;
     }
 }
 
