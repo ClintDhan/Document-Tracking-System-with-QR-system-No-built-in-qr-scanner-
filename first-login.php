@@ -73,6 +73,14 @@ if (!isset($_SESSION['user_id'])) {
 
                     </div>
                 </div>
+    <div class="copyright">
+        <p>
+        © 2026 
+        <a href="https://www.facebook.com/GodSonClintoy/" target="_blank">Clint Roño</a> 
+        - Designed by 
+        <a href="https://example.com">April Jhea Logroño</a>
+        </p>    
+    </div>
 </div>
 
 
