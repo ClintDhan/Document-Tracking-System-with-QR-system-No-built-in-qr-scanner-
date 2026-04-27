@@ -121,11 +121,11 @@ $document = mysqli_fetch_assoc($result);
                     <input type="text" class="update-input" name="control" value="<?= $control ?>" readonly>
                 </div>
                 <div class="mt-2">
-                     <label for="">Created</label> <br>
+                     <label for="">Date Created</label> <br>
                     <input type="text" class="update-input" name="status" value="<?= $document['created_at'] ?>" readonly>
                 </div>
                 <div class="mt-2">
-                     <label for="">Last updated</label> <br>
+                     <label for="">Last Updated</label> <br>
                     <input type="text" class="update-input" name="status" value="<?= $document['updated_at'] ?>" readonly>
                 </div>
                 <?php if($document['remarks'] != NULL): ?>

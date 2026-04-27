@@ -110,6 +110,7 @@ $row = $result->fetch_assoc();
                             <option value="For MJCA Approval" <?= ($row['status'] ?? '') == 'For MJCA Approval' ? 'selected' : '' ?>>For MJCA Approval</option>
                         </select>
                     </div>
+                    
                     <div class="mt-2">
                      <label for="" id="releasedInputLabel">Released To</label>
                         <input type="text"

@@ -199,6 +199,11 @@ $row = $result->fetch_assoc();
                     </div>
 
                     <div class="mt-2">
+                        <label for="" style="font-weight: 600;">Date Created</label> <br>
+                        <input type="text" name="created_at" value="<?= htmlspecialchars($row['created_at']) ?>" class="admin-doc-input" readonly>
+                    </div>
+
+                    <div class="mt-2">
                         <label for="" style="font-weight: 600;">Last Updated</label> <br>
                         <input type="text" name="updated_at" value="<?= htmlspecialchars($row['updated_at']) ?>" class="admin-doc-input" readonly>
                     </div>

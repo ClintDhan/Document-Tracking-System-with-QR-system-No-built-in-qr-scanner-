@@ -94,7 +94,7 @@ $document = mysqli_fetch_assoc($result);
                         <label for="">Number of copies</label> <br>
                         <input required type="number" placeholder='Pages' class='update-input' name='pages' value="<?= $document['pages'] ?>">
                     </div>
-                    
+
                     <div class="mt-2">
                         <label for="">Status</label> <br>
                         <select name="status" class="update-input" id='statusSelect'>
@@ -163,7 +163,7 @@ function showInput() {
         returnedInputLabel.style.display = 'block';
         returnReason.style.display = 'block';
         returnReason.required = true;
-         releasedInputLabel.style.display = 'none';
+        releasedInputLabel.style.display = 'none';
         releasedInput.style.display = 'none';
         releasedInput.required = false;
     }
