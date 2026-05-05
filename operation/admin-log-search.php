@@ -10,13 +10,30 @@ $search = $conn->real_escape_string($_POST['query']);
 
 }
 
-$sql = "SELECT document_log.id , document_log.action , document_log.remarks , document_log.performed_at, document_log.changes, document.type AS document_type, document.description AS document_description, user.name AS performer
-        FROM document_log INNER JOIN user ON document_log.performed_by = user.id INNER JOIN document ON document_log.document_id = document.id";
+$sql = "SELECT 
+        document_log.id, 
+        document_log.action, 
+        document_log.remarks, 
+        document_log.performed_at, 
+        document_log.changes, 
+        document.type AS document_type, 
+        document.description AS document_description, 
+        qr_code.control_num,
+        user.name AS performer
+        FROM document_log 
+        INNER JOIN user ON document_log.performed_by = user.id 
+        INNER JOIN document ON document_log.document_id = document.id
+        INNER JOIN qr_code ON document.qr_id = qr_code.id";
 
 // if search is not empty, filter results
 if ($search != "") {
-    $sql .= " WHERE document_log.id LIKE '%$search%' OR document_log.action LIKE '%$search%' OR document_log.performed_at LIKE '%$search%' OR 
-                document.type LIKE '%$search%' OR user.name LIKE '%$search%' OR document.description LIKE '%$search%'";
+    $sql .= " WHERE document_log.id LIKE '%$search%' 
+              OR document_log.action LIKE '%$search%' 
+              OR document_log.performed_at LIKE '%$search%' 
+              OR document.type LIKE '%$search%' 
+              OR user.name LIKE '%$search%' 
+              OR document.description LIKE '%$search%' 
+              OR qr_code.control_num LIKE '%$search%'";
 }
 
 $sql .= " ORDER BY document_log.performed_at DESC";
@@ -26,6 +43,7 @@ echo "<table class='admin-logs-table table table-striped'>
         <thead>
             <tr>
                 <th class='logs-no'>No</th>
+                <th>Control Number</th>
                 <th class='logs-type'>Type</th>
                 <th class='logs-description'>Description</th>
                 <th class='logs-act'>Performed</th>
@@ -41,6 +59,7 @@ while ($row = $result->fetch_assoc()) {
     echo "
         <tr class='tr-hover'>
             <td>".$row['id']."</td>
+            <td>".$row['control_num']."</td>
             <td>".$row['document_type']."</td>
             <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['document_description']."</td>            <td>
             <div class='document-action-container'>

@@ -1,6 +1,7 @@
 <?php 
 session_start();
 require_once "../db.php";
+/** @var mysqli $conn */
 
 if(isset($_POST['approved']) || isset($_POST['mayor'])) {
 

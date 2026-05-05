@@ -2,6 +2,8 @@
 session_start();
 require_once '../db.php';
 
+/** @var mysqli $conn */
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: ../login.php");
     exit();
