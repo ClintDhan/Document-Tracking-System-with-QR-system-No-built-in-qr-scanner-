@@ -109,9 +109,13 @@ if($result && $result->num_rows > 0) {
                         <input type="text" name='remark' placeholder="(Optional)" class="admin-doc-input">
                     </div>
 
-                    
+                    <?php if ($_SESSION['role'] == "admin"): ?>
                     <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='approve'>APPROVE</button>
                     <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='mayor' style="margin-top: 5px; background-color: green;">FOR MAYOR'S APPROVAL</button>
+
+                    <?php else: ?>
+                     <button class='btn-submit admin-doc-submit admin-btn-sub' type='submit' name='create'>CREATE</button>
+                    <?php endif; ?>
                     </div>
                 </form>
                 
