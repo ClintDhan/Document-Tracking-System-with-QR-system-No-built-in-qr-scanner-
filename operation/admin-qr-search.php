@@ -24,7 +24,7 @@ if ($search != "") {
     OR qr_code.control_num LIKE '%$search%' 
     OR user.name LIKE '%$search%'
     OR (CASE 
-            WHEN qr_code.is_used = 1 THEN 'Used'
+            WHEN qr_code.is_used = 1 THEN 'In-used'
             ELSE 'Not used'
         END) LIKE '%$search%'";
 }

@@ -33,7 +33,8 @@ if ($search != "") {
               OR document.type LIKE '%$search%' 
               OR user.name LIKE '%$search%' 
               OR document.description LIKE '%$search%' 
-              OR qr_code.control_num LIKE '%$search%'";
+              OR qr_code.control_num LIKE '%$search%'
+              OR document_log.remarks LIKE '%$search%'";
 }
 
 $sql .= " ORDER BY document_log.performed_at DESC";
