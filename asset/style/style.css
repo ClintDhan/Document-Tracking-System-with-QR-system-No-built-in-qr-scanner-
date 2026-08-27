@@ -237,13 +237,18 @@ body {
 }
 
 .log-out {
-    width: 167px;
+    width: auto;
     border-radius: 20px;
     border: none;
     cursor: pointer;
     height: 100%;
     color: white;
-    background-color: rgb(251, 100, 100);
+    background-color: transparent;
+    color: black;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .in-use {
@@ -355,11 +360,27 @@ body {
     border: 1px solid #d1d5db;
 }
 
+.user-dash-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 12px 0 12px;
+}
+
+.user-document-view {
+    width: 30px;
+    height: 30px;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}
+
 .user-dash-flx {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 0;
+    padding-bottom: 10px;
     flex-direction: column;
 }
 
@@ -866,6 +887,10 @@ tbody tr td {
 }
 
 
+.bi-box-arrow-left {
+    width: 40px;
+    height: 20px;
+}
 
 
 /* .admin-docs-table , admin-auth-table {
