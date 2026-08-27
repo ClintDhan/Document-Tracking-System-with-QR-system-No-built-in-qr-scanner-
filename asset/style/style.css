@@ -367,13 +367,15 @@ body {
 }
 
 .user-document-view {
-    width: 30px;
-    height: 30px;
+    padding: 5px;
     border: 1px solid lightgray;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 12px;
     border-radius: 8px;
+    text-decoration: none;
+    color: #413fc1;
 }
 
 .user-dash-flx {
@@ -1279,6 +1281,38 @@ table {
     text-decoration: none;
     color: #424242;
 }
+
+
+/* user view document */
+
+.document-table-container {
+    width: 431px;
+    min-height: 600px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 16px;
+    padding: 5px;
+    
+}
+
+
+.document-table-title-container p{ 
+    font-size: 20px;
+}
+
+.document-table-title-container input {
+    width: 300px !important;
+}
+
+.user-docs-table {    
+    width: 850px !important;
+}
+
+.user-view-document-container {
+     max-width: 900px !important;
+        overflow-x: auto !important;
+}
+
 
 
 /* LOGIN RESPO */
