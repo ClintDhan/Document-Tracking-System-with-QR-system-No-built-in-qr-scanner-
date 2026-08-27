@@ -1548,3 +1548,8 @@ table {
 }
 
 
+@media (max-width: 437px) {
+    .document-table-container {
+        width: 100%;
+    }
+}
