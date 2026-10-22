@@ -54,7 +54,7 @@ echo "<table class='admin-logs-table table table-striped'>
                 <th class='logs-description'>Description</th>
                 <th class='logs-act'>Performed</th>
                 <th class=''>Released To</th>
-                <th class=''>Returned Reason</th>
+                <th class=''>Return Reason</th>
                 <th>Remarks</th>
                 <th class='logs-change'>Changes</th>
                 <th class='logs-date'>Performed At</th>
