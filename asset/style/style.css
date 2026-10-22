@@ -265,6 +265,10 @@ body {
     border-radius: 4px;
 }
 
+
+.admin-logs-table {
+    table-layout: auto !important;
+}
 .qr-status-container {
     margin-top: 12px;
     width: 100%;

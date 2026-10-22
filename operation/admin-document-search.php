@@ -42,7 +42,7 @@ echo "<table class='admin-docs-table table table-striped'>
                 <th class='admin-docs-no' style='width:auto;'>Copies</th>
                 <th class='admin-docs-created'>Created by</th>
                 <th class='admin-docs-created-at'>Created at</th>
-                <th class='admin-docs-created-at'>Control</th>
+                <th class='admin-docs-created-at' style='width:150px;'>Control</th>
                 <th class='admin-docs-action' style='width:85px;'>Action</th>
             </tr>
          </thead>

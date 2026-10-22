@@ -1,10 +1,11 @@
-<?php 
+
+<?php
 session_start();
-require_once '../db.php'; 
+require_once '../db.php';
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
-    $conn->begin_transaction(); // ✅ START TRANSACTION
+    $conn->begin_transaction();
 
     try {
 
@@ -18,96 +19,171 @@ if(isset($_POST['submit'])) {
         $document_id = $_POST['doc_id'];
         $returned_reason = $_POST['returned_reason'] ?? null;
         $copies = $_POST['pages'];
-        $remark = !empty($_POST['remark']) ? $_POST['remark'] : 'No remarks';
+        $remark = !empty($_POST['remark'])
+            ? $_POST['remark']
+            : 'No remarks';
 
         $changes = [];
 
-        // GET document
-        $stmt = $conn->prepare("SELECT * FROM document WHERE id = ?");
+        // GET EXISTING DOCUMENT
+        $stmt = $conn->prepare(
+            "SELECT * FROM document WHERE id = ?"
+        );
         $stmt->bind_param("s", $document_id);
         $stmt->execute();
+
         $row = $stmt->get_result()->fetch_assoc();
 
-        // CHECK duplicate
-        $stmt = $conn->prepare("SELECT * FROM document WHERE description = ? AND id != ?");
+        if (!$row) {
+            throw new Exception("Document not found.");
+        }
+
+        // PRESERVE HISTORICAL VALUES BEFORE CLEARING CURRENT VALUES
+        $log_released_to = !empty($released_to)
+            ? $released_to
+            : $row['released_to'];
+
+        $log_returned_reason = !empty($returned_reason)
+            ? $returned_reason
+            : $row['returned_reason'];
+
+        // CHECK DUPLICATE DESCRIPTION
+        $stmt = $conn->prepare(
+            "SELECT id FROM document
+             WHERE description = ? AND id != ?"
+        );
         $stmt->bind_param("ss", $description, $document_id);
         $stmt->execute();
+
         $checkResult = $stmt->get_result();
 
-        if($checkResult->num_rows > 0) {
+        if ($checkResult->num_rows > 0) {
             $conn->rollback();
+
             $_SESSION['error'] = "Document description already exists.";
             header("Location: ../admin/admin-doc-edit.php");
             exit();
         }
 
-        if($row['type'] != $type) {
+        // TRACK CHANGES
+        if ($row['type'] != $type) {
             $changes[] = "Type: {$row['type']} -> {$type}<br>";
         }
 
-        if($row['description'] != $description) {
+        if ($row['description'] != $description) {
             $changes[] = "Description: {$row['description']} -> {$description}<br>";
         }
 
-        if($row['status'] != $status) {
+        if ($row['status'] != $status) {
             $changes[] = "Status: {$row['status']} -> {$status}<br>";
         }
 
-        if($row['department'] != $department) {
+        if ($row['department'] != $department) {
             $changes[] = "Department: {$row['department']} -> {$department}<br>";
         }
 
-        if($row['pages'] != $copies) {
+        if ($row['pages'] != $copies) {
             $changes[] = "Copies: {$row['pages']} -> {$copies}<br>";
         }
 
-        $changesString = !empty($changes) ? implode("", $changes) : null;
+        if (($row['released_to'] ?? '') != ($released_to ?? '')) {
+            $changes[] = "Released To: "
+                . ($row['released_to'] ?? 'None')
+                . " -> "
+                . ($released_to ?? 'None')
+                . "<br>";
+        }
 
-        if($status != 'Released') {
+        if (($row['returned_reason'] ?? '') != ($returned_reason ?? '')) {
+            $changes[] = "Returned Reason: "
+                . ($row['returned_reason'] ?? 'None')
+                . " -> "
+                . ($returned_reason ?? 'None')
+                . "<br>";
+        }
+
+        $changesString = !empty($changes)
+            ? implode("", $changes)
+            : null;
+
+        // CLEAR CURRENT VALUES WHEN THEY NO LONGER APPLY
+        if ($status != 'Released') {
             $released_to = null;
         }
 
-        if($status != 'Returned') {
+        if ($status != 'Returned') {
             $returned_reason = null;
         }
 
-        // UPDATE document
-        $stmt = $conn->prepare("UPDATE document 
-                SET type = ?,
-                    description = ?,
-                    pages = ?,
-                    status = ?,
-                    released_to = ?,
-                    returned_reason = ?
-                WHERE id = ?");
-        $stmt->bind_param("sssssss", $type, $description, $copies, $status, $released_to, $returned_reason, $document_id);
+        // UPDATE CURRENT DOCUMENT
+        $stmt = $conn->prepare(
+            "UPDATE document
+             SET type = ?,
+                 description = ?,
+                 pages = ?,
+                 status = ?,
+                 department = ?,
+                 released_to = ?,
+                 returned_reason = ?
+             WHERE id = ?"
+        );
+
+        $stmt->bind_param(
+            "ssssssss",
+            $type,
+            $description,
+            $copies,
+            $status,
+            $department,
+            $released_to,
+            $returned_reason,
+            $document_id
+        );
+
         $stmt->execute();
 
-        // INSERT log
-        $stmt = $conn->prepare("INSERT INTO document_log
-            (document_id, action, changes, performed_by, remarks) 
-            VALUES(?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $document_id, $status, $changesString, $updatedby, $remark);
+        // INSERT HISTORICAL LOG
+        $stmt = $conn->prepare(
+            "INSERT INTO document_log
+             (document_id, action, changes, performed_by, remarks,
+              released_to, returned_reason)
+             VALUES (?, ?, ?, ?, ?, ?, ?)"
+        );
+
+        $stmt->bind_param(
+            "sssssss",
+            $document_id,
+            $status,
+            $changesString,
+            $updatedby,
+            $remark,
+            $log_released_to,
+            $log_returned_reason
+        );
+
         $stmt->execute();
 
-        $conn->commit(); // ✅ SAVE ALL CHANGES
+        // COMMIT TRANSACTION
+        $conn->commit();
 
         $_SESSION['success'] = "Document successfully updated.";
         header("Location: ../admin/admin-document.php");
         exit();
 
-    } catch (Exception $e) {
+    } catch (Throwable $e) {
 
-        $conn->rollback(); // ❌ undo everything
+        $conn->rollback();
+
+        error_log("Document update failed: " . $e->getMessage());
 
         $_SESSION['error'] = "Update failed.";
         header("Location: ../admin/admin-doc-edit.php");
         exit();
     }
-}
 
-else {
-    $_SESSION['error'] = "Something went wrong";
+} else {
+
+    $_SESSION['error'] = "Something went wrong.";
     header("Location: ../admin/admin-doc-edit.php");
     exit();
 }

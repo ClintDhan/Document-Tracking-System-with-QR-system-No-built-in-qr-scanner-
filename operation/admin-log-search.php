@@ -16,8 +16,11 @@ $sql = "SELECT
         document_log.remarks, 
         document_log.performed_at, 
         document_log.changes, 
+        document_log.released_to AS log_released_to,
+        document_log.returned_reason,
         document.type AS document_type, 
-        document.description AS document_description, 
+        document.description AS document_description,
+        document.released_to AS document_released_to, 
         qr_code.control_num,
         user.name AS performer
         FROM document_log 
@@ -31,6 +34,8 @@ if ($search != "") {
               OR document_log.action LIKE '%$search%' 
               OR document_log.performed_at LIKE '%$search%' 
               OR document.type LIKE '%$search%' 
+              OR document_log.released_to LIKE '%$search%' 
+              OR document_log.returned_reason LIKE '%$search%' 
               OR user.name LIKE '%$search%' 
               OR document.description LIKE '%$search%' 
               OR qr_code.control_num LIKE '%$search%'
@@ -44,10 +49,12 @@ echo "<table class='admin-logs-table table table-striped'>
         <thead>
             <tr>
                 <th class='logs-no'>No</th>
-                <th>Control Number</th>
+                <th style='width: 120px;'>Control Number</th>
                 <th class='logs-type'>Type</th>
                 <th class='logs-description'>Description</th>
                 <th class='logs-act'>Performed</th>
+                <th class=''>Released To</th>
+                <th class=''>Returned Reason</th>
                 <th>Remarks</th>
                 <th class='logs-change'>Changes</th>
                 <th class='logs-date'>Performed At</th>
@@ -60,7 +67,7 @@ while ($row = $result->fetch_assoc()) {
     echo "
         <tr class='tr-hover'>
             <td>".$row['id']."</td>
-            <td>".$row['control_num']."</td>
+            <td style='min-width: 500px;'>".$row['control_num']."</td>
             <td>".$row['document_type']."</td>
             <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['document_description']."</td>            <td>
             <div class='document-action-container'>
@@ -72,12 +79,14 @@ while ($row = $result->fetch_assoc()) {
                     'status-default'))))
                 ."'>".$row['action']."</div>
             </div>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['log_released_to']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['returned_reason']."</td>
             <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['remarks']."</td>
             </td>
             <td class='truncate' style='text-align: justify;' onclick=\"this.classList.toggle('expanded')\">
                 ".$row['changes']."
             </td>
-            <td>".$row['performed_at']."</td>
+            <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['performed_at']."</td>
             <td>".$row['performer']."</td>
         </tr>";
 }
