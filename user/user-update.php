@@ -40,7 +40,7 @@ $document = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="../asset/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
-<body>
+<body class="user-body">
     
     <?php if (isset($_SESSION['error'])): ?>
         <div class="alert alert-danger">
@@ -48,26 +48,104 @@ $document = mysqli_fetch_assoc($result);
         </div>
         <?php unset($_SESSION['error']); ?>
     <?php endif; ?>
-    <div class='user-container'>
-        <div class="user-form">
 
-            <div class='user-nav-bar'>
-                <div class='user-name'>
-                    <p>Hi, <span class="span-name"><?= $_SESSION['name']; ?>!</p>
-                    <p style="color: gray;"><?= date('m/d/Y') ?></p>
+
+    <div class="user-home-header-container">
+        <header class="user-home-header">
+            <div class="header-inner">
+                <a class="brand" href="">DTS</a>
+                <div class="account">
+                    <div class="user"><strong><?= $_SESSION['name']; ?></strong> <br><span class="role">Records Officer</span></div>
+
+                    <form class="user-header-form" action="../operation/logout.php" method='POST'>
+                        <button
+                            class="logout">Logout</button>
+                    </form>
                 </div>
-                <form action="../operation/logout.php" method='POST'>
-                    <button class='log-out'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
-                        <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
-                        </svg>
-                    </button>
-                </form>
+            </div>
+        </header>
+    </div>
+
+
+
+    <div class="main">
+
+        <div class='user-main-title-container'>
+            <h2>Update Document</h2>
+        </div>
+
+        <form class="panel form-panel" action="../operation/updatedocument.php" method='POST'>
+            <input type="hidden" name="qr_id" value="<?= $qr_id ?>">
+                    <input type="hidden" name="document_id" value="<?= $document_id ?>">
+                    <input type="hidden" name="control_num" value="<?= $control_num ?>">
+
+            <div class="field">
+                <label class="label" for="document-name">Document Type</label>
+                <input class="user-document-input" id="document-name" name='type' required value="<?= $document['type'] ?>">
+            </div>
+            <div class="field">
+                <label class="label" for="description">Description</label>
+                <textarea class="user-document-input" id="description" name="description"><?= $document['description'] ?></textarea>
+            </div>
+            <div class="field">
+                <label class="label" for="department">Department</label>
+                <input class="user-document-input" type="text" id="department" name="department" value="<?= $document['department']?>">
+            </div>
+            <div class="grid-two">
+                <div class="field">
+                    <label class="label" for="status">Status</label>
+                    <select class="user-document-input" name="status" id='statusSelect'>
+                            <option value="Received" <?= ($document['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
+                            <option value="Released" <?= ($document['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
+                            <option value="Returned" <?= ($document['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="label" for="copies">Copies</label>
+                    <input class="user-document-input" id="copies" name="pages" type="number" min="1" value="<?= $document['pages'] ?>">
+                </div>
             </div>
 
-<button class="btn-home" onclick="history.back()">
-  ❮ BACK
+            <div class="field">
+                <label class="label" for="returnReason" id="returnedInputLabel">Return Reason</label>
+                <input type="text"
+                            required
+                            id="returnReason"
+                            class="user-document-input"
+                            name="returned_reason"value="<?= htmlspecialchars($document['returned_reason'] ?? '') ?>"
+                            style="<?= ($document['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;">           
+            </div>
+
+            <div class="field">
+                <label class="label" for="releasedTo" id="releasedInputLabel">Released To</label>
+                 <input type="text"
+                            required
+                            id="releasedTo"
+                            class="user-document-input"
+                            name="released_to"
+                            value="<?= htmlspecialchars($document['released_to'] ?? '') ?>"
+                             style="<?= ($document['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;">
+            </div>
+            
+            <div class="field">
+                <label class="label" for="remarks">Remarks</label>
+                <input class="user-document-input" type="text" id="remarks" name="remark">
+            </div>
+
+            <button type="button"
+        onclick="goBack()"
+        class="user-qr-scan-btn btn-user-bck btn-outline">
+    Back
 </button>
+            <button class="user-qr-scan-btn btn-user-bck" name="submit" type="submit">Update</button>
+        </form>
+    </div>
+
+    <!-- <div class='user-container'>
+        <div class="user-form">
+    <button class="btn-home" onclick="history.back()">
+    ❮ BACK
+    </button>
             <div class='option-form'>
                 <p class='option-receive' style="text-align: center;">Update Document</p>
                 <p class='option-text' style="text-align: center;">Please indicate the necessary changes</p>
@@ -142,7 +220,7 @@ $document = mysqli_fetch_assoc($result);
 
         </div>
 
-    </div>
+    </div> -->
 
 <script>
 
@@ -187,6 +265,11 @@ function showInput() {
 
 showInput();
 statusSelect.addEventListener('change' ,showInput );
+
+function goBack() {
+    sessionStorage.setItem("hideHomeAlerts", "true");
+    history.back();
+}
 
 </script>
 </body>

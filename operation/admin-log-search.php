@@ -49,7 +49,7 @@ echo "<table class='admin-logs-table table table-striped'>
         <thead>
             <tr>
                 <th class='logs-no'>No</th>
-                <th style='width: 120px;'>Control Number</th>
+                <th style='width: 200px;'>Control Number</th>
                 <th class='logs-type'>Type</th>
                 <th class='logs-description'>Description</th>
                 <th class='logs-act'>Performed</th>
@@ -67,7 +67,7 @@ while ($row = $result->fetch_assoc()) {
     echo "
         <tr class='tr-hover'>
             <td>".$row['id']."</td>
-            <td style='min-width: 500px;'>".$row['control_num']."</td>
+            <td>".$row['control_num']."</td>
             <td>".$row['document_type']."</td>
             <td class='truncate' onclick=\"this.classList.toggle('expanded')\">".$row['document_description']."</td>            <td>
             <div class='document-action-container'>
