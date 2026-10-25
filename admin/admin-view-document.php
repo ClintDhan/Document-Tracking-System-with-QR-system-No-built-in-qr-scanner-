@@ -10,13 +10,18 @@ if (!isset($_SESSION['user_id'])) {
 
 if (isset($_GET['doc'])) {
     $value = $_GET['doc'];
-    $sql = "SELECT d.*, dl.remarks
+
+    $sql = "SELECT d.*, dl.remarks, dl.performed_by,
+                   u.name AS last_updated_by
             FROM document d
-            LEFT JOIN document_log dl 
+            LEFT JOIN document_log dl
                 ON d.id = dl.document_id
+            LEFT JOIN user u
+                ON dl.performed_by = u.id
             WHERE d.id = '$value'
             ORDER BY dl.performed_at DESC
             LIMIT 1";
+
     $result = $conn->query($sql);
     $row1 = $result->fetch_assoc();
 
@@ -32,13 +37,18 @@ if (isset($_GET['doc'])) {
 }
 elseif (isset($_GET['qr_id'])) {
     $value = $_GET['qr_id'];
-    $sql = "SELECT d.*, dl.remarks
+
+    $sql = "SELECT d.*, dl.remarks, dl.performed_by,
+                   u.name AS last_updated_by
             FROM document d
-            LEFT JOIN document_log dl 
+            LEFT JOIN document_log dl
                 ON d.id = dl.document_id
+            LEFT JOIN user u
+                ON dl.performed_by = u.id
             WHERE d.id = '$value'
             ORDER BY dl.performed_at DESC
             LIMIT 1";
+
     $result = $conn->query($sql);
     $row1 = $result->fetch_assoc();
 
@@ -67,10 +77,12 @@ elseif (isset($_GET['control'])) {
 
     // JOIN QUERY (para sa $row)
     $sql = "
-        SELECT qc.*, d.*, dl.remarks
+        SELECT qc.*, d.*, dl.remarks, dl.performed_by,
+               u.name AS last_updated_by
         FROM qr_code qc
         LEFT JOIN document d ON qc.id = d.qr_id
         LEFT JOIN document_log dl ON d.id = dl.document_id
+        LEFT JOIN user u ON dl.performed_by = u.id
         WHERE qc.control_num = '$control'
         ORDER BY dl.performed_at DESC
         LIMIT 1
@@ -210,6 +222,10 @@ $row = $result->fetch_assoc();
                     <div class="mt-2">
                         <label for="" style="font-weight: 600;">Last Updated</label> <br>
                         <input type="text" name="updated_at" value="<?= htmlspecialchars($row['updated_at']) ?>" class="admin-doc-input" readonly>
+                    </div>
+                    <div class="mt-2">
+                        <label for="" style="font-weight: 600;">Last Updated By</label> <br>
+                        <input type="text" name="last_updated_by" value="<?= htmlspecialchars($row['last_updated_by']) ?>" class="admin-doc-input" readonly>
                     </div>
 
                     <div class="mt-2">
