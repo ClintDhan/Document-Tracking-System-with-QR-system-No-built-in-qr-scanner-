@@ -12,10 +12,16 @@ $document_id = $_GET['document'] ?? null;
 $control = $_GET['control'] ?? null;
 
 $sql = "
-SELECT d.*, dl.remarks
+SELECT
+    d.*,
+    dl.remarks,
+    dl.performed_by,
+    u.name AS last_updated_by
 FROM document d
-LEFT JOIN document_log dl 
+LEFT JOIN document_log dl
     ON d.id = dl.document_id
+LEFT JOIN user u
+    ON dl.performed_by = u.id
 WHERE d.qr_id = '$qr_id'
 ORDER BY dl.performed_at DESC
 LIMIT 1
@@ -129,6 +135,10 @@ $document = mysqli_fetch_assoc($result);
                 <div class="detail-row">
                     <dt>Last Updated</dt>
                     <dd><?= $document['updated_at'] ?></dd>
+                </div>
+                <div class="detail-row">
+                    <dt>Last Updated By</dt>
+                    <dd><?= $document['last_updated_by'] ?></dd>
                 </div>
                 <div class="detail-row">
                     <dt>Latest Remark</dt>

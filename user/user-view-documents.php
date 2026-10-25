@@ -92,7 +92,7 @@ if (isset($qr_id)) {
 
             <div class="actions">
           <button onclick="history.back()" class="user-qr-scan-btn btn-user-bck btn-outline">Back</button>  
-    </div>
+        </div>
 
         </div>
 

@@ -944,9 +944,13 @@ tbody tr td {
     background-color: rgb(253, 93, 120);
 } 
 
-.result {
-    max-width: 1010px;
+.result-scroll {
+    max-width: 100%;
     overflow-x: auto;
+}
+
+.admin-docs-table {
+    min-width: 1400px;
 }
 
 .tr-hover:hover {
@@ -1416,10 +1420,11 @@ table {
     }
 
     .admin-docs-container , .admin-logs-container, .admin-qr-container , .admin-user-container{
-        width: 100% !important;
+        width:  100%;
     }
     .admin-dash-container {
         padding: 5px;
+        width: 100%;
     }
 
     .admin-middle-container{
@@ -1452,20 +1457,21 @@ table {
     }
 
     .result-scroll {
-        max-width: 900px !important;
-        overflow-x: auto !important;
-        margin-top: 10px;
+        width: 98%;
+        min-width: 0;
+        overflow-x: auto;
     }
-    .admin-logs-table{
+    /* .admin-logs-table{
         width: max-content !important;
+    } */
+    .admin-logs-table{
+         min-width: 1200px !important;
     }
 
-    .admin-docs-table {
-        width: 850px !important;
-    }
+    
 
     .admin-auth-table , .admin-qr-table {
-    width: 100%;
+        min-width: 1200px !important;
     }
 
     .user-table {
@@ -1497,9 +1503,9 @@ table {
         margin-top: 5px
     }
 
-    .admin-docs-table {
+    /* .admin-docs-table {
         width: max-content !important;
-    }
+    } */
 }
 
 @media (max-width:520px) { 
@@ -1927,7 +1933,7 @@ th {
 }
 
 .user-view-document-max {
-    max-height: 65vh;
+    max-height: 75vh;
 }
 
 tr:first-child td {
@@ -2054,5 +2060,12 @@ td {
     th,
     td {
         padding: 10px 12px
+    }
+}
+
+@media(max-width:468px) {
+
+    .no-qr-panel {
+        width: 98%;
     }
 }
