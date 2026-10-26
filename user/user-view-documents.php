@@ -80,7 +80,7 @@ if (isset($qr_id)) {
             <div class="user-view-document-table-container">
                 <div class="document-table-title-container search-container">
                     <p></p>
-                    <input type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
+                    <input class="new-user-input" type="text" onkeyup="loadData(this.value)" placeholder="Search for document....">
                 </div>
                 
                  <div id="result" class="result-scroll result-user-view-scroll user-view-document-container">

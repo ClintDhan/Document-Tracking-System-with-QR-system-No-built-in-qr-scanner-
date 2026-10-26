@@ -65,7 +65,7 @@ if (!$result) {
 
 
 echo "
-<table class='user-docs-table table table-striped' '>
+<table class='user-docs-table'>
 
     <thead>
         <tr>

@@ -95,7 +95,7 @@ $document = mysqli_fetch_assoc($result);
                         <dt>Status</dt>
                         <dd style="<?= ($document['status'] ?? '') == 'Returned' ? 'background-color: #f5081cff; width: auto; color: #ffff;' :
                                     (($document['status'] ?? '') == 'Released' ? 'background-color: #8b0effff; width: auto; color: #ffff;' :
-                                    (($document['status'] ?? '') == 'Received' ? 'background-color: #12fd49ff; width: auto; color: #ffff;' :
+                                    (($document['status'] ?? '') == 'Received' ? 'background-color: #009423ff; width: auto; color: #ffff;' :
                                     (($document['status'] ?? '') == 'Reviewed' ? 'background-color: #f7bf08ff; width: auto; color: #fff;' : '' )))?>"><?= $document['status'] ?>
                         </dd>
                     </div>
@@ -109,7 +109,7 @@ $document = mysqli_fetch_assoc($result);
                         <dt>Status</dt>
                         <dd style="<?= ($document['status'] ?? '') == 'Returned' ? 'background-color: #f5081cff; width: auto; color: #ffff;' :
                                     (($document['status'] ?? '') == 'Released' ? 'background-color: #8b0effff; width: auto; color: #ffff;' :
-                                    (($document['status'] ?? '') == 'Received' ? 'background-color: #12fd49ff; width: auto; color: #ffff;' :
+                                    (($document['status'] ?? '') == 'Received' ? 'background-color: #009423ff; width: auto; color: #ffff;' :
                                     (($document['status'] ?? '') == 'Reviewed' ? 'background-color: #f7bf08ff; width: auto; color: #fff;' : '' )))?>"><?= $document['status'] ?>
                         </dd>
                     </div>
@@ -123,7 +123,7 @@ $document = mysqli_fetch_assoc($result);
                         <dt>Status</dt>
                         <dd style="<?= ($document['status'] ?? '') == 'Returned' ? 'background-color: #f5081cff; width: auto; color: #ffff;' :
                                     (($document['status'] ?? '') == 'Released' ? 'background-color: #8b0effff; width: auto; color: #ffff;' :
-                                    (($document['status'] ?? '') == 'Received' ? 'background-color: #12fd49ff; width: auto; color: #ffff;' :
+                                    (($document['status'] ?? '') == 'Received' ? 'background-color: #009423ff; width: auto; color: #ffff;' :
                                     (($document['status'] ?? '') == 'Reviewed' ? 'background-color: #f7bf08ff; width: auto; color: #fff;' : '' )))?>"><?= $document['status'] ?>
                         </dd>
                     </div>

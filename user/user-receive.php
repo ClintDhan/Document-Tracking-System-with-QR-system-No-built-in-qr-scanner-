@@ -38,7 +38,7 @@ if (!$qr) {
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
 
-<body>
+<body class="user-body">
 
     <?php if (isset($_SESSION['error'])): ?>
         <div class="alert alert-danger">
