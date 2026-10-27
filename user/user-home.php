@@ -95,17 +95,20 @@ $returnedDocs = $row3['returned_docs'];
 
 <body class="user-body">
     <?php if (isset($_SESSION['success'])): ?>
-    <div class="alert alert-success flash-message">
-        <?= $_SESSION['success']; ?>
+        <div class="toast-notification toast-success" id="updateToast">
+        <div class="toast-check-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
+</svg>
+        </div>
+
+        <span class="toast-message" id="toastMessage">
+            <?= htmlspecialchars($_SESSION['success'], ENT_QUOTES, 'UTF-8'); ?>
+        </span>
+
+        <i class="bi bi-x toast-exit-btn" id="toastClose"></i>
     </div>
     <?php unset($_SESSION['success']); ?>
-    <?php endif; ?>
-
-    <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger flash-message">
-            <?= $_SESSION['error']; ?>
-        </div>
-        <?php unset($_SESSION['error']); ?>
     <?php endif; ?>
 
     <div class="user-home-header-container">
@@ -145,10 +148,11 @@ $returnedDocs = $row3['returned_docs'];
             </div>
 
             <div class="actions">
-                <a class="user-qr-scan-btn" href="user-view.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>&document=<?= $document['id'] ?>">View Document</a>
-                <a class="user-qr-scan-btn btn-outline"
+                <a class="user-qr-scan-btn"
                 href="user-update.php?document=<?= $document['id'] ?>&qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>">Update Document</a>
-                <a class="user-qr-scan-btn btn-outline" href="user-view-documents.php">All Documents</a> 
+                <a class="user-qr-scan-btn btn-outline btn-view-document" href="user-view.php?qr=<?= $qr_id ?>&control=<?= urlencode($qrControl) ?>&document=<?= $document['id'] ?>">View Document</a>
+                <a class="user-qr-scan-btn btn-outline" href="user-view-documents.php">All Documents</a>
+                <a class="user-qr-scan-btn btn-outline" href="user-home.php">Scan Another</a> 
             </div>
            
             <!-- <div class='user-option'>
@@ -158,6 +162,10 @@ $returnedDocs = $row3['returned_docs'];
         <?php elseif (!$qr): ?>
             <div class='user-main-title-container'>
                 <h2>Scan Document</h2>
+            </div>
+
+            <div class="actions">
+                <a class="user-qr-scan-btn" href="user-view-documents.php">All Documents</a> 
             </div>
 
             <div class="no-qr-panel">
@@ -395,6 +403,48 @@ $returnedDocs = $row3['returned_docs'];
         sessionStorage.removeItem("hideHomeAlerts");
     }
 });
+
+        const updateToast = document.getElementById('updateToast');
+const toastMessage = document.getElementById('toastMessage');
+const toastClose = document.getElementById('toastClose');
+
+let toastTimer;
+
+function showToast(message, type = 'error') {
+    if (!updateToast || !toastMessage) return;
+
+    clearTimeout(toastTimer);
+
+    updateToast.classList.remove('toast-error', 'toast-success');
+    updateToast.classList.add(`toast-${type}`);
+
+    toastMessage.textContent = message;
+
+    updateToast.style.display = 'flex';
+    updateToast.classList.add('show-toast');
+
+    toastTimer = setTimeout(() => {
+        updateToast.classList.remove('show-toast');
+        updateToast.style.display = 'none';
+    }, 5000);
+}
+
+if (toastClose) {
+    toastClose.addEventListener('click', () => {
+        clearTimeout(toastTimer);
+        updateToast.classList.remove('show-toast');
+        updateToast.style.display = 'none';
+    });
+}
+
+// Display the success toast for 5 seconds
+if (updateToast) {
+    const toastType = updateToast.classList.contains('toast-success')
+        ? 'success'
+        : 'error';
+
+    showToast(toastMessage.textContent.trim(), toastType);
+}
     </script>
 </body>
 

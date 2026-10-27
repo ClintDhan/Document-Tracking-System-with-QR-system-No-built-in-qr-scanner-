@@ -1,7 +1,7 @@
-<?php 
+<?php
 
 session_start();
-require_once '../db.php'; 
+require_once '../db.php';
 
 
 if (!isset($_SESSION['user_id'])) {
@@ -32,6 +32,7 @@ $document = mysqli_fetch_assoc($result);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,14 +41,33 @@ $document = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="../asset/bootstrap-5.3.8-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../asset/style/style.css">
 </head>
+
 <body class="user-body">
-    
+
     <?php if (isset($_SESSION['error'])): ?>
-        <div class="alert alert-danger">
-            <?= $_SESSION['error']; ?>
+     <div class="toast-notification toast-error" id="updateToast">
+        <div class="toast-check-container">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+                id="toastIcon"
+            >
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+            </svg>
         </div>
-        <?php unset($_SESSION['error']); ?>
-    <?php endif; ?>
+
+        <span class="toast-message" id="toastMessage">
+            <?= htmlspecialchars($_SESSION['error'], ENT_QUOTES, 'UTF-8'); ?>
+        </span>
+
+        <i class="bi bi-x toast-exit-btn" id="toastClose"></i>
+    </div>
+
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>
 
 
     <div class="user-home-header-container">
@@ -76,8 +96,8 @@ $document = mysqli_fetch_assoc($result);
 
         <form class="panel form-panel" action="../operation/updatedocument.php" method='POST'>
             <input type="hidden" name="qr_id" value="<?= $qr_id ?>">
-                    <input type="hidden" name="document_id" value="<?= $document_id ?>">
-                    <input type="hidden" name="control_num" value="<?= $control_num ?>">
+            <input type="hidden" name="document_id" value="<?= $document_id ?>">
+            <input type="hidden" name="control_num" value="<?= $control_num ?>">
 
             <div class="field">
                 <label class="label" for="document-name">Document Type</label>
@@ -89,15 +109,15 @@ $document = mysqli_fetch_assoc($result);
             </div>
             <div class="field">
                 <label class="label" for="department">Department</label>
-                <input class="user-document-input" type="text" id="department" name="department" value="<?= $document['department']?>">
+                <input class="user-document-input" type="text" id="department" name="department" value="<?= $document['department'] ?>">
             </div>
             <div class="grid-two">
                 <div class="field">
                     <label class="label" for="status">Status</label>
                     <select class="user-document-input" name="status" id='statusSelect'>
-                            <option value="Received" <?= ($document['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
-                            <option value="Released" <?= ($document['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
-                            <option value="Returned" <?= ($document['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
+                        <option value="Received" <?= ($document['status'] ?? '') == 'Received' ? 'selected' : '' ?>>Received</option>
+                        <option value="Released" <?= ($document['status'] ?? '') == 'Released' ? 'selected' : '' ?>>Released</option>
+                        <option value="Returned" <?= ($document['status'] ?? '') == 'Returned' ? 'selected' : '' ?>>Returned</option>
                     </select>
                 </div>
                 <div class="field">
@@ -109,34 +129,34 @@ $document = mysqli_fetch_assoc($result);
             <div class="field">
                 <label class="label" for="returnReason" id="returnedInputLabel">Return Reason</label>
                 <input type="text"
-                            required
-                            id="returnReason"
-                            class="user-document-input"
-                            name="returned_reason"value="<?= htmlspecialchars($document['returned_reason'] ?? '') ?>"
-                            style="<?= ($document['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;">           
+                    required
+                    id="returnReason"
+                    class="user-document-input"
+                    name="returned_reason" value="<?= htmlspecialchars($document['returned_reason'] ?? '') ?>"
+                    style="<?= ($document['status'] ?? '') == 'Returned' ? 'display:block;' : 'display:none;' ?> padding: none;">
             </div>
 
             <div class="field">
                 <label class="label" for="releasedTo" id="releasedInputLabel">Released To</label>
-                 <input type="text"
-                            required
-                            id="releasedTo"
-                            class="user-document-input"
-                            name="released_to"
-                            value="<?= htmlspecialchars($document['released_to'] ?? '') ?>"
-                             style="<?= ($document['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;">
+                <input type="text"
+                    required
+                    id="releasedTo"
+                    class="user-document-input"
+                    name="released_to"
+                    value="<?= htmlspecialchars($document['released_to'] ?? '') ?>"
+                    style="<?= ($document['status'] ?? '') == 'Released' ? 'display:block;' : 'display:none;' ?> padding: none;">
             </div>
-            
+
             <div class="field">
                 <label class="label" for="remarks">Remarks</label>
                 <input class="user-document-input" type="text" id="remarks" name="remark">
             </div>
 
             <button type="button"
-        onclick="goBack()"
-        class="user-qr-scan-btn btn-user-bck btn-outline">
-    Back
-</button>
+                onclick="goBack()"
+                class="user-qr-scan-btn btn-user-bck btn-outline">
+                Back
+            </button>
             <button class="user-qr-scan-btn btn-user-bck" name="submit" type="submit">Update</button>
         </form>
     </div>
@@ -170,7 +190,7 @@ $document = mysqli_fetch_assoc($result);
                     </div>
                     <div class="mt-2">
                         <label for="">Department</label> <br>
-                        <input required type="text" placeholder='Department' class='update-input' name='department' value="<?= $document['department']?>">
+                        <input required type="text" placeholder='Department' class='update-input' name='department' value="<?= $document['department'] ?>">
                     </div>
                     <div class="mt-2">
                         <label for="">Number of copies</label> <br>
@@ -222,55 +242,92 @@ $document = mysqli_fetch_assoc($result);
 
     </div> -->
 
-<script>
+    <script>
+        const statusSelect = document.getElementById('statusSelect');
+        const releasedInput = document.getElementById('releasedTo');
+        const releasedInputLabel = document.getElementById('releasedInputLabel');
+        const returnedInputLabel = document.getElementById('returnedInputLabel');
+        const returnReason = document.getElementById('returnReason');
 
-const statusSelect = document.getElementById('statusSelect');
-const releasedInput = document.getElementById('releasedTo');
-const releasedInputLabel = document.getElementById('releasedInputLabel');
-const returnedInputLabel = document.getElementById('returnedInputLabel');
-const returnReason = document.getElementById('returnReason');
 
+        function showInput() {
+            if (statusSelect.value === 'Released') {
+                releasedInputLabel.style.display = 'block';
+                releasedInput.style.display = 'block';
+                releasedInput.required = true;
+                returnedInputLabel.style.display = 'none';
+                returnReason.style.display = 'none';
+                returnReason.required = false;
+            } else if (statusSelect.value === 'Returned') {
+                returnedInputLabel.style.display = 'block';
+                returnReason.style.display = 'block';
+                returnReason.required = true;
+                releasedInputLabel.style.display = 'none';
+                releasedInput.style.display = 'none';
+                releasedInput.required = false;
+            } else {
+                releasedInputLabel.style.display = 'none';
+                releasedInput.style.display = 'none';
+                releasedInput.required = false;
+                releasedInput.value = ''; // ADD THIS
 
-function showInput() {
-    if (statusSelect.value === 'Released') {
-        releasedInputLabel.style.display = 'block';
-        releasedInput.style.display = 'block';
-        releasedInput.required = true;
-        returnedInputLabel.style.display = 'none';
-        returnReason.style.display = 'none';
-        returnReason.required = false;
-    }
-    
-    else if(statusSelect.value === 'Returned') {
-        returnedInputLabel.style.display = 'block';
-        returnReason.style.display = 'block';
-        returnReason.required = true;
-        releasedInputLabel.style.display = 'none';
-        releasedInput.style.display = 'none';
-        releasedInput.required = false;
-    }
-    else {
-        releasedInputLabel.style.display = 'none';
-        releasedInput.style.display = 'none';
-        releasedInput.required = false;
-        releasedInput.value = ''; // ADD THIS
+                returnedInputLabel.style.display = 'none';
+                returnReason.style.display = 'none';
+                returnReason.required = false;
+                returnReason.value = ''; // ADD THIS
+            }
 
-        returnedInputLabel.style.display = 'none';
-        returnReason.style.display = 'none';
-        returnReason.required = false;
-        returnReason.value = ''; // ADD THIS
-    }
+        }
 
+        showInput();
+        statusSelect.addEventListener('change', showInput);
+
+        function goBack() {
+            sessionStorage.setItem("hideHomeAlerts", "true");
+            window.location.replace(
+                "user-home.php?control=<?= urlencode($control_num) ?>"
+            );
+        }
+
+const updateToast = document.getElementById('updateToast');
+const toastMessage = document.getElementById('toastMessage');
+const toastIcon = document.getElementById('toastIcon');
+const toastClose = document.getElementById('toastClose');
+
+let toastTimer;
+
+function showToast(message, type = 'error') {
+    if (!updateToast) return;
+
+    clearTimeout(toastTimer);
+
+    updateToast.classList.remove('toast-error', 'toast-success');
+    updateToast.classList.add(`toast-${type}`);
+
+    toastMessage.textContent = message;
+
+    updateToast.style.display = 'flex';
+    updateToast.classList.add('show-toast');
+
+    toastTimer = setTimeout(() => {
+        updateToast.classList.remove('show-toast');
+        updateToast.style.display = 'none';
+    }, 5000);
 }
 
-showInput();
-statusSelect.addEventListener('change' ,showInput );
-
-function goBack() {
-    sessionStorage.setItem("hideHomeAlerts", "true");
-    history.back();
+if (toastClose) {
+    toastClose.addEventListener('click', () => {
+        clearTimeout(toastTimer);
+        updateToast.classList.remove('show-toast');
+        updateToast.style.display = 'none';
+    });
 }
 
-</script>
+// Automatically hide the PHP session error after 5 seconds
+if (updateToast) {
+    showToast(toastMessage.textContent.trim(), 'error');
+}
+    </script>
 </body>
+
 </html>
